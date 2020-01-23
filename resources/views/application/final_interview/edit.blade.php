@@ -1,7 +1,6 @@
 <form action="/final_interviews/{{$fin->id}}" method="POST">
 	@csrf
 	@method('PUT')
-	<input type="hidden" name="applicant_id" value="{{$applicant->id}}">
 	<div class="row">
 		<div class="col-md-12">
 			<h6 class="mt-3">Setup Final Interview</h6>
@@ -23,8 +22,17 @@
 					</div>
 				</div>
 				<div class="col-md-4 d-flex align-items-end justify-content-center">
-					<div class="form-group">
-						<input class="btn btn-primary" type="submit" name="submit" value="Submit">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<span class="btn btn-secondary j_cancel" data-type="fin-interview" data-id="{{$fin->id}}">Cancel</span>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<input class="btn btn-primary" type="submit" name="submit" value="Submit">
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -33,13 +41,13 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>Result</label>
-						<input type="text" class="form-control form-control-sm" value="{{$fin_interview->result}}" disabled>
+						<input type="text" class="form-control form-control-sm" disabled>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-group">
 						<label>Remarks</label>
-						<textarea class="form-control" rows="5" disabled>{{$fin_interview->remarks}}</textarea>
+						<textarea class="form-control" rows="5" disabled></textarea>
 					</div>
 				</div>
 			</div>

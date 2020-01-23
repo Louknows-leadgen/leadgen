@@ -96,6 +96,12 @@ $(document).ready(function(){
 	//-------------------------------------------------------------------------
 
 
+	/*
+	 |---------------------------------------------
+	 |		Add More Items on the Personal Details
+	 |---------------------------------------------
+	*/
+
 	$(".j_add-item").on("click", function(){
 		var ids = [];
 		var last_id = 0;
@@ -160,11 +166,12 @@ $(document).ready(function(){
 		});
 	});
 
+	//---------------------------------------------------
 
 	/*
-	 |---------------------------
+	 |----------------------------------------------------
 	 |		Search Functionalities
-	 |---------------------------
+	 |----------------------------------------------------
 	*/
 
 	$("#search-applicant").on("input", $.debounce(200,function(){
@@ -184,5 +191,28 @@ $(document).ready(function(){
 
 	}));
 
+	//-----------------------------------------------------
+
+	$(".dynamic-container").on("click",".j_edit-fin",function(){
+		var fin_id = $(this).data("id");
+		var container = $(".dynamic-container");
+
+		container.load('/final_interviews/'+ fin_id +'/edit');
+
+	});
+
+	$(".dynamic-container").on("click",".j_cancel",function(){
+		var type = $(this).data("type");
+		var id = $(this).data('id');
+		var container = $(".dynamic-container");
+		var url = '';
+
+		switch(type){
+			case 'fin-interview':
+				url = '/final_interview/'+ id +'/form'; break;
+		}
+
+		container.load(url);
+	});
 
 });

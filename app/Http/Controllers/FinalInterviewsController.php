@@ -59,4 +59,10 @@ class FinalInterviewsController extends Controller
             $fin->applicant()->update(['application_status_id'=>5]); // 5 is the status of Final Interview Failed
         return redirect()->action('ApplicationsController@candidates');
     }
+
+    public function form_partial($fin_id){
+        $fin_interview = FinalInterview::find($fin_id);
+
+        return view('application.final_interview._interview-form',compact('fin_interview'));
+    }
 }

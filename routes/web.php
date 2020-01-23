@@ -56,6 +56,7 @@ Route::get('/emergency_contacts/more/{person_id}','EmergencyContactsController@m
 
 //- final interviews
 Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@update_result')->name('fin.update_result');
+Route::get('/final_interview/{id}/form','FinalInterviewsController@form_partial')->name('fin.form');
 
 //- persons
 Route::get('/persons/{person_id}/list','PersonsController@list')->name('persons.list');
