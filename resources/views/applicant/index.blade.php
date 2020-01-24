@@ -45,7 +45,7 @@
                                         <td>{{ $applicant->person->mobile_1 }}</td>
                                         <td>{{ $applicant->person->email }}</td>
                                         <td>
-                                            <a class="link" href="/application/{{$applicant->id}}/status/{{$applicant->application_status->stat_id}}">
+                                            <a href="{{route('applications.procedure',[$applicant->id])}}">
                                                 {{ $applicant->application_status->name}}
                                             </a>
                                         </td>

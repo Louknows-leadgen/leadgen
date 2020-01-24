@@ -209,3 +209,51 @@ ul.d-flex{
   background-color: #fff;
   z-index: 2;
 }
+
+.unavailable{
+  height: 100%;
+}
+
+.process-tab:not(.actv){
+  cursor: pointer;
+  transition: 300ms background-color ease-in-out;
+  border-bottom: 1px solid #848d94;
+}
+
+.process-tab:not(.actv):hover{
+  background-color: #848d94 !important;
+}
+
+.process-tab{
+  position: relative;
+}
+
+.completed::before {
+  position: absolute;
+  content: "\f00c";
+  font: normal normal normal 14px/1 FontAwesome;
+  color: #29a829;
+  left: 20px;
+  font-size: 20px;
+  z-index: 1;
+}
+
+.current::before {
+  position: absolute;
+  content: "\f10c";
+  font: normal normal normal 14px/1 FontAwesome;
+  color: #ffc107;
+  left: 20px;
+  font-size: 20px;
+  z-index: 1;
+}
+
+.fail::before {
+  position: absolute;
+  content: "\f00d";
+  font: normal normal normal 14px/1 FontAwesome;
+  color: #a82929;
+  left: 20px;
+  font-size: 20px;
+  z-index: 1;
+}

@@ -13,48 +13,99 @@ use App\User;
 
 class ApplicationsController extends Controller
 {
-    public function process($applicant_id,$stat_id){
+    public function procedure($applicant_id){
         $applicant = Applicant::find($applicant_id);
         $tests = Test::all();
         $interviewers = User::interviewers();
-        $stat_id = $stat_id > $applicant->application_status_id ? $applicant->application_status_id : $stat_id;
-        
-        switch($stat_id){
-            case 1: // status is for initial screening
-            case 2: // Initial Screening Failed
-                $count = InitialScreening::where('applicant_id','=',$applicant_id)->count();
-                if($count > 0){
-                    $init_screen = InitialScreening::where('applicant_id','=',$applicant_id)->first();
-                    return view('application.initial_screen.show',compact('applicant','init_screen'));
-                }else
-                    return view('application.initial_screen.new',compact('applicant','tests'));
+        $procedure = '';
+        $view = '';
+
+        switch($applicant->application_status_id)
+        {
+            case 1:
+            case 2:
+                if($applicant->initial_screening()->exists()){
+                    $procedure = InitialScreening::where('applicant_id','=',$applicant_id)->first();
+                    $view = 'application.initial_screen.show';
+                }else{
+                    $view = 'application.initial_screen.new';
+                }
                 break;
-            case 3: // Appoint Final Interview
-            case 4: // For Final Interview
-            case 5: // Final Interview Failed
-                $count = FinalInterview::where('applicant_id','=',$applicant_id)->count();
-                if($count > 0){
-                    $fin_interview = FinalInterview::where('applicant_id','=',$applicant_id)->first();
-                    return view('application.final_interview.show',compact('applicant','fin_interview'));
-                }else
-                    return view('application.final_interview.new',compact('applicant','interviewers'));
+            case 3:
+            case 4:
+            case 5:
+                if($applicant->final_interview()->exists()){
+                    $procedure = FinalInterview::where('applicant_id','=',$applicant_id)->first();
+                    $view = 'application.final_interview.show';
+                }else{
+                    $view = 'application.final_interview.new';
+                }
                 break;
-            case 6: // Schedule Job Orientation
-            case 7: // For Job Orientation
-            case 8: // No Show
-            case 9: // Hired
-            case 10: // Declined Offer
-                $count = JobOrientation::where('applicant_id','=',$applicant_id)->count();
-                if($count > 0){
-                    $job_orient = JobOrientation::where('applicant_id','=',$applicant_id)->first();
-                    return view('application.job_offer.show',compact('applicant','job_orient'));
-                }else
-                    return view('application.job_offer.new',compact('applicant'));
-                break;    
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+                if($applicant->job_orientation()->exists()){
+                    $procedure = JobOrientation::where('applicant_id','=',$applicant_id)->first();
+                    $view = 'application.job_orientation.show';
+                }else{
+                    $view = 'application.job_orientation.new';
+                }
+                break;
         }
+
+        return view('application.main',compact('procedure','view','applicant','tests','interviewers'));
+    }
+
+    public function initial_screening($applicant_id){
+        $applicant = Applicant::find($applicant_id);
+        $tests = Test::all();
+        $procedure = '';
+
+        if($applicant->initial_screening()->exists()){
+            $procedure = InitialScreening::where('applicant_id','=',$applicant_id)->first();
+            $view = 'application.initial_screen.show';
+        }else{
+            $view = 'application.initial_screen.new';
+        }
+
+        return view($view,compact('applicant','tests','procedure'));
+    }
+
+    public function final_interview($applicant_id){
+        $applicant = Applicant::find($applicant_id);
+        $interviewers = User::interviewers();
+        $procedure = '';
+
+        if($applicant->application_status_id < 3){
+            $view = 'application.unavailable';
+        }elseif($applicant->final_interview()->exists()){
+            $procedure = FinalInterview::where('applicant_id','=',$applicant_id)->first();
+            $view = 'application.final_interview.show';
+        }else{
+            $view = 'application.final_interview.new';
+        }
+
+        return view($view,compact('applicant','interviewers','procedure'));
+    }
+
+    public function job_orientation($applicant_id){
+        $applicant = Applicant::find($applicant_id);
+        $procedure = '';
+
+        if($applicant->application_status_id < 6){
+            $view = 'application.unavailable';
+        }elseif($applicant->job_orientation()->exists()){
+            $procedure = JobOrientation::where('applicant_id','=',$applicant_id)->first();
+            $view = 'application.job_orientation.show';
+        }else{
+            $view = 'application.job_orientation.new';
+        }
+
+        return view($view,compact('applicant','procedure'));
     }
   
-
     public function candidates(){
         $user = Auth::user();
         $user_id = Auth::id();

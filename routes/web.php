@@ -33,6 +33,10 @@ Route::get('/applicants/search','ApplicantsController@search')->name('applicants
 
 //- application routes
 Route::get('/application/{applicant_id}/status/{status_id}','ApplicationsController@process')->name('applications.process')->middleware('checkrole:2');
+Route::get('/application/{applicant_id}/procedure','ApplicationsController@procedure')->name('applications.procedure')->middleware('checkrole:2');
+Route::get('/application/initial-screening/{applicant_id}','ApplicationsController@initial_screening')->name('applications.initial-screening')->middleware('checkrole:2');
+Route::get('/application/final-interview/{applicant_id}','ApplicationsController@final_interview')->name('applications.final-interview')->middleware('checkrole:2');
+Route::get('/application/job-orientation/{applicant_id}','ApplicationsController@job_orientation')->name('applications.job-orientation')->middleware('checkrole:2');
 
 Route::get('/application/candidates','ApplicationsController@candidates')->name('applications.candidates')->middleware('checkrole:3');
 

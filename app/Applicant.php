@@ -43,6 +43,10 @@ class Applicant extends Model
         return $this->hasOne('App\FinalInterview');
     }
 
+    public function job_orientation(){
+        return $this->hasOne('App\JobOrientation');
+    }
+
 
     /*
     |---------------------

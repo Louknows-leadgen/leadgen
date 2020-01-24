@@ -29,7 +29,7 @@ class FinalInterviewsController extends Controller
 
         \Mail::to($to_email)->send(new SendMail($details));
     	
-    	return redirect()->route('applications.process',['applicant_id'=>$id, 'status_id'=>4]);
+    	return redirect()->route('applications.procedure',['applicant_id'=>$applicant->id]);
     }
 
     public function edit($fin_id){
@@ -40,11 +40,11 @@ class FinalInterviewsController extends Controller
     }
 
     public function update($fin_id, Request $request){
-        $fin = FinalInterview::find($fin_id);
-        $id = $fin->applicant_id;
-        $fin->update($request->all());
+        $procedure = FinalInterview::find($fin_id);
+        $procedure->update($request->all());
 
-        return redirect()->route('applications.process',['applicant_id'=>$id, 'status_id'=>4]); // 4 is the status of Final Interview
+        //return redirect()->route('applications.process',['applicant_id'=>$id, 'status_id'=>4]); // 4 is the status of Final Interview
+        return view('application.final_interview.show',compact('procedure'));
     }
 
     public function update_result($fin_id, Request $request){
@@ -61,8 +61,8 @@ class FinalInterviewsController extends Controller
     }
 
     public function form_partial($fin_id){
-        $fin_interview = FinalInterview::find($fin_id);
+        $procedure = FinalInterview::find($fin_id);
 
-        return view('application.final_interview._interview-form',compact('fin_interview'));
+        return view('application.final_interview._interview-form',compact('procedure'));
     }
 }

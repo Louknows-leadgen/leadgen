@@ -47,44 +47,55 @@
 	        	<div class="col-md-12 mt-3 mb-5">
 	        		<div class="row">
 		        		<div class="col-md-12">
-			        		<div class="box">
+			        		<div class="box process">
 			        			<h5>Application Process</h5>
 			        			<div class="row">
-			        				<div class="col-md-3 nopadding">
-			        					<div class="p-3 text-center bg-secondary text-light">Initial Screening</div>
-			        					<div class="p-3 text-center bg-secondary text-light">Final Interview</div>
-			        					<div class="p-3 text-center text-primary border-top border-left border-bottom actv">Job Orientation</div>
-			        				</div>
-			        				<div class="col-md-9 border-top border-left border-right border-bottom">
-			        					<form action="/final_interviews" method="POST">
-			        						@csrf
-			        						<input type="hidden" name="applicant_id" value="{{$applicant->id}}">
-				        					<div class="row">
-				        						<div class="col-md-12">
-				        							<h6 class="mt-3">Schedule Job Orientation</h6>
-				        							<div class="row">
-					        							<div class="col-md-4">
-						        							<div class="form-group">
-						        								<label>Schedule</label>
-						        								<input type="text" name="jo_date" class="form-control form-control-sm datetime" placeholder="mm/dd/yyyy" autocomplete="off">
-						        							</div>
-					        							</div>
-					        							<div class="col-md-4 d-flex align-items-end justify-content-center">
-						        							<div class="form-group">
-						        								<input class="btn btn-primary" type="submit" name="submit" value="Submit">
-						        							</div>
-					        							</div>
-				        							</div>
-				        						</div>
-				        					</div>
-				        				</form>	
-			        				</div>
-			        			</div>
+									<div class="col-md-3 nopadding">
+										@php 
+											$icon = get_status_icon($applicant->application_status_id) 
+										@endphp
+										<div class="p-3 
+													text-center 
+													process-tab
+   													{{ $icon['init'] }}
+													@if(in_array($applicant->application_status_id, [1,2])) text-primary border-top border-bottom border-left actv @endif
+													@if(!in_array($applicant->application_status_id, [1,2])) bg-secondary text-light @endif
+													"
+											 data-process="initial-screening" 
+											 data-id="{{$applicant->id}}"
+													>Initial Screening</div>
+
+										<div class="p-3 
+													text-center 
+													process-tab  
+    												{{ $icon['fi'] }}
+													@if(in_array($applicant->application_status_id, [3,4,5])) text-primary border-top border-bottom border-left actv @endif
+													@if(!in_array($applicant->application_status_id, [3,4,5])) bg-secondary text-light @endif
+													"
+											 data-process="final-interview" 
+											 data-id="{{$applicant->id}}"
+													>Final Interview</div>
+
+										<div class="p-3 
+													text-center 
+													process-tab 
+													{{ $icon['jo'] }}    
+													@if(in_array($applicant->application_status_id, [6,7,8,9,10])) text-primary border-top border-bottom border-left actv @endif
+													@if(!in_array($applicant->application_status_id, [6,7,8,9,10])) bg-secondary text-light @endif
+													"
+											 data-process="job-orientation" 
+											 data-id="{{$applicant->id}}"
+													>Job Orientation</div>
+									</div>
+									<div class="col-md-9 border-top border-left border-right border-bottom dynamic-container">
+				        				@include($view)
+				        			</div>	
+								</div>	
 			        		</div>
-		        		</div>
-		        	</div>	
-	        	</div>
-        	</div>
-        </div>
-	</div>
+			        	</div>
+			        </div>
+			    </div>
+			</div>
+		</div>
+	</div>		        
 @endsection

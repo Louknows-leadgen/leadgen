@@ -15,7 +15,7 @@ class InitialScreeningsController extends Controller
     	if($request->overall_result == 'Pass'){
     		$applicant->application_status_id = 3; // Appoint Final Interview
             $applicant->save();
-            return redirect()->route('applications.process',['applicant_id'=>$applicant->id, 'status_id'=>3]);
+            return redirect()->route('applications.procedure',['applicant_id'=>$applicant->id]);
         }
     	else{
     		$applicant->application_status_id = 2; // Initial Screening - Failed

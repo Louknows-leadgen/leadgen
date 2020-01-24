@@ -215,4 +215,62 @@ $(document).ready(function(){
 		container.load(url);
 	});
 
+	$(".dynamic-container").on('submit','form.update',function(e){
+		var form_data = {};
+		var url = $(this).attr("action");
+		var container = $(this).parent();
+
+		$(this).find('[name]').each(function(){
+			form_data[this.name] = this.value;
+		});
+
+		e.preventDefault();
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+			url: url,
+			method: 'PUT',
+			data: form_data,
+			success: function(result){
+				container.empty().append(result);
+			}
+		});
+	});
+
+
+	$('.process').on('click','.process-tab:not(.actv)',function(){
+		var cur_actv = $('.actv');
+		var selected = $(this);
+		var procedure = selected.data('process');
+		var applicant_id = selected.data('id');
+		var container = $('.dynamic-container');
+		var url = '';
+
+		switch(procedure){
+			case 'initial-screening':
+				url = '/application/initial-screening/' + applicant_id;
+				break;
+			case 'final-interview':
+				url = '/application/final-interview/' + applicant_id;
+				break;
+			case 'job-orientation':
+				url = '/application/job-orientation/' + applicant_id;
+				break;	
+		}
+
+		container.load(url,function(){
+			cur_actv.removeClass('text-primary border-top border-bottom border-left actv')
+		        	.addClass('bg-secondary text-light');
+
+			selected.removeClass('bg-secondary text-light')
+		        	.addClass('text-primary border-top border-bottom border-left actv');
+		});	
+
+	});
+
 });

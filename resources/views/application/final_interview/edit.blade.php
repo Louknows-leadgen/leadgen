@@ -1,4 +1,4 @@
-<form action="/final_interviews/{{$fin->id}}" method="POST">
+<form class="update" action="/final_interviews/{{$fin->id}}" method="POST">
 	@csrf
 	@method('PUT')
 	<div class="row">
