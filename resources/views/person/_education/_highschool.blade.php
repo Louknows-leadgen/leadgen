@@ -7,7 +7,7 @@
 			<div class="form-group col-md-5">
 				<label>School name:</label>
 				<input type="text" name="schools[1][school_name]" class="form-control form-control-sm validate @error('schools.1.school_name') is-invalid @enderror" value="{{old('schools.1.school_name')}}">
-				<input type="hidden" name="schools[1][education_type]" value="1">
+				<input type="hidden" name="schools[1][education_type]" value="2">
 				<span class="invalid-feedback" role="alert">
 					@error('schools.1.school_name') {{$message}} @enderror
 				</span>
