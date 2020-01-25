@@ -16,7 +16,9 @@
 			</div>
 			<div class="col-md-4 d-flex align-items-end justify-content-center">
 				<div class="form-group">
+					@if(!isset($procedure->result))
 					<button class="btn btn-primary j_edit-fin" data-id="{{$procedure->id}}">Edit</button>
+					@endif
 				</div>
 			</div>
 		</div>

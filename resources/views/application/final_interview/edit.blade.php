@@ -1,4 +1,4 @@
-<form class="update" action="/final_interviews/{{$fin->id}}" method="POST">
+<form class="update" action="/final_interviews/{{$procedure->id}}" method="POST">
 	@csrf
 	@method('PUT')
 	<div class="row">
@@ -10,7 +10,7 @@
 						<label>Interviewer</label>
 						<select name="interviewer_id" class="custom-select custom-select-sm">
 							@foreach($interviewers as $interviewer)
-								<option value="{{$interviewer->id}}" {{$interviewer->id == $fin->interviewer_id ? 'selected' : ''}}>{{$interviewer->name}}</option>
+								<option value="{{$interviewer->id}}" {{$interviewer->id == $procedure->interviewer_id ? 'selected' : ''}}>{{$interviewer->name}}</option>
 							@endforeach
 						</select>
 					</div>
@@ -18,14 +18,17 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>Schedule</label>
-						<input type="text" name="schedule" class="form-control form-control-sm datetime" placeholder="mm/dd/yyyy" autocomplete="off" value="{{$fin->schedule}}">
+						<input type="text" name="schedule" class="form-control form-control-sm datetime" placeholder="mm/dd/yyyy" autocomplete="off" value="{{$procedure->schedule}}">
+
+						<span class="invalid-feedback feedback-inline schedule" role="alert">
+						</span>
 					</div>
 				</div>
 				<div class="col-md-4 d-flex align-items-end justify-content-center">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<span class="btn btn-secondary j_cancel" data-type="fin-interview" data-id="{{$fin->id}}">Cancel</span>
+								<span class="btn btn-secondary j_cancel" data-type="fin-interview" data-id="{{$procedure->id}}">Cancel</span>
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -41,7 +44,7 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>Result</label>
-						<input type="text" class="form-control form-control-sm" disabled>
+						<input type="text" class="form-control form-control-sm" value="{{$procedure->result}}" disabled>
 					</div>
 				</div>
 				<div class="col-md-12">

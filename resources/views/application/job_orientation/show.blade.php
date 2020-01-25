@@ -1,21 +1,18 @@
-@extends('layout.recruitment')
-
-@section('title', 'Resources > Applicant')
-
-
-@section('content')
-	@include('application/applicant_info')
-	<div class="card wp-mid margin-auto margin-top-30 margin-bot-30">
-		@include('application/application-nav')
-		<div class="process_body">
-				<div class="setup_sec">
-					<h3>Schedule Job Orientation</h3>
-					<div>
-						<label>Schedule:</label>
-						<input type="text" value="{{$procedure->jo_date}}" disabled>
-						<button class="btn btn-confirm edit_jo" data-id="{{$procedure->id}}">Edit</button>
-					</div>
+<div class="row">
+	<div class="col-md-12">
+		<h6 class="mt-3">Schedule Job Orientation</h6>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+					<label>Schedule</label>
+					<input type="text" class="form-control" value="{{$procedure->jo_date}}" disabled>
 				</div>
+			</div>
+			<div class="col-md-4 d-flex align-items-end justify-content-start">
+				<div class="form-group">
+					<button class="btn btn-primary edit_jo" data-id="{{$procedure->id}}">Edit</button>
+				</div>
+			</div>
 		</div>
 	</div>
-@endsection
+</div>

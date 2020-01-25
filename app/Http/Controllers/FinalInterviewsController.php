@@ -3,16 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\FinalInterview;
 use App\User;
 use App\Applicant;
 use App\Mail\SendMail;
+use App\Rules\CompareDatetime;
 
 class FinalInterviewsController extends Controller
 {
     //
     public function store(Request $request){
-    	$id = $request->applicant_id;
+
+        $request->validate([
+            'schedule' => ['bail','required','date_format:m/d/Y h:i A',new CompareDatetime]
+        ],[
+            'schedule.required' => 'Schedule date is required.',
+            'schedule.date_format' => 'Wrong date format.'
+        ]);
+
+        $id = $request->applicant_id;
         $applicant = Applicant::find($id);
         $applicant->update(['application_status_id'=>4]); // For Final Interview
     	$fin = FinalInterview::create($request->all());
@@ -33,18 +43,40 @@ class FinalInterviewsController extends Controller
     }
 
     public function edit($fin_id){
-    	$fin = FinalInterview::find($fin_id);
+    	$procedure = FinalInterview::find($fin_id);
     	$interviewers = User::interviewers();
 
-    	return view('application.final_interview.edit',compact('fin','interviewers'));
+    	return view('application.final_interview.edit',compact('procedure','interviewers'));
     }
 
     public function update($fin_id, Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'schedule' => ['bail','required','date_format:m/d/Y h:i A',new CompareDatetime]
+        ],[
+            'schedule.required' => 'Schedule date is required.',
+            'schedule.date_format' => 'Wrong date format.'
+        ]);
+
+        if ($validator->fails()){
+            if($request->ajax()){
+                return response()->json(['errors'=>$validator->getMessageBag()->toArray()]);
+            }else{
+                return redirect()->route('applications.procedure')
+                        ->withErrors($validator)
+                        ->withInput();
+            }
+        }
+
         $procedure = FinalInterview::find($fin_id);
         $procedure->update($request->all());
 
-        //return redirect()->route('applications.process',['applicant_id'=>$id, 'status_id'=>4]); // 4 is the status of Final Interview
-        return view('application.final_interview.show',compact('procedure'));
+        if($request->ajax()){
+            return response()->json(['url'=>route('fin.form',['id'=>$fin_id])]);
+        }else{
+            return view('application.final_interview.show',compact('procedure'));
+        }
+
     }
 
     public function update_result($fin_id, Request $request){

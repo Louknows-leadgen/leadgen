@@ -10,6 +10,13 @@ class InitialScreeningsController extends Controller
 {
     //
     public function store(Request $request){
+
+        $request->validate([
+            'test_score' => 'required'
+        ],[
+            'test_score.required' => 'Test score is required.'
+        ]);
+
     	$applicant = Applicant::find($request->applicant_id);
         InitialScreening::create($request->all());
     	if($request->overall_result == 'Pass'){

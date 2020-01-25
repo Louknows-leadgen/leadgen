@@ -10,7 +10,9 @@
 						<label>Interviewer</label>
 						<select name="interviewer_id" class="custom-select custom-select-sm">
 							@foreach($interviewers as $interviewer)
-								<option value="{{$interviewer->id}}">{{$interviewer->name}}</option>
+								<option value="{{$interviewer->id}}" 
+									{{ $interviewer->id == old('interviewer_id') ? 'selected' : '' }}
+								>{{$interviewer->name}}</option>
 							@endforeach
 						</select>
 					</div>
@@ -18,7 +20,11 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>Schedule</label>
-						<input type="text" name="schedule" class="form-control form-control-sm datetime" placeholder="mm/dd/yyyy" autocomplete="off">
+						<input type="text" name="schedule" class="form-control form-control-sm datetime @error('schedule') is-invalid @enderror" placeholder="mm/dd/yyyy" autocomplete="off" value="{{ old('schedule') }}">
+
+						<span class="invalid-feedback" role="alert">
+                            @error('schedule') {{ $message }} @enderror
+                        </span>
 					</div>
 				</div>
 				<div class="col-md-4 d-flex align-items-end justify-content-center">

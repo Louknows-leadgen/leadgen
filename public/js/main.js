@@ -210,6 +210,8 @@ $(document).ready(function(){
 		switch(type){
 			case 'fin-interview':
 				url = '/final_interview/'+ id +'/form'; break;
+			case 'jo':
+				url = '/application/job-orientation/' + id; break;
 		}
 
 		container.load(url);
@@ -236,8 +238,18 @@ $(document).ready(function(){
 			url: url,
 			method: 'PUT',
 			data: form_data,
-			success: function(result){
-				container.empty().append(result);
+			success: function(response){
+				//container.empty().append(result);
+				if(!$.isEmptyObject(response.errors)){
+                    for (var key in response.errors) {
+					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
+					        $("input[name='"+ key +"']").addClass('is-invalid');
+					        $("span."+ key).empty().append(response.errors[key]);
+					    }
+					}
+                }else{
+                	container.load(response.url);
+                }
 			}
 		});
 	});
@@ -272,5 +284,15 @@ $(document).ready(function(){
 		});	
 
 	});
+
+	$(".dynamic-container").on("click",".edit_jo",function(){
+		var jo_id = $(this).data("id");
+		var container = $(".dynamic-container");
+
+		container.load('/job_orientations/'+ jo_id +'/edit');
+
+	});
+
+	
 
 });
