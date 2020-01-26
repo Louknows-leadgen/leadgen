@@ -69,6 +69,8 @@ Route::get('/application/form','PersonsController@create')->name('person.form')-
 Route::view('/application/notification','applicant.notification')->name('person.notification');
 Route::get('/application/validate','PersonsController@validate_field')->name('person.validate');
 
+//- resource details
+Route::get('/resource-details/{person_id}','ResourceDetailsController@index')->name('rd.index');
 
 //- spouses
 Route::get('/spouses/{person_id}/list','SpousesController@list')->name('spouses.list');
@@ -96,7 +98,6 @@ Route::resource('educations','EducationsController')->only(['show','edit','updat
 Route::resource('initial_screenings','InitialScreeningsController')->only(['store']);
 Route::resource('final_interviews','FinalInterviewsController')->only(['store','edit','update']);
 Route::resource('job_orientations','JobOrientationsController')->only(['store','edit','update']);
-
 
 /*
 |------------------------------------------ 

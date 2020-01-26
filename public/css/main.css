@@ -273,3 +273,53 @@ ul.d-flex{
   position: absolute;
   bottom: -25px;
 }
+
+.nav-tab{
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #6c757d;
+  border-bottom-color: transparent;
+  margin-right: 1px;
+  position: relative;
+  font-size: 15px;
+}
+
+.nav-tab:not(.active){
+  border: 1px solid #a3bbd2;
+  background-color: #a3bbd2;
+  color: #fff;
+  cursor: pointer;
+}
+
+.nav-tab:not(.active):hover{
+  border: 1px solid #5481ab;
+  background-color: #5481ab;
+  color: #fff;
+  cursor: pointer;
+}
+
+.nav-tab.active{
+  color: #4f5a68;
+  font-weight: bolder;
+  cursor: default;
+}
+
+.nav-tab.active::after{
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.dtl-cntr{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 10px;
+  align-items: baseline;
+  padding: 10px 0;
+}
