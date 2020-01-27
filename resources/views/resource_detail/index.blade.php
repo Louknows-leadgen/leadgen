@@ -14,7 +14,9 @@
 					<div class="col-md-12 border border-secondary">
 						<div class="row">
 							<div class="col-md-10 mx-auto">
-								@include('resource_detail._basic_info.index')
+								<div class="mt-4 grp">
+									@include('resource_detail._basic_info.show')
+								</div>
 							</div>
 						</div>
 					</div>

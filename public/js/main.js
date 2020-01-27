@@ -293,6 +293,69 @@ $(document).ready(function(){
 
 	});
 
-	
+	$('.grp').on('click','.edit',function(){
+		var id = $(this).data('id');
+		var tab = $(this).data('tab');
+		var container = $(this).parent();
+		var url = '';
+
+		switch(tab){
+			case 'basic':
+				url = '/resource-details/basic/'+ id +'/edit'; break;
+		}
+
+		container.load(url);
+	});
+
+	$(".grp").on("click",".j_abort",function(){
+		var tab = $(this).data("tab");
+		var id = $(this).data('id');
+		var container = $(this).parents('.grp');
+		var url = '';
+
+		switch(tab){
+			case 'basic':
+				url = '/resource-details/basic/' + id; break;
+		}
+
+		container.load(url);
+	});
+
+	$(".grp").on('submit','form.update',function(e){
+		var form_data = {};
+		var url = $(this).attr("action");
+		var container = $(this).parent();
+
+		$(this).find('[name]').each(function(){
+			form_data[this.name] = this.value;
+		});
+
+		e.preventDefault();
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+			url: url,
+			method: 'PUT',
+			data: form_data,
+			success: function(response){
+				//container.empty().append(result);
+				if(!$.isEmptyObject(response.errors)){
+                    for (var key in response.errors) {
+					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
+					        $("input[name='"+ key +"']").addClass('is-invalid');
+					        $("span."+ key).empty().append(response.errors[key]);
+					    }
+					}
+                }else{
+                	container.load(response.url);
+                }
+			}
+		});
+	});
 
 });

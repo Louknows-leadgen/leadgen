@@ -71,6 +71,9 @@ Route::get('/application/validate','PersonsController@validate_field')->name('pe
 
 //- resource details
 Route::get('/resource-details/{person_id}','ResourceDetailsController@index')->name('rd.index');
+Route::get('/resource-details/basic/{person_id}/edit','ResourceDetailsController@edit_person')->name('rd.edit_person');
+Route::get('/resource-details/basic/{person_id}','ResourceDetailsController@show_person')->name('rd.show_person');
+Route::put('/resource-details/basic/{person_id}','ResourceDetailsController@update_person')->name('rd.update_person');
 
 //- spouses
 Route::get('/spouses/{person_id}/list','SpousesController@list')->name('spouses.list');
