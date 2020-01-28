@@ -24,7 +24,11 @@ class Spouse extends Model
 
     //-- mutator
     public function setBirthdayAttribute($value){
-        $date = date_create_from_format("m/d/Y",$value);
-        $this->attributes['birthday'] = date_format($date,'Y-m-d');
+        if(isset($value)){
+            $date = date_create_from_format("m/d/Y",$value);
+            $this->attributes['birthday'] = date_format($date,'Y-m-d');
+        }else{
+            $this->attributes['birthday'] = NULL;
+        }
     }
 }

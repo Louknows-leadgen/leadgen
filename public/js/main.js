@@ -293,6 +293,44 @@ $(document).ready(function(){
 
 	});
 
+	/*
+	|---------------------------
+	| Resource Details Events
+	|---------------------------
+	*/
+
+	// navigating on the tabs
+	$(".resource-nav").on("click",".nav-tab:not(.active)", function(){
+		var container = $(".grp");
+		var tab = $(this).data("tab");
+		var person_id = $(this).data('id');
+
+		$(".active").removeClass("active");
+		$(this).addClass("active");
+
+		switch(tab){
+			case 'basic':
+				container.load('/resource-details/basic/' + person_id);
+				break;
+			case 'spouse':
+				container.load('/resource-details/spouse/' + person_id);
+				break;
+			case 'contact':
+				container.load('/resource-details/contact/'+ person_id);
+				break;
+			case 'dependent':
+				container.load('/resource-details/dependent/'+ person_id);
+				break;
+			case 'education':
+				container.load('/resource-details/education/'+ person_id);
+				break;
+			case 'work':
+				container.load('/resource-details/work/'+ person_id);
+				break;
+		}
+
+	});
+
 	$('.grp').on('click','.edit',function(){
 		var id = $(this).data('id');
 		var tab = $(this).data('tab');
@@ -302,6 +340,20 @@ $(document).ready(function(){
 		switch(tab){
 			case 'basic':
 				url = '/resource-details/basic/'+ id +'/edit'; break;
+			case 'spouse':
+				url = '/resource-details/spouse/'+ id +'/edit'; break;
+			case 'contact':
+				url = '/resource-details/contact/'+ id +'/edit'; break;
+			case 'dependent':
+				url = '/resource-details/dependent/'+ id +'/edit'; break;
+			case 'elementary':
+				url = '/resource-details/elementary/'+ id +'/edit'; break;
+			case 'high':
+				url = '/resource-details/high/'+ id +'/edit'; break;
+			case 'college':
+				url = '/resource-details/college/'+ id +'/edit'; break;			
+			case 'work':
+				url = '/resource-details/work/'+ id +'/edit'; break;				
 		}
 
 		container.load(url);
@@ -310,15 +362,30 @@ $(document).ready(function(){
 	$(".grp").on("click",".j_abort",function(){
 		var tab = $(this).data("tab");
 		var id = $(this).data('id');
-		var container = $(this).parents('.grp');
+		var parent = '.' + $(this).data('parent');
+		var container = $(this).parents(parent);
 		var url = '';
 
 		switch(tab){
 			case 'basic':
 				url = '/resource-details/basic/' + id; break;
+			case 'spouse':
+				url = '/resource-details/spouse/' + id + '/show'; break;
+			case 'contact':
+				url = '/resource-details/contact/' + id + '/show'; break;
+			case 'dependent':
+				url = '/resource-details/dependent/' + id + '/show'; break;
+			case 'elementary':
+				url = '/resource-details/elementary/' + id + '/show'; break;
+			case 'high':
+				url = '/resource-details/high/' + id + '/show'; break;
+			case 'college':
+				url = '/resource-details/college/' + id + '/show'; break;			
+			case 'work':
+				url = '/resource-details/work/' + id + '/show'; break;			
 		}
 
-		container.load(url);
+		$(container).load(url);
 	});
 
 	$(".grp").on('submit','form.update',function(e){
@@ -344,6 +411,108 @@ $(document).ready(function(){
 			data: form_data,
 			success: function(response){
 				//container.empty().append(result);
+				$('.is-invalid').removeClass('is-invalid');
+				if(!$.isEmptyObject(response.errors)){
+                    for (var key in response.errors) {
+					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
+					        $("input[name='"+ key +"']").addClass('is-invalid');
+					        $("span."+ key).empty().append(response.errors[key]);
+					    }
+					}
+                }else{
+                	container.load(response.url);
+                }
+			}
+		});
+	});
+
+	$(".grp").on("click",".new",function(){
+		var parent = '.' + $(this).data('parent');
+		var container = $(this).parents(parent);
+		var tab = $(this).data('tab');
+		var id = $(this).data('id');
+		var url = '';
+
+		switch(tab){
+			case 'spouse':
+				url = '/resource-details/spouse/new'; break;
+		}
+
+		$.ajax({
+			url: url,
+			method: 'GET',
+			data: {
+				person_id: id
+			},
+			success: function(response){
+				container.append(response);
+			}
+		});
+	});
+
+	$(".grp").on("click",".cancel-new", function(){
+		var parent = '.' + $(this).data('parent');
+		var container = $(this).parents(parent);
+
+		container.fadeOut(300,function(){
+			container.remove();
+		});
+	});
+
+	$(".grp").on("click",".delete", function(){
+		var parent = '.' + $(this).data('parent');
+		var tab = $(this).data('tab');
+		var id = $(this).data('id');
+		var container = $(this).parents(parent);
+		var url = '';
+
+		switch(tab){
+			case 'spouse':
+				url = '/resource-details/spouse/' + id; break;
+		}
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+		$.ajax({
+			url: url,
+			method: 'DELETE',
+			success: function(){
+				container.fadeOut(300,function(){
+					container.remove();
+				});
+			}
+		});
+
+	});
+
+	$(".grp").on('submit','form.store',function(e){
+		var form_data = {};
+		var url = $(this).attr("action");
+		var container = $(this).parent();
+
+		$(this).find('[name]').each(function(){
+			form_data[this.name] = this.value;
+		});
+
+		e.preventDefault();
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+			url: url,
+			method: 'POST',
+			data: form_data,
+			success: function(response){
+				//container.empty().append(result);
+				$('.is-invalid').removeClass('is-invalid');
 				if(!$.isEmptyObject(response.errors)){
                     for (var key in response.errors) {
 					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {

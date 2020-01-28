@@ -38,10 +38,10 @@ class PersonFormRequest extends FormRequest
             'spouses.*.first_name' => 'sometimes|required|regex:/[A-z]+/',
             'spouses.*.middle_name' => 'sometimes|nullable|regex:/[A-z]+/',
             'spouses.*.last_name' => 'sometimes|required|regex:/[A-z]+/',
-            'spouses.*.birthday' => 'sometimes|date_format:m/d/Y',
-            'spouses.*.contact_no' => array('sometimes','nullable', 'regex:/[0-9]+|[0-9]+-[0-9]+/'),
+            'spouses.*.birthday' => 'sometimes|required|date_format:m/d/Y',
+            'spouses.*.contact_no' => array('sometimes','nullable', 'regex:/^[0-9]+$|^\d{3}-\d{4}$/'),
             'emergency_contacts.*.full_name' => 'sometimes|required',
-            'emergency_contacts.*.contact_no' => array('sometimes','required', 'regex:/[0-9]+|[0-9]+-[0-9]+/'),
+            'emergency_contacts.*.contact_no' => array('sometimes','required', 'regex:/^[0-9]+$|^\d{3}-\d{4}$/'),
             'emergency_contacts.*.relationship' => 'sometimes|required',
             'dependents.*.full_name' => 'sometimes|required',
             'dependents.*.birthday' => 'sometimes|required|date_format:m/d/Y',
@@ -49,8 +49,8 @@ class PersonFormRequest extends FormRequest
             'schools.*.graduated_date' => 'sometimes|required|numeric',
             'work_exp.*.employer' => 'sometimes|required',
             'work_exp.*.role_name' => 'sometimes|required',
-            'work_exp.*.start_date' => 'sometimes|date_format:m/d/Y|before:end_date',
-            'work_exp.*.end_date' => 'sometimes|date_format:m/d/Y|after:start_date',
+            'work_exp.*.start_date' => 'sometimes|required|date_format:m/d/Y|before:end_date',
+            'work_exp.*.end_date' => 'sometimes|required|date_format:m/d/Y|after:start_date',
         ];
     }
 
