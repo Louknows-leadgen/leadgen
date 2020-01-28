@@ -1,16 +1,12 @@
-<div class="dtl-cntr">
-	<label>School name</label>
-	<input type="text" class="form-control" value="{{ $college->school_name }}" disabled>
+<div class="d-flex justify-content-end mb-4">
+	<button class="btn btn-success new" data-id="{{$person->id}}" data-tab="college" data-parent="grp">Add college</button>
 </div>
-<div class="dtl-cntr">
-	<label>Year graduated</label>
-	<input type="text" class="form-control" value="{{ $college->graduated_date }}" disabled>
-</div>
-<div class="dtl-cntr">
-	<label>Degree</label>
-	<input type="text" class="form-control" value="{{ $college->degree }}" disabled>
-</div>
-<button class="btn btn-primary btn-block edit" 
-        data-tab="college" 
-        data-id="{{ $college->id }}">Edit</button>
-</div>
+@if(count($colleges))
+	@foreach($colleges as $college)
+		<div class="grp-item mb-4">
+			@include('resource_detail._education._college.show_college')
+		</div>
+	@endforeach
+@else
+	<p class="no-data empty">No colleges to display</p>
+@endif

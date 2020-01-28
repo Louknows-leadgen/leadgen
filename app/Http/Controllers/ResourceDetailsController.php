@@ -185,11 +185,46 @@ class ResourceDetailsController extends Controller
     |       Emergency Contacts tab
     |----------------------------------
     */
+
+    public function destroy_contact($contact_id){
+        $contact = EmergencyContact::find($contact_id);
+        $contact->delete();
+    }
+
+    public function new_contact(Request $request){
+        $person_id = $request->person_id;
+        return view('resource_detail._emergency_contact.new_contact',compact('person_id'));
+    }
+
+    public function store_contact(Request $request){
+        $validator = Validator::make($request->all(), [
+            'full_name' => 'required',
+            'contact_no' => array('required', 'regex:/^[0-9]+$|^\d{3}-\d{4}$/'),
+            'relationship' => 'required',
+        ],[
+            'full_name.required' => 'Name is required.',
+            'contact_no.required' => 'Contact number is required.',
+            'contact_no.regex' => 'Invalid contact number.',
+            'relationship.required' => 'Relationship is required.',
+        ]);
+
+        if ($validator->fails()){
+            if($request->ajax())
+                return response()->json(['errors'=>$validator->getMessageBag()->toArray()]);
+        }
+
+        $contact = EmergencyContact::create($request->all());
+
+        if($request->ajax()){
+            return response()->json(['url'=>route('rd.show_contact',['contact_id'=>$contact->id])]);
+        }
+    }
+
     public function show_contacts($person_id){
         $person = Person::find($person_id);
         $contacts = $person->emergency_contacts;
 
-        return view('resource_detail._emergency_contact.show',compact('contacts'));
+        return view('resource_detail._emergency_contact.show',compact('contacts','person'));
     }
 
     public function edit_contact($contact_id){
@@ -238,11 +273,44 @@ class ResourceDetailsController extends Controller
     |       Dependents tab
     |----------------------------------
     */
+
+    public function destroy_dependent($dependent_id){
+        $dependent = Dependent::find($dependent_id);
+        $dependent->delete();
+    }
+
+    public function new_dependent(Request $request){
+        $person_id = $request->person_id;
+        return view('resource_detail._dependent.new_dependent',compact('person_id'));
+    }
+
+    public function store_dependent(Request $request){
+        $validator = Validator::make($request->all(), [
+            'full_name' => 'required',
+            'birthday' => 'required|date_format:m/d/Y',
+        ],[
+            'full_name.required' => 'Name is required.',
+            'birthday.required' => 'Birthday is required.',
+            'birthday.date_format' => 'Invalid date format.'
+        ]);
+
+        if ($validator->fails()){
+            if($request->ajax())
+                return response()->json(['errors'=>$validator->getMessageBag()->toArray()]);
+        }
+
+        $dependent = Dependent::create($request->all());
+
+        if($request->ajax()){
+            return response()->json(['url'=>route('rd.show_dependent',['dependent_id'=>$dependent->id])]);
+        }
+    }
+
     public function show_dependents($person_id){
         $person = Person::find($person_id);
         $dependents = $person->dependents;
 
-        return view('resource_detail._dependent.show',compact('dependents'));
+        return view('resource_detail._dependent.show',compact('dependents','person'));
     }
 
     public function edit_dependent($dependent_id){
@@ -295,7 +363,7 @@ class ResourceDetailsController extends Controller
         $high = $person->high();
         $colleges = $person->colleges;
 
-        return view('resource_detail._education.show',compact('elem','high','colleges'));
+        return view('resource_detail._education.show',compact('elem','high','colleges','person'));
     }
 
     public function edit_elementary($elem_id){
@@ -376,6 +444,41 @@ class ResourceDetailsController extends Controller
         return view('resource_detail._education._high.show',compact('high'));
     }
 
+    public function destroy_college($college_id){
+        $college = College::find($college_id);
+        $college->delete();
+    }
+
+    public function new_college(Request $request){
+        $person_id = $request->person_id;
+        return view('resource_detail._education._college.new_college',compact('person_id'));
+    }
+
+    public function store_college(Request $request){
+        $validator = Validator::make($request->all(), [
+            'school_name' => 'required',
+            'graduated_date' => 'required|numeric|regex:/^\d{4}$/',
+            'degree' => 'required'
+        ],[
+            'school_name.required' => 'School name is required.',
+            'graduated_date.required' => 'Graduated date is required.',
+            'graduated_date.numeric' => 'Invalid year format.',
+            'graduated_date.regex' => 'Invalid year format.',
+            'degree.required' => 'Degree is required.'
+        ]);
+
+        if ($validator->fails()){
+            if($request->ajax())
+                return response()->json(['errors'=>$validator->getMessageBag()->toArray()]);
+        }
+
+        $college = College::create($request->all());
+
+        if($request->ajax()){
+            return response()->json(['url'=>route('rd.show_college',['college_id'=>$college->id])]);
+        }
+    }
+
     public function edit_college($college_id){
         $college = College::find($college_id);
 
@@ -408,13 +511,13 @@ class ResourceDetailsController extends Controller
             return response()->json(['url'=>route('rd.show_college',['college_id'=>$college->id])]);
         }
 
-        return view('resource_detail._education._college.show',compact('college'));
+        return view('resource_detail._education._college.show_college',compact('college'));
     }
 
     public function show_college($college_id){
         $college = College::find($college_id);
 
-        return view('resource_detail._education._college.show',compact('college'));
+        return view('resource_detail._education._college.show_college',compact('college'));
     }
 
 
@@ -423,11 +526,51 @@ class ResourceDetailsController extends Controller
     |       Work Experiences tab
     |----------------------------------
     */
+
+    public function destroy_work($work_id){
+        $work = WorkExperience::find($work_id);
+        $work->delete();
+    }
+
+    public function new_work(Request $request){
+        $person_id = $request->person_id;
+        return view('resource_detail._work.new_work',compact('person_id'));
+    }
+
+    public function store_work(Request $request){
+        $validator = Validator::make($request->all(), [
+            'employer' => 'required',
+            'role_name' => 'required',
+            'start_date' => 'required|date_format:m/d/Y|before:end_date',
+            'end_date' => 'required|date_format:m/d/Y|after:start_date',
+        ],[
+            'employer.required' => 'Employer is required.',
+            'role_name.required' => 'Role is required.',
+            'start_date.required' => 'Start date is required.',
+            'start_date.date_format' => 'Invalid date format.',
+            'start_date.before' => 'Start date must be before End date.',
+            'end_date.required' => 'End date is required.',
+            'end_date.date_format' => 'Invalid date format.',
+            'end_date.after' => 'End date must be after Start date.',
+        ]);
+
+        if ($validator->fails()){
+            if($request->ajax())
+                return response()->json(['errors'=>$validator->getMessageBag()->toArray()]);
+        }
+
+        $work = WorkExperience::create($request->all());
+
+        if($request->ajax()){
+            return response()->json(['url'=>route('rd.show_work',['work_id'=>$work->id])]);
+        }
+    }
+
     public function show_works($person_id){
         $person = Person::find($person_id);
         $works = $person->work_experiences;
 
-        return view('resource_detail._work.show',compact('works'));
+        return view('resource_detail._work.show',compact('works','person'));
     }
 
     public function edit_work($work_id){

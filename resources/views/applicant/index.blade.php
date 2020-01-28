@@ -39,7 +39,7 @@
                                 @if (count($applicants))
                                 @foreach($applicants as $applicant)
                                     <tr>
-                                        <td><a class="link" href="/applicants/{{$applicant->person->id}}">{{ $applicant->person->first_name }}</a></td>
+                                        <td><a class="link" href="{{route('rd.index',['person_id'=>$applicant->person->id])}}">{{ $applicant->person->first_name }}</a></td>
                                         <td>{{ $applicant->person->middle_name }}</td>
                                         <td>{{ $applicant->person->last_name }}</td>
                                         <td>{{ $applicant->person->mobile_1 }}</td>

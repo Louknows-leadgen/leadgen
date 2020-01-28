@@ -8,5 +8,5 @@
 </div>
 <button class="btn btn-primary btn-block edit" 
         data-tab="dependent" 
-        data-id="{{ $dependent->id }}">Edit</button>
-</div>
+        data-id="{{ $dependent->id }}">Edit
+</button>

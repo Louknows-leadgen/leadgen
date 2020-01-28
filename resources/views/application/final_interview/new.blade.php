@@ -1,4 +1,4 @@
-<form class="store" action="/final_interviews" method="POST">
+<form class="j_fi-submit" action="/final_interviews" method="POST">
 	@csrf
 	<input type="hidden" name="applicant_id" value="{{$applicant->id}}">
 	<div class="row">
@@ -22,14 +22,14 @@
 						<label>Schedule</label>
 						<input type="text" name="schedule" class="form-control form-control-sm datetime @error('schedule') is-invalid @enderror" placeholder="mm/dd/yyyy" autocomplete="off" value="{{ old('schedule') }}">
 
-						<span class="invalid-feedback" role="alert">
+						<span class="invalid-feedback feedback-inline" role="alert">
                             @error('schedule') {{ $message }} @enderror
                         </span>
 					</div>
 				</div>
 				<div class="col-md-4 d-flex align-items-end justify-content-center">
 					<div class="form-group">
-						<input class="btn btn-primary" type="submit" name="submit" value="Submit">
+						<button class="btn btn-primary" name="submit">Submit</button>
 					</div>
 				</div>
 			</div>

@@ -6,19 +6,14 @@
 	</div>
 	<div class="dtl-cntr">
 		<label>Birthday</label>
-		<input type="text" name="birthday" class="form-control date" value="{{ $dependent->birthday }}" autocomplete="false">
+		<input type="text" name="birthday" class="form-control date" value="{{ $dependent->birthday }}" autocomplete="off">
 		<span class="invalid-feedback birthday" role="alert" style="grid-column-start: 2"></span>
 	</div>
 	<div class="row">
-		<div class="col-md-6">
-			<div class="form-group d-flex justify-content-end">
-				<span class="btn btn-secondary j_abort" data-parent="grp-item" data-tab="dependent" data-id="{{ $dependent->id }}">Cancel</span>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="form-group">
-				<input type="submit" class="btn btn-primary" name="update" value="Update">
-			</div>
+		<div class="col-md-12 d-flex justify-content-center">
+			<span class="btn btn-secondary j_abort mr-3" data-parent="grp-item" data-tab="dependent" data-id="{{ $dependent->id }}">Cancel</span>
+			<span class="btn btn-danger mr-3 delete" data-parent="grp-item" data-tab="dependent" data-id="{{ $dependent->id }}">Delete</span>
+			<input type="submit" class="btn btn-primary" name="update" value="Update">
 		</div>
 	</div>
 </form>

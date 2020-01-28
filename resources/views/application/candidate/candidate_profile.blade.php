@@ -153,6 +153,7 @@
 
 			<h5 class="mt-5 mb-4">WORK EXPERIENCE/S</h5>
 			<div class="container">
+				@if(count($info->work_experiences))
 				@foreach($info->work_experiences as $work)
 					<div class="row">
 						<div class="col-md-6">
@@ -206,7 +207,10 @@
 							</div>
 						</div>
 					</div>
-				@endforeach	
+				@endforeach
+				@else
+					<p>No work experiences to display</p>
+				@endif
 			</div>
 		</div>
 

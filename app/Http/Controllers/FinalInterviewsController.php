@@ -30,7 +30,7 @@ class FinalInterviewsController extends Controller
 
         // send email
         $details = [
-            'url' => "http://recruitment.build/application/candidate/$id/profile",
+            'url' => route('applications.profile',['applicant_id'=>$id]),
             'name' => $applicant->person->name(),
             'job' => $applicant->job->name,
             'sched' => $fin->schedule,

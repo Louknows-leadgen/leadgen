@@ -193,6 +193,13 @@ $(document).ready(function(){
 
 	//-----------------------------------------------------
 
+	$(".dynamic-container").on("submit",".j_fi-submit",function(){
+		var button = $(this).find("[name='submit']");
+		button.attr('disabled',true);
+		button.css({'cursor':'default'});
+		button.html("<span class='spinner-border spinner-border-sm'></span> Submitting...");
+	});
+
 	$(".dynamic-container").on("click",".j_edit-fin",function(){
 		var fin_id = $(this).data("id");
 		var container = $(".dynamic-container");
@@ -436,6 +443,14 @@ $(document).ready(function(){
 		switch(tab){
 			case 'spouse':
 				url = '/resource-details/spouse/new'; break;
+			case 'contact':
+				url = '/resource-details/contact/new'; break;
+			case 'dependent':
+				url = '/resource-details/dependent/new'; break;
+			case 'college':
+				url = '/resource-details/college/new'; break;	
+			case 'work':
+				url = '/resource-details/work/new'; break;		
 		}
 
 		$.ajax({
@@ -469,6 +484,14 @@ $(document).ready(function(){
 		switch(tab){
 			case 'spouse':
 				url = '/resource-details/spouse/' + id; break;
+			case 'contact':
+				url = '/resource-details/contact/' + id; break;
+			case 'dependent':
+				url = '/resource-details/dependent/' + id; break;
+			case 'college':
+				url = '/resource-details/college/' + id; break;	
+			case 'work':
+				url = '/resource-details/work/' + id; break;			
 		}
 
 		$.ajaxSetup({
