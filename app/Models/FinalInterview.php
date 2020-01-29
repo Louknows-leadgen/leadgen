@@ -1,10 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Carbon;
 use DB;
 
 class FinalInterview extends Model
@@ -26,11 +24,11 @@ class FinalInterview extends Model
     */
 
     public function user(){
-        return $this->belongsTo('App\User','interviewer_id');
+        return $this->belongsTo('App\Models\User','interviewer_id');
     }
 
     public function applicant(){
-        return $this->belongsTo('App\Applicant');
+        return $this->belongsTo('App\Models\Applicant');
     }
 
 

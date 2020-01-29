@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,11 +45,11 @@ class User extends Authenticatable
     */
 
     public function role(){
-        return $this->belongsTo('App\Role','roleid','roleid');
+        return $this->belongsTo('App\Models\Role','roleid','roleid');
     }
 
     public function final_interviews(){
-        return $this->hasMany('App\FinalInterview','interviewer_id');
+        return $this->hasMany('App\Models\FinalInterview','interviewer_id');
     }
 
     /*

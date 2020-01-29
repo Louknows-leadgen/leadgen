@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,10 +18,10 @@ class InitialScreening extends Model
     ];
 
     public function test(){
-    	return $this->belongsTo('App\Test');
+    	return $this->belongsTo('App\Models\Test');
     }
 
     public function applicant(){
-        return $this->belongsTo('App\Applicant');
+        return $this->belongsTo('App\Models\Applicant');
     }
 }

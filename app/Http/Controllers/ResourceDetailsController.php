@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Person;
-use App\Spouse;
-use App\EmergencyContact;
-use App\Dependent;
-use App\MiddleSchool;
-use App\College;
-use App\WorkExperience;
+use App\Models\Person;
+use App\Models\Spouse;
+use App\Models\EmergencyContact;
+use App\Models\Dependent;
+use App\Models\MiddleSchool;
+use App\Models\College;
+use App\Models\WorkExperience;
 
 class ResourceDetailsController extends Controller
 {

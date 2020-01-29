@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,35 +33,35 @@ class Person extends Model
     |---------------------
     */
     public function applicant(){
-    	return $this->hasOne('App\Applicant');
+    	return $this->hasOne('App\Models\Applicant');
     }
 
     public function employee(){
-    	return $this->hasOne('App\Employee');
+    	return $this->hasOne('App\Models\Employee');
     }
 
     public function spouses(){
-    	return $this->hasMany('App\Spouse');
+    	return $this->hasMany('App\Models\Spouse');
     }
 
     public function emergency_contacts(){
-    	return $this->hasMany('App\EmergencyContact');
+    	return $this->hasMany('App\Models\EmergencyContact');
     }
 
     public function dependents(){
-    	return $this->hasMany('App\Dependent');
+    	return $this->hasMany('App\Models\Dependent');
     }
 
     public function middle_schools(){
-    	return $this->hasMany('App\MiddleSchool');
+    	return $this->hasMany('App\Models\MiddleSchool');
     }
 
     public function colleges(){
-    	return $this->hasMany('App\College');
+    	return $this->hasMany('App\Models\College');
     }
 
     public function work_experiences(){
-    	return $this->hasMany('App\WorkExperience');
+    	return $this->hasMany('App\Models\WorkExperience');
     }
 
     /*

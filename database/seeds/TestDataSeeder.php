@@ -4,10 +4,10 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
-use App\User;
-use App\Applicant;
-use App\Person;
-use App\MiddleSchool;
+use App\Models\User;
+use App\Models\Applicant;
+use App\Models\Person;
+use App\Models\MiddleSchool;
 
 class TestDataSeeder extends Seeder
 {

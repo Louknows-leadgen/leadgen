@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\InitialScreening;
-use App\FinalInterview;
-use App\JobOrientation;
-use App\Applicant;
-use App\Test;
-use App\User;
+use App\Models\InitialScreening;
+use App\Models\FinalInterview;
+use App\Models\JobOrientation;
+use App\Models\Applicant;
+use App\Models\Test;
+use App\Models\User;
 
 class ApplicationsController extends Controller
 {

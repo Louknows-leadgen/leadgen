@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -22,29 +22,29 @@ class Applicant extends Model
 
     // belongs to personal detail
     public function person(){
-    	return $this->belongsTo('App\Person');
+    	return $this->belongsTo('App\Models\Person');
     }
 
     // belongs to job application
     public function job(){
-    	return $this->belongsTo('App\Job');
+    	return $this->belongsTo('App\Models\Job');
     }
 
     // belongs to application status
     public function application_status(){
-    	return $this->belongsTo('App\ApplicationStatus','application_status_id','stat_id');
+    	return $this->belongsTo('App\Models\ApplicationStatus','application_status_id','stat_id');
     }
 
     public function initial_screening(){
-        return $this->hasOne('App\InitialScreening');
+        return $this->hasOne('App\Models\InitialScreening');
     }
 
 	public function final_interview(){
-        return $this->hasOne('App\FinalInterview');
+        return $this->hasOne('App\Models\FinalInterview');
     }
 
     public function job_orientation(){
-        return $this->hasOne('App\JobOrientation');
+        return $this->hasOne('App\Models\JobOrientation');
     }
 
 

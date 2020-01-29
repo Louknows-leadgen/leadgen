@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +19,7 @@ class Spouse extends Model
     ];
 
     public function person(){
-        $this->belongsTo('App\Person');
+        $this->belongsTo('App\Models\Person');
     }
 
     //-- mutator

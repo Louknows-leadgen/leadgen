@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class ApplicationStatus extends Model
     ];
 
     public function applicants(){
-    	return $this->hasMany('App\Applicant','application_status_id','stat_id');
+    	return $this->hasMany('App\Models\Applicant','application_status_id','stat_id');
     }
 
 }

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\FinalInterview;
-use App\User;
-use App\Applicant;
+use App\Models\FinalInterview;
+use App\Models\User;
+use App\Models\Applicant;
 use App\Mail\SendMail;
 use App\Rules\CompareDatetime;
 

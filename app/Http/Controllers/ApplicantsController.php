@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Applicant;
-use App\Person;
-use App\Job;
-use App\Site;
-use App\ApplicationStatus;
+use App\Models\Applicant;
+use App\Models\Person;
+use App\Models\Job;
+use App\Models\Site;
+use App\Models\ApplicationStatus;
 
 
 class ApplicantsController extends Controller

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\InitialScreening;
-use App\Applicant;
+use App\Models\InitialScreening;
+use App\Models\Applicant;
 
 class InitialScreeningsController extends Controller
 {

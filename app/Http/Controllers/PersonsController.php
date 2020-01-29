@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PersonFormRequest;
-use App\Person;
+use App\Models\Person;
 use Validator;
 
 class PersonsController extends Controller
@@ -78,23 +78,6 @@ class PersonsController extends Controller
         return redirect()->route('applicants.create' , ['id' => $person->id]);
     }
 
-    public function list($person_id){
-        $person = Person::find($person_id);
-
-        return view('person.list',compact('person'));
-    }
-
-    public function edit(Person $person){
-        $applicant_id = $person->applicant->id;
-        return view('person.edit',compact('person','applicant_id'));
-    }
-
-    public function update(Request $request, $person_id){
-        $person = Person::find($person_id);
-        $person->update($request->obj);
-        return view('person.list',compact('person'));
-    }
-
     public function validate_field(Request $request){
         $messages = $this->validation_messages();
         $validator = Validator::make($request->all(), [
@@ -123,8 +106,8 @@ class PersonsController extends Controller
             'schools.*.graduated_date' => 'sometimes|required|numeric',
             'work_exp.*.employer' => 'sometimes|required',
             'work_exp.*.role_name' => 'sometimes|required',
-            'work_exp.*.start_date' => 'sometimes|date_format:m/d/Y|before:end_date',
-            'work_exp.*.end_date' => 'sometimes|date_format:m/d/Y|after:start_date',
+            'work_exp.*.start_date' => 'sometimes|required|date_format:m/d/Y',
+            'work_exp.*.end_date' => 'sometimes|required|date_format:m/d/Y',
         ],$messages);
 
         if ($validator->passes()) {

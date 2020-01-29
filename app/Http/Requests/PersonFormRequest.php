@@ -49,8 +49,8 @@ class PersonFormRequest extends FormRequest
             'schools.*.graduated_date' => 'sometimes|required|numeric',
             'work_exp.*.employer' => 'sometimes|required',
             'work_exp.*.role_name' => 'sometimes|required',
-            'work_exp.*.start_date' => 'sometimes|required|date_format:m/d/Y|before:end_date',
-            'work_exp.*.end_date' => 'sometimes|required|date_format:m/d/Y|after:start_date',
+            'work_exp.*.start_date' => 'sometimes|required|date_format:m/d/Y|before:work_exp.*.end_date',
+            'work_exp.*.end_date' => 'sometimes|required|date_format:m/d/Y|after:work_exp.*.start_date',
         ];
     }
 
@@ -63,7 +63,13 @@ class PersonFormRequest extends FormRequest
             'regex' => 'This field should be a string.',
             'spouses.*.contact_no.regex' => 'Should follow the correct format.',
             'emergency_contacts.*.contact_no.regex' => 'Should follow the correct format.',
-            'date_format' => 'Date format should be mm/dd/yyyy'
+            'date_format' => 'Date format should be mm/dd/yyyy',
+            'work_exp.*.start_date.before' => 'Start date should be lesser than End date.',
+            'work_exp.*.start_date.required' => 'Start date is required.',
+            'work_exp.*.end_date.after' => 'End date should be greater than Start date.',
+            'work_exp.*.end_date.required' => 'End date is required.',
+            'work_exp.*.employer.required' => 'Employer is required.',
+            'work_exp.*.role_name.required' => 'Role name is required.'
         ];
     }
 

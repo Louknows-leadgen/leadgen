@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +13,7 @@ class JobOrientation extends Model
     ];
 
     public function applicant(){
-    	return $this->belongsTo('App\Applicant');
+    	return $this->belongsTo('App\Models\Applicant');
     }
 
 
