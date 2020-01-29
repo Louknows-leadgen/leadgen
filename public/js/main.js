@@ -110,6 +110,8 @@ $(document).ready(function(){
 		var url = '';
 		var type = $(this).data('type');
 
+		// Controller: PersonsController
+		// method: new
 		switch(type){
 			case 'spouse':
 							wrapper = $('.j_spouse-list');
