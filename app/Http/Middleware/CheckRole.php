@@ -20,6 +20,9 @@ class CheckRole
             $role = Auth::user()->roleid;
             if($role != $roleid){
                 switch ($role) {
+                    case 1:
+                        return redirect()->route('person.form');
+                        break;
                     case 2:
                         return redirect()->route('root');
                         break;

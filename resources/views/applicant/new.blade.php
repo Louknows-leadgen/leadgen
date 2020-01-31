@@ -4,6 +4,20 @@
 
 @section('contents')
 	<div class="box container w-50">
+		
+		@if ($errors->any())
+		    <div class="alert alert-danger alert-dismissible">
+		    	<button type="button" class="close" data-dismiss="alert">&times;</button>
+		    	<p>The ff. errors prevented the operation to continue:</p>
+		        <ul>
+		            @foreach ($errors->all() as $error)
+		                <li>{{ $error }}</li>
+		            @endforeach
+		        </ul>
+		        <p>Go back to <a href="{{ route('person.form') }}">form</a>.</p>
+		    </div>
+		@endif
+
 		<div class="row">
 			<div class="col-md-12 mx-auto">
 				<form action="/applicants" method="post">

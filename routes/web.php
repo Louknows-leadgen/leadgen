@@ -17,7 +17,7 @@
 |------------------------------------------
 */
 
-Route::get('/','ApplicantsController@index')->name('root')->middleware('checkrole:2');
+Route::get('/','ApplicantsController@index')->name('root');
 
 
 
@@ -32,17 +32,16 @@ Route::get('/applicants/new/{id}','ApplicantsController@create')->name('applican
 Route::get('/applicants/search','ApplicantsController@search')->name('applicants.search');
 
 //- application routes
-Route::get('/application/{applicant_id}/status/{status_id}','ApplicationsController@process')->name('applications.process')->middleware('checkrole:2');
-Route::get('/application/{applicant_id}/procedure','ApplicationsController@procedure')->name('applications.procedure')->middleware('checkrole:2');
-Route::get('/application/initial-screening/{applicant_id}','ApplicationsController@initial_screening')->name('applications.initial-screening')->middleware('checkrole:2');
-Route::get('/application/final-interview/{applicant_id}','ApplicationsController@final_interview')->name('applications.final-interview')->middleware('checkrole:2');
-Route::get('/application/job-orientation/{applicant_id}','ApplicationsController@job_orientation')->name('applications.job-orientation')->middleware('checkrole:2');
+Route::get('/application/{applicant_id}/procedure','ApplicationsController@procedure')->name('applications.procedure');
+Route::get('/application/initial-screening/{applicant_id}','ApplicationsController@initial_screening')->name('applications.initial-screening');
+Route::get('/application/final-interview/{applicant_id}','ApplicationsController@final_interview')->name('applications.final-interview');
+Route::get('/application/job-orientation/{applicant_id}','ApplicationsController@job_orientation')->name('applications.job-orientation');
 
-Route::get('/application/candidates','ApplicationsController@candidates')->name('applications.candidates')->middleware('checkrole:3');
+Route::get('/application/candidates','ApplicationsController@candidates')->name('applications.candidates');
 
 Route::get('/application/candidates/search','ApplicationsController@search')->name('applications.search');
 
-Route::get('/application/candidate/{applicant_id}/profile','ApplicationsController@profile')->name('applications.profile')->middleware('checkrole:3');
+Route::get('/application/candidate/{applicant_id}/profile','ApplicationsController@profile')->name('applications.profile');
 
 
 //- final interviews
@@ -50,9 +49,8 @@ Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@upd
 Route::get('/final_interview/{id}/form','FinalInterviewsController@form_partial')->name('fin.form');
 
 //- persons
-Route::get('/persons/{person_id}/list','PersonsController@list')->name('persons.list');
 Route::get('/person/{item}/new','PersonsController@new')->name('person.new');
-Route::get('/application/form','PersonsController@create')->name('person.form')->middleware('checkrole:1');
+Route::get('/application/form','PersonsController@create')->name('person.form');
 Route::view('/application/notification','applicant.notification')->name('person.notification');
 Route::get('/application/validate','PersonsController@validate_field')->name('person.validate');
 
@@ -129,8 +127,7 @@ Route::delete('/resource-details/work/{work_id}','ResourceDetailsController@dest
 */
 
 Route::resource('applicants','ApplicantsController')->except(['create']);
-Route::resource('applicants','ApplicantsController')->only(['show'])->middleware('checkrole:2');
-Route::resource('persons','PersonsController')->except(['create']);
+Route::resource('persons','PersonsController')->only(['store']);
 Route::resource('initial_screenings','InitialScreeningsController')->only(['store']);
 Route::resource('final_interviews','FinalInterviewsController')->only(['store','edit','update']);
 Route::resource('job_orientations','JobOrientationsController')->only(['store','edit','update']);
@@ -141,8 +138,3 @@ Route::resource('job_orientations','JobOrientationsController')->only(['store','
 |------------------------------------------
 */
 Auth::routes();
-
-
-Route::get("/phpinfo",function(){
-	phpinfo();
-});

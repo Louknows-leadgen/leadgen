@@ -9,6 +9,11 @@ use Validator;
 
 class PersonsController extends Controller
 {
+    
+    public function __construct(){
+        $this->middleware('checkrole:1')->only('create');
+    }
+
     // show person new form
 	public function create(){
 		return view('person.main');

@@ -14,6 +14,12 @@ use App\Models\WorkExperience;
 
 class ResourceDetailsController extends Controller
 {
+    
+    public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('checkrole:2');
+    }
+
     /*
     |----------------------------------
     |        Index page. 

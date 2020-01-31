@@ -13,6 +13,13 @@ use App\Models\User;
 
 class ApplicationsController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('checkrole:2')->only(['procedure','initial_screening','final-interview','job-orientation']);
+        $this->middleware('checkrole:3')->only(['candidates','profile']);
+    }
+
     public function procedure($applicant_id){
         $applicant = Applicant::find($applicant_id);
         $tests = Test::all();

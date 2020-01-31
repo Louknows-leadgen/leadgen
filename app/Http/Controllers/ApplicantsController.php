@@ -16,6 +16,7 @@ class ApplicantsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('checkrole:2')->only('index');
     }
     
     // root route
@@ -32,6 +33,8 @@ class ApplicantsController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate(['person_id' => 'unique:applicants'],['The applicant already exists.']);
+
         $person = Person::find($request->person_id);
         $person->applicant()->create([
             'job_id' => $request->job_id,
@@ -42,12 +45,6 @@ class ApplicantsController extends Controller
 
         //return redirect()->route('root');
         return redirect()->route('person.notification');
-    }
-
-    public function show(Applicant $applicant){
-        $person = $applicant->person;
-
-        return view('applicant.show',compact('person'));
     }
 
     public function search(Request $request){
