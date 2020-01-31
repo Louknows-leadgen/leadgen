@@ -6,7 +6,7 @@
 	<div class="box container w-50">
 		
 		@if ($errors->any())
-		    <div class="alert alert-danger alert-dismissible">
+		    <div class="alert alert-danger alert-dismissible fade show">
 		    	<button type="button" class="close" data-dismiss="alert">&times;</button>
 		    	<p>The ff. errors prevented the operation to continue:</p>
 		        <ul>

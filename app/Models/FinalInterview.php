@@ -82,7 +82,7 @@ class FinalInterview extends Model
         if(!empty($skey))
             $query->whereRaw("concat(p.first_name, ' ', p.last_name) LIKE ?",['%'.$skey.'%']);
 
-        return $query->get(['p.first_name','p.middle_name','p.last_name','j.name','fi.schedule']);
+        return $query->get(['p.first_name','p.middle_name','p.last_name','j.name','fi.schedule','fi.applicant_id']);
     }
 
 }

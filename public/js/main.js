@@ -4,6 +4,7 @@ $(document).ready(function(){
     | initialize datefield
     |-------------------------------------------------------------------------
 	*/
+	
 
 	// callback function
 	var date = function(){
@@ -32,6 +33,8 @@ $(document).ready(function(){
 	var obsrv_datetime = new MutationObserver(datetime);
 	obsrv_date.observe(elementToObserve, {subtree: true, childList: true});
 	obsrv_datetime.observe(elementToObserve, {subtree: true, childList: true});
+
+
 
 	//-------------------------------------------------------------------------
 
@@ -185,6 +188,27 @@ $(document).ready(function(){
 			method: 'GET',
 			data: {
 				skey: search_text
+			},
+			success: function(result){
+				container.empty().append(result);
+			}
+		});
+
+	}));
+
+
+	$("#search-candidate").on("input", $.debounce(200,function(){
+		var search_text = $(this).val();
+		var user_id = $(this).data('user');
+
+		var container = $("tbody");
+
+		$.ajax({
+			url: '/application/candidates/search',
+			method: 'GET',
+			data: {
+				skey: search_text,
+				id: user_id
 			},
 			success: function(result){
 				container.empty().append(result);

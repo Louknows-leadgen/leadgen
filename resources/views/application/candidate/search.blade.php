@@ -8,7 +8,7 @@
 		<td>{{$candidate->last_name}}</td>
 		<td>{{$candidate->name}}</td>
 		<td>{{date('m/d/Y g:i A', strtotime($candidate->schedule))}}</td>
-		<td><a class="link" href="#">Interview</a></td>
+		<td><a class="link" href="{{ route('applications.profile',['applicant_id'=>$candidate->applicant_id]) }}">Interview</a></td>
 	</tr>
 	@endforeach
 @else

@@ -41,7 +41,7 @@
 										<td>{{$interview->applicant->person->last_name}}</td>
 										<td>{{$interview->applicant->job->name}}</td>
 										<td>{{$interview->schedule}}</td>
-										<td><a class="link" href="/application/candidate/{{$interview->applicant_id}}/profile">Interview</a></td>
+										<td><a class="link" href="{{ route('applications.profile',['applicant_id'=>$interview->applicant_id]) }}">Interview</a></td>
 									</tr>
                             	@endforeach
                             @else
