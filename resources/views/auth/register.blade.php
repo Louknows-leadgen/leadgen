@@ -1,11 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
+        
+        @if(session('success'))
+        <div class="col-md-8">
+            <div class="alert alert-success alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                Success! You have created a user.
+            </div>
+        </div>
+        @endif
+
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6 d-flex justify-content-start">
+                            <div>{{ __('Register') }}</div>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <div>
+                                <a href="{{ URL::previous() }}">Back</a>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
