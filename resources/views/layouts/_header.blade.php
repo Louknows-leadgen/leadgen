@@ -5,14 +5,26 @@
 		        <img src="{{ URL::asset('images/logo.svg') }}">
 		    </div>
 		    <div class="sign-in">
-		        <span>
-		            Logged in as {{Auth::user()->role_name}} | <a class="link" href="#" onclick="event.preventDefault();
-		                        document.getElementById('logout-form').submit();">Sign out</a>
-		        </span>
+		    	Logged in as
+				<span class="dropdown-toggle" data-toggle="dropdown">
+					{{ Auth::user()->username }}
+				</span>
+				<div class="dropdown-menu user-menu">
+		            @can('access',2)
+					<a class="dropdown-item menu-item" href="{{ route('register') }}">Create user</a>
+					@endcan
 
-		        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					<a class="link dropdown-item menu-item" 
+					   href="#" 
+					   onclick="event.preventDefault();
+		                        document.getElementById('logout-form').submit();">
+		               Sign out
+		            </a>
+
+					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 		            @csrf
 		        </form>
+				</div>
 		    </div>
 		</div>
 	</div>

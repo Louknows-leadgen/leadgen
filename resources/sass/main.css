@@ -335,3 +335,20 @@ ul.d-flex{
   cursor: pointer;
   color: #3490dc;
 }
+
+.dropdown-toggle{
+  cursor: pointer;
+}
+
+.user-menu{
+  background-color: #4c8ccd !important;
+}
+
+.menu-item{
+  color: #fff !important;
+  transition: background-color 200ms ease-in-out;
+}
+
+.menu-item:hover{
+  background-color: #3578bc !important;
+}
