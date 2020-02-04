@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
+/* commented out because it creates error when caching routes. it's not used anyways.
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+*/
