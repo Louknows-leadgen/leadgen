@@ -30,8 +30,8 @@
 		<div class="row">
 			<div class="form-group col-md-3">
 				<div class="custom-control custom-checkbox mb-3">
-			      <input type="checkbox" class="custom-control-input" id="bpo" name="work_exp[{{$idx}}][is_bpo]">
-			      <label class="custom-control-label" for="bpo">BPO type of work?</label>
+			      <input type="checkbox" class="custom-control-input" id="work_exp[{{$idx}}][is_bpo]" name="work_exp[{{$idx}}][is_bpo]">
+			      <label class="custom-control-label" for="work_exp[{{$idx}}][is_bpo]">BPO type of work?</label>
 			    </div>
 		    </div>
 		</div>
