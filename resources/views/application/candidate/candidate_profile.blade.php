@@ -7,6 +7,11 @@
 
 <div class="container">
 	<div class="row box mb-4">
+		<div class="sign-in">
+            <div>
+                <a href="{{ URL::previous() }}"><< Back</a>
+            </div>
+        </div>
 		<div class="col-md-12">
 			<h5 class="mb-4">CANDIDATE BASIC INFO</h5>
 			<div class="container">

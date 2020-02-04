@@ -37,14 +37,14 @@
 		            <li class="list-inline-item mr-4" id="tab-resource">
 		                <span>Resources</span>
 		                <div class="drop-down">
-		                    <a href="/">Applicants</a>
+		                    <a href="{{ route('applicants.index') }}">Applicants</a>
 		                    <a href="#">Employees</a>
 		                </div>
 		            </li>
 		            <li class="list-inline-item"><a href="#">Training Rooster</a></li>
 		        @endcan
 		        @can('access',3)
-		            <li class="list-inline-item"><a href="/application/candidates">Candidates</a></li>
+		            <li class="list-inline-item"><a href="{{ route('applications.candidates') }}">Candidates</a></li>
 		        @endcan
 		    </ul>
 		</div>

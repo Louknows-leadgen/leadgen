@@ -7,7 +7,14 @@
 		<div class="row">
 			<div class="col-md-8 mx-auto">
 				<div class="row box mb-5">
-					<h5>Resource Details</h5>
+					<h4 class="pt-4 pb-4">Resource Details</h4>
+
+					<div class="sign-in">
+			            <div>
+			                <a href="{{ URL::previous() }}"><< Back</a>
+			            </div>
+			        </div>
+					
 					<div class="col-md-12">
 						@include('resource_detail.nav')
 					</div>
