@@ -1,4 +1,4 @@
-<form class="store" action="/job_orientations" method="POST">
+<form class="store" action="{{ route('job_orientations.store') }}" method="POST">
 	@csrf
 	<input type="hidden" name="applicant_id" value="{{$applicant->id}}">
 	<div class="row">

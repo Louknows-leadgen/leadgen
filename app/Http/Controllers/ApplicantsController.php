@@ -21,7 +21,7 @@ class ApplicantsController extends Controller
     
     // root route
     public function index(){
-    	$applicants = Applicant::all();
+        $applicants = Applicant::with('person')->get();
     	return view('applicant.index',compact('applicants'));
     }
 

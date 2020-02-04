@@ -1,4 +1,5 @@
-<form class="update" action="/job_orientations/{{$procedure->id}}" method="POST">
+<form class="update" 
+	  action="{{ route('job_orientations.update',['job_orientation'=>$procedure->id]) }}" method="POST">
 	@csrf
 	@method('PUT')
 	<div class="row">

@@ -1,4 +1,4 @@
-<form class="j_fi-submit" action="/final_interviews" method="POST">
+<form class="j_fi-submit" action="{{ route('final_interviews.store') }}" method="POST">
 	@csrf
 	<input type="hidden" name="applicant_id" value="{{$applicant->id}}">
 	<div class="row">

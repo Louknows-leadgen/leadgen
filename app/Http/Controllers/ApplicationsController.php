@@ -21,7 +21,7 @@ class ApplicationsController extends Controller
     }
 
     public function procedure($applicant_id){
-        $applicant = Applicant::find($applicant_id);
+        $applicant = Applicant::with('application_status')->find($applicant_id);
         $tests = Test::all();
         $interviewers = User::interviewers();
         $procedure = '';
@@ -32,7 +32,7 @@ class ApplicationsController extends Controller
             case 1:
             case 2:
                 if($applicant->initial_screening()->exists()){
-                    $procedure = InitialScreening::where('applicant_id','=',$applicant_id)->first();
+                    $procedure = InitialScreening::with('test')->where('applicant_id','=',$applicant_id)->first();
                     $view = 'application.initial_screen.show';
                 }else{
                     $view = 'application.initial_screen.new';

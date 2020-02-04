@@ -20,7 +20,7 @@
 
 		<div class="row">
 			<div class="col-md-12 mx-auto">
-				<form action="/applicants" method="post">
+				<form action="{{ route('applicants.store') }}" method="post">
 					@csrf
 					<input type="hidden" name="person_id" value="{{$person_id}}">
 					<div class="form-group col-md-12">

@@ -221,7 +221,8 @@
 
 		<div class="col-md-12 mt-5">
 			<h5>INTERVIEWER'S ASSESSMENT</h5>
-			<form action="/final_interviews/{{$fin->id}}/update_result" method="post">
+			<form action="{{ route('fin.update_result',['id'=>$fin->id]) }}" 
+				  method="post">
 				@csrf
 				@method('PUT')
 				<div class="row">

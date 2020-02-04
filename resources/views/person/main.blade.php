@@ -6,7 +6,9 @@
 			<div class="col-md-12">
 				<div class="row content">
 					<div class="col-md-12">
-						<form class="row" action="/persons" method="POST">
+						<form class="row" 
+							  action="{{ route('persons.store') }}" 
+							  method="POST">
 							@csrf
 							@include('person._personal-detail._personal-detail')
 							@include('person._spouse.spouse')
