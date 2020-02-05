@@ -17,4 +17,3 @@
 <button class="btn btn-primary btn-block edit" 
         data-tab="contact" 
         data-id="{{ $contact->id }}">Edit</button>
-</div>

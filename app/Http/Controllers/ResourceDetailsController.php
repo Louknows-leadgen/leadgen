@@ -27,8 +27,14 @@ class ResourceDetailsController extends Controller
     |----------------------------------
     */
     public function index($person_id){
-    	$person = Person::find($person_id);
-    	return view('resource_detail.index',compact('person'));
+    	$person = Person::with('spouses',
+                               'emergency_contacts',
+                               'dependents',
+                               'colleges',
+                               'work_experiences')
+                        ->find($person_id);
+    	
+        return view('resource_detail.index',compact('person'));
     }
 
     /*
@@ -133,13 +139,6 @@ class ResourceDetailsController extends Controller
         }
     }
 
-    public function show_spouses($person_id){
-        $person = Person::find($person_id);
-        $spouses = $person->spouses;
-
-        return view('resource_detail._spouse.show',compact('spouses','person'));
-    }
-
     public function edit_spouse($spouse_id){
         $spouse = Spouse::find($spouse_id);
 
@@ -226,13 +225,6 @@ class ResourceDetailsController extends Controller
         }
     }
 
-    public function show_contacts($person_id){
-        $person = Person::find($person_id);
-        $contacts = $person->emergency_contacts;
-
-        return view('resource_detail._emergency_contact.show',compact('contacts','person'));
-    }
-
     public function edit_contact($contact_id){
         $contact = EmergencyContact::find($contact_id);
 
@@ -312,13 +304,6 @@ class ResourceDetailsController extends Controller
         }
     }
 
-    public function show_dependents($person_id){
-        $person = Person::find($person_id);
-        $dependents = $person->dependents;
-
-        return view('resource_detail._dependent.show',compact('dependents','person'));
-    }
-
     public function edit_dependent($dependent_id){
         $dependent = Dependent::find($dependent_id);
 
@@ -363,14 +348,6 @@ class ResourceDetailsController extends Controller
     |       Educations tab
     |----------------------------------
     */
-    public function show_educations($person_id){
-        $person = Person::find($person_id);
-        $elem = $person->elem();
-        $high = $person->high();
-        $colleges = $person->colleges;
-
-        return view('resource_detail._education.show',compact('elem','high','colleges','person'));
-    }
 
     public function edit_elementary($elem_id){
         $elem = MiddleSchool::find($elem_id);
@@ -407,8 +384,9 @@ class ResourceDetailsController extends Controller
 
     public function show_elementary($elem_id){
         $elem = MiddleSchool::find($elem_id);
+        $person = $elem->person;
 
-        return view('resource_detail._education._elementary.show',compact('elem'));
+        return view('resource_detail._education._elementary.show',compact('person'));
     }
 
     public function edit_high($high_id){
@@ -446,8 +424,9 @@ class ResourceDetailsController extends Controller
 
     public function show_high($high_id){
         $high = MiddleSchool::find($high_id);
+        $person = $high->person;
 
-        return view('resource_detail._education._high.show',compact('high'));
+        return view('resource_detail._education._high.show',compact('person'));
     }
 
     public function destroy_college($college_id){
@@ -570,13 +549,6 @@ class ResourceDetailsController extends Controller
         if($request->ajax()){
             return response()->json(['url'=>route('rd.show_work',['work_id'=>$work->id])]);
         }
-    }
-
-    public function show_works($person_id){
-        $person = Person::find($person_id);
-        $works = $person->work_experiences;
-
-        return view('resource_detail._work.show',compact('works','person'));
     }
 
     public function edit_work($work_id){

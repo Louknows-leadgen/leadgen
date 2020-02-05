@@ -321,33 +321,13 @@ $(document).ready(function(){
 
 	// navigating on the tabs
 	$(".resource-nav").on("click",".nav-tab:not(.active)", function(){
-		var container = $(".grp");
 		var tab = $(this).data("tab");
-		var person_id = $(this).data('id');
 
 		$(".active").removeClass("active");
 		$(this).addClass("active");
 
-		switch(tab){
-			case 'basic':
-				container.load('/resource-details/basic/' + person_id);
-				break;
-			case 'spouse':
-				container.load('/resource-details/spouse/' + person_id);
-				break;
-			case 'contact':
-				container.load('/resource-details/contact/'+ person_id);
-				break;
-			case 'dependent':
-				container.load('/resource-details/dependent/'+ person_id);
-				break;
-			case 'education':
-				container.load('/resource-details/education/'+ person_id);
-				break;
-			case 'work':
-				container.load('/resource-details/work/'+ person_id);
-				break;
-		}
+		$("[data-tabcontent]").removeClass('d-none').addClass('d-none');
+		$("[data-tabcontent='"+ tab +"']").removeClass('d-none');
 
 	});
 

@@ -21,4 +21,3 @@
 <button class="btn btn-primary btn-block edit" 
         data-tab="work" 
         data-id="{{ $work->id }}">Edit</button>
-</div>

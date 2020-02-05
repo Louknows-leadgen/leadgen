@@ -74,4 +74,3 @@
 	<button class="btn btn-primary btn-block edit mb-4" 
 	        data-tab="basic" 
 	        data-id="{{ $person->id }}">Edit</button>
-	</div>

@@ -21,8 +21,25 @@
 					<div class="col-md-12 border border-secondary">
 						<div class="row">
 							<div class="col-md-10 mx-auto">
-								<div class="mt-4 grp">
-									@include('resource_detail._basic_info.show')
+								<div class="mt-4">
+									<div class="grp" data-tabcontent="basic">
+										@include('resource_detail._basic_info.show')
+									</div>
+									<div class="grp d-none" data-tabcontent="spouse">
+										@include('resource_detail._spouse.show')
+									</div>
+									<div class="grp d-none" data-tabcontent="contact">
+										@include('resource_detail._emergency_contact.show')
+									</div>
+									<div class="grp d-none" data-tabcontent="dependent">
+										@include('resource_detail._dependent.show')
+									</div>
+									<div class="grp d-none" data-tabcontent="education">
+										@include('resource_detail._education.show')
+									</div>
+									<div class="grp d-none" data-tabcontent="work">
+										@include('resource_detail._work.show')
+									</div>
 								</div>
 							</div>
 						</div>
