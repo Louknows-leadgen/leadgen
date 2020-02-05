@@ -1,1 +1,1 @@
-@include('application.final_interview._interview-form')
+@include('application.final_interview._form')

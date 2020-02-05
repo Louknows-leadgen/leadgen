@@ -33,9 +33,6 @@ Route::get('/applicants/search','ApplicantsController@search')->name('applicants
 
 //- application routes
 Route::get('/application/{applicant_id}/procedure','ApplicationsController@procedure')->name('applications.procedure');
-Route::get('/application/initial-screening/{applicant_id}','ApplicationsController@initial_screening')->name('applications.initial-screening');
-Route::get('/application/final-interview/{applicant_id}','ApplicationsController@final_interview')->name('applications.final-interview');
-Route::get('/application/job-orientation/{applicant_id}','ApplicationsController@job_orientation')->name('applications.job-orientation');
 
 Route::get('/application/candidates','ApplicationsController@candidates')->name('applications.candidates');
 
@@ -46,7 +43,10 @@ Route::get('/application/candidate/{applicant_id}/profile','ApplicationsControll
 
 //- final interviews
 Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@update_result')->name('fin.update_result');
-Route::get('/final_interview/{id}/form','FinalInterviewsController@form_partial')->name('fin.form');
+Route::get('/final_interview/{id}/form','FinalInterviewsController@form')->name('fin.form');
+
+//- job orientation
+Route::get('/job_orientation/{id}/form','JobOrientationsController@form')->name('jo.form');
 
 //- persons
 Route::get('/person/{item}/new','PersonsController@new')->name('person.new');

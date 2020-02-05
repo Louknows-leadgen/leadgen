@@ -228,7 +228,7 @@ $(document).ready(function(){
 
 	$(".dynamic-container").on("click",".j_edit-fin",function(){
 		var fin_id = $(this).data("id");
-		var container = $(this).parents(".dynamic-container");
+		var container = $(".dynamic-container");
 
 		container.load('/final_interviews/'+ fin_id +'/edit');
 
@@ -237,14 +237,14 @@ $(document).ready(function(){
 	$(".dynamic-container").on("click",".j_cancel",function(){
 		var type = $(this).data("type");
 		var id = $(this).data('id');
-		var container = $(this).parents(".dynamic-container");
+		var container = $(".dynamic-container");
 		var url = '';
 
 		switch(type){
 			case 'fin-interview':
-				url = '/final_interview/'+ id + '/form'; break;
+				url = '/final_interview/'+ id +'/form'; break;
 			case 'jo':
-				url = '/job_orientation/' + id + '/form'; break;
+				url = '/application/job-orientation/' + id; break;
 		}
 
 		container.load(url);
@@ -292,22 +292,35 @@ $(document).ready(function(){
 		var cur_actv = $('.actv');
 		var selected = $(this);
 		var procedure = selected.data('process');
+		var applicant_id = selected.data('id');
+		var container = $('.dynamic-container');
+		var url = '';
 
-		$("[data-tab]").removeClass('d-none').addClass('d-none');
-		$("[data-tab='"+ procedure +"']").removeClass('d-none');
+		switch(procedure){
+			case 'initial-screening':
+				url = '/application/initial-screening/' + applicant_id;
+				break;
+			case 'final-interview':
+				url = '/application/final-interview/' + applicant_id;
+				break;
+			case 'job-orientation':
+				url = '/application/job-orientation/' + applicant_id;
+				break;	
+		}
 
+		container.load(url,function(){
+			cur_actv.removeClass('text-primary border-top border-bottom border-left actv')
+		        	.addClass('bg-secondary text-light');
 
-		cur_actv.removeClass('text-primary border-top border-bottom border-left actv')
-	        	.addClass('bg-secondary text-light');
-
-		selected.removeClass('bg-secondary text-light')
-	        	.addClass('text-primary border-top border-bottom border-left actv');
+			selected.removeClass('bg-secondary text-light')
+		        	.addClass('text-primary border-top border-bottom border-left actv');
+		});	
 
 	});
 
 	$(".dynamic-container").on("click",".edit_jo",function(){
 		var jo_id = $(this).data("id");
-		var container = $(this).parents(".dynamic-container");
+		var container = $(".dynamic-container");
 
 		container.load('/job_orientations/'+ jo_id +'/edit');
 

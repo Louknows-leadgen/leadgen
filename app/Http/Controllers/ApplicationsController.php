@@ -21,96 +21,42 @@ class ApplicationsController extends Controller
     }
 
     public function procedure($applicant_id){
-        $applicant = Applicant::with('application_status')->find($applicant_id);
+        $applicant = Applicant::with('application_status','initial_screening','final_interview','job_orientation')->find($applicant_id);
+        
         $tests = Test::all();
         $interviewers = User::interviewers();
-        $procedure = '';
-        $view = '';
+        
+        $init_view = '';
+        $fin_view = '';
+        $jo_view = '';
 
-        switch($applicant->application_status_id)
-        {
-            case 1:
-            case 2:
-                if($applicant->initial_screening()->exists()){
-                    $procedure = InitialScreening::with('test')->where('applicant_id','=',$applicant_id)->first();
-                    $view = 'application.initial_screen.show';
-                }else{
-                    $view = 'application.initial_screen.new';
-                }
-                break;
-            case 3:
-            case 4:
-            case 5:
-                if($applicant->final_interview()->exists()){
-                    $procedure = FinalInterview::where('applicant_id','=',$applicant_id)->first();
-                    $view = 'application.final_interview.show';
-                }else{
-                    $view = 'application.final_interview.new';
-                }
-                break;
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-                if($applicant->job_orientation()->exists()){
-                    $procedure = JobOrientation::where('applicant_id','=',$applicant_id)->first();
-                    $view = 'application.job_orientation.show';
-                }else{
-                    $view = 'application.job_orientation.new';
-                }
-                break;
-        }
-
-        return view('application.main',compact('procedure','view','applicant','tests','interviewers'));
-    }
-
-    public function initial_screening($applicant_id){
-        $applicant = Applicant::find($applicant_id);
-        $tests = Test::all();
-        $procedure = '';
-
+        // this is for the view on the initial screening tab
         if($applicant->initial_screening()->exists()){
-            $procedure = InitialScreening::where('applicant_id','=',$applicant_id)->first();
-            $view = 'application.initial_screen.show';
+            $init_view = 'application.initial_screen.show';
         }else{
-            $view = 'application.initial_screen.new';
+            $init_view = 'application.initial_screen.new';
         }
 
-        return view($view,compact('applicant','tests','procedure'));
-    }
-
-    public function final_interview($applicant_id){
-        $applicant = Applicant::find($applicant_id);
-        $interviewers = User::interviewers();
-        $procedure = '';
-
-        if($applicant->application_status_id < 3){
-            $view = 'application.unavailable';
-        }elseif($applicant->final_interview()->exists()){
-            $procedure = FinalInterview::where('applicant_id','=',$applicant_id)->first();
-            $view = 'application.final_interview.show';
+        // this is for the view on the final interview tab
+        if($applicant->application_status->id < 3)
+            $fin_view = 'application.unavailable';
+        elseif($applicant->final_interview()->exists()){
+            $fin_view = 'application.final_interview.show';
         }else{
-            $view = 'application.final_interview.new';
+            $fin_view = 'application.final_interview.new';
         }
 
-        return view($view,compact('applicant','interviewers','procedure'));
-    }
-
-    public function job_orientation($applicant_id){
-        $applicant = Applicant::find($applicant_id);
-        $procedure = '';
-
-        if($applicant->application_status_id < 6){
-            $view = 'application.unavailable';
-        }elseif($applicant->job_orientation()->exists()){
-            $procedure = JobOrientation::where('applicant_id','=',$applicant_id)->first();
-            $view = 'application.job_orientation.show';
+        // this is for the job orientation view tab
+        if($applicant->application_status->id < 6)
+            $jo_view = 'application.unavailable';
+        elseif($applicant->job_orientation()->exists()){
+            $jo_view = 'application.job_orientation.show';
         }else{
-            $view = 'application.job_orientation.new';
+            $jo_view = 'application.job_orientation.new';
         }
 
-        return view($view,compact('applicant','procedure'));
+        return view('application.main',compact('applicant','tests','interviewers','init_view','fin_view','jo_view'));
+
     }
   
     public function candidates(){

@@ -44,9 +44,10 @@ class FinalInterviewsController extends Controller
 
     public function edit($fin_id){
     	$procedure = FinalInterview::find($fin_id);
+        $applicant_id = $procedure->applicant->id;
     	$interviewers = User::interviewers();
 
-    	return view('application.final_interview.edit',compact('procedure','interviewers'));
+    	return view('application.final_interview.edit',compact('procedure','applicant_id','interviewers'));
     }
 
     public function update($fin_id, Request $request){
@@ -69,10 +70,11 @@ class FinalInterviewsController extends Controller
         }
 
         $procedure = FinalInterview::find($fin_id);
+        $applicant_id = $procedure->applicant->id;
         $procedure->update($request->all());
 
         if($request->ajax()){
-            return response()->json(['url'=>route('fin.form',['id'=>$fin_id])]);
+            return response()->json(['url'=>route('fin.form',['id'=>$applicant_id])]);
         }else{
             return view('application.final_interview.show',compact('procedure'));
         }
@@ -92,9 +94,9 @@ class FinalInterviewsController extends Controller
         return redirect()->action('ApplicationsController@candidates');
     }
 
-    public function form_partial($fin_id){
-        $procedure = FinalInterview::find($fin_id);
+    public function form($applicant_id){
+        $applicant = Applicant::with('final_interview')->find($applicant_id);
 
-        return view('application.final_interview._interview-form',compact('procedure'));
+        return view('application.final_interview._form',compact('applicant'));
     }
 }

@@ -17,11 +17,31 @@ class InitialScreening extends Model
     	'overall_result'
     ];
 
+    /*
+    |------------------------
+    |     Association
+    |------------------------
+    */
+
     public function test(){
     	return $this->belongsTo('App\Models\Test');
     }
 
     public function applicant(){
         return $this->belongsTo('App\Models\Applicant');
+    }
+
+
+    /*
+    |------------------------
+    |     Custom Attributes
+    |------------------------
+    */
+
+    // used to create custom attribute specified inside the bracket
+    protected $appends = ['test_name'];
+
+    public function getTestNameAttribute(){
+        return $this->test->name;
     }
 }

@@ -30,12 +30,12 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<span class="btn btn-secondary j_cancel" data-type="fin-interview" data-id="{{$procedure->id}}">Cancel</span>
+								<span class="btn btn-secondary j_cancel" data-type="fin-interview" data-id="{{$applicant_id}}">Cancel</span>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<input class="btn btn-primary" type="submit" name="submit" value="Submit">
+								<input class="btn btn-primary" type="submit" name="update" value="Update">
 							</div>
 						</div>
 					</div>
@@ -52,7 +52,7 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label>Remarks</label>
-						<textarea class="form-control" rows="5" disabled></textarea>
+						<textarea class="form-control" rows="5" disabled>{{$procedure->remarks}}</textarea>
 					</div>
 				</div>
 			</div>

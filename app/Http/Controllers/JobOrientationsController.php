@@ -61,9 +61,15 @@ class JobOrientationsController extends Controller
         $procedure->update($request->all());
 
         if($request->ajax()){
-            return response()->json(['url'=>route('applications.job-orientation',['applicant_id'=>$id])]);
+            return response()->json(['url'=>route('jo.form',['id'=>$id])]);
         }else{
             return redirect()->route('applications.procedure',['applicant_id'=>$id]);
         }
+    }
+
+    public function form($applicant_id){
+        $applicant = Applicant::with('job_orientation')->find($applicant_id);
+
+        return view('application.job_orientation.show',compact('applicant'));
     }
 }
