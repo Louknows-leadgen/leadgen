@@ -133,3 +133,8 @@ Route::resource('job_orientations','JobOrientationsController')->only(['store','
 |------------------------------------------
 */
 Auth::routes();
+
+Route::get('/account','UsersController@index')->name('user.account');
+Route::put('/account/update-email','UsersController@update_email')->name('user.update-email');
+Route::get('/account/edit-password','UsersController@edit_password')->name('user.edit-password');
+Route::put('/account/update-password','UsersController@update_password')->name('user.update-password');

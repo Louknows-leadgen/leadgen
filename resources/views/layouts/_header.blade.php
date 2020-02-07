@@ -5,26 +5,35 @@
 		        <img src="{{ URL::asset('images/logo.svg') }}">
 		    </div>
 		    <div class="sign-in">
-		    	Logged in as
-				<span class="dropdown-toggle" data-toggle="dropdown">
-					{{ Auth::user()->username }}
-				</span>
-				<div class="dropdown-menu user-menu">
-		            @can('access',2)
-					<a class="dropdown-item menu-item" href="{{ route('register') }}">Create user</a>
-					@endcan
+		    	@guest
+                    <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                @else
+			    	Logged in as
+					<span class="dropdown-toggle" data-toggle="dropdown">
+						{{ Auth::user()->username }}
+					</span>
+					<div class="dropdown-menu user-menu">
 
-					<a class="link dropdown-item menu-item" 
-					   href="#" 
-					   onclick="event.preventDefault();
-		                        document.getElementById('logout-form').submit();">
-		               Sign out
-		            </a>
+						<a class="dropdown-item menu-item" href="{{ route('root') }}">Home page</a>
 
-					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-		            @csrf
-		        </form>
-				</div>
+						<a class="dropdown-item menu-item" href="{{ route('user.account') }}">My account</a>
+
+			            @can('access',2)
+						<a class="dropdown-item menu-item" href="{{ route('register') }}">Create user</a>
+						@endcan
+
+						<a class="link dropdown-item menu-item" 
+						   href="#" 
+						   onclick="event.preventDefault();
+			                        document.getElementById('logout-form').submit();">
+			               Sign out
+			            </a>
+
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+			            @csrf
+			        	</form>
+					</div>
+				@endguest	
 		    </div>
 		</div>
 	</div>

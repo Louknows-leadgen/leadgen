@@ -329,14 +329,6 @@ ul.d-flex{
   position: relative;
 }
 
-.fa-edit{
-  position: absolute;
-  right: -50px;
-  font-size: 20px;
-  cursor: pointer;
-  color: #3490dc;
-}
-
 .dropdown-toggle{
   cursor: pointer;
 }
@@ -356,4 +348,88 @@ ul.d-flex{
 
 .sub-header .list-inline-item > a{
   color: #212529;
+}
+
+.actv-acnt-opt{
+  background-color: #595959 !important;
+  padding: 10px 0 10px 10px !important;
+  border-top-right-radius: 50px !important;
+  border-bottom-right-radius: 50px !important;
+}
+
+.actv-acnt-opt .icon{
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+.actv-acnt-opt .title,
+.actv-acnt-opt .icon{
+  color: #fff;
+}
+
+.account li.list-group-item:not(.actv-acnt-opt){
+  border-style: none;
+  background-color: transparent;
+  padding: 10px; 
+  border-top-right-radius: 50px; 
+  border-bottom-right-radius: 50px;
+  color: #595959;
+  cursor: pointer;
+
+  transition: background-color 200ms ease-in-out;
+}
+
+.account li.list-group-item:not(.actv-acnt-opt) .icon{
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+.account li.list-group-item:not(.actv-acnt-opt):hover{
+  background-color: #e6e6e6;
+}
+
+.card-header h5{
+  color: #3578bc;
+}
+
+table.display-info{
+  width: 100%;
+}
+
+table.display-info tr:not(:last-child){
+  border-bottom: 1px solid #dee2e6;
+}
+
+table.display-info tr{
+  transition: background-color 200ms ease-in-out;
+}
+
+table.display-info tr:hover{
+  background-color: #f2f2f2;
+}
+
+table.display-info td{
+  padding: 12px;
+}
+
+table.display-info td:first-child{
+  width: 20%;
+}
+
+.edit-email{
+  position: absolute;
+  right: 30px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.input-underline{
+  border: none;
+  background-color: transparent;
+  outline: none;
+  width: 100%;
+}
+
+span.close{
+  cursor: pointer;
 }
