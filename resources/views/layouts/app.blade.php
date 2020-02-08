@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <div style="width: 100vw;">
+        <div>
         @include('layouts._header')
         </div>
 

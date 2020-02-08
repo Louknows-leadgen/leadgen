@@ -61,7 +61,7 @@ class Applicant extends Model
         if(!empty($skey))
             $query->whereRaw("concat(people.first_name,' ',people.middle_name, ' ', people.last_name) LIKE ?",['%'.$skey.'%']);
 
-        return $query->orderBy('applicants.id','asc')->get(['first_name','middle_name','last_name','mobile_1','email','person_id','applicants.id as applicant_id','applicants.application_status_id','application_statuses.name as status_name']);
+        return $query->orderBy('applicants.id','asc')->paginate(5,['first_name','middle_name','last_name','mobile_1','email','person_id','applicants.id as applicant_id','applicants.application_status_id','application_statuses.name as status_name']);
 	}
 
     public function applied_date(){

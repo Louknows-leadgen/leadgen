@@ -18,7 +18,7 @@
                     <div class="col-md-3">
                         <div class="form-group has-search">
                             <span class="fa fa-search form-control-feedback"></span>
-                            <input type="text" id="search-applicant" class="form-control" placeholder="Search">
+                            <input type="text" id="search-applicant" class="form-control" placeholder="Search" value="{{ $skey }}">
                         </div>
                     </div>
                 </div>
@@ -36,17 +36,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($applicants))
-                                @foreach($applicants as $applicant)
+                                @if (count($persons))
+                                @foreach($persons as $person)
                                     <tr>
-                                        <td><a class="link" href="{{route('rd.index',['person_id'=>$applicant->person->id])}}">{{ $applicant->person->first_name }}</a></td>
-                                        <td>{{ $applicant->person->middle_name }}</td>
-                                        <td>{{ $applicant->person->last_name }}</td>
-                                        <td>{{ $applicant->person->mobile_1 }}</td>
-                                        <td>{{ $applicant->person->email }}</td>
+                                        <td><a class="link" 
+                                               href="{{route('rd.index',['person_id'=>$person->person_id])}}">
+                                               {{ $person->first_name }}
+                                           </a>
+                                       </td>
+                                        <td>{{ $person->middle_name }}</td>
+                                        <td>{{ $person->last_name }}</td>
+                                        <td>{{ $person->mobile_1 }}</td>
+                                        <td>{{ $person->email }}</td>
                                         <td>
-                                            <a href="{{route('applications.procedure',[$applicant->id])}}">
-                                                {{ $applicant->application_status->name}}
+                                            <a href="{{route('applications.procedure',[$person->person_id])}}">
+                                                {{ $person->status_name}}
                                             </a>
                                         </td>
                                     </tr>
@@ -58,7 +62,7 @@
                                 @endif
                             </tbody>
                         </table>
-                        {!! $applicants->links() !!}
+                        {!! $persons->appends(['skey'=>$skey])->links() !!}
                     </div>
                 </div>
             </div>

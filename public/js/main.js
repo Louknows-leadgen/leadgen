@@ -181,7 +181,7 @@ $(document).ready(function(){
 
 	$("#search-applicant").on("input", $.debounce(200,function(){
 		var search_text = $(this).val();
-		var container = $("tbody");
+		var container = $(".applicant-list");
 
 		$.ajax({
 			url: '/applicants/search',

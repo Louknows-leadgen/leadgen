@@ -21,7 +21,8 @@ class ApplicantsController extends Controller
     
     // root route
     public function index(){
-        $applicants = Applicant::with('person')->get();
+        //$applicants = Applicant::with('person')->get();
+        $applicants = Applicant::with('person')->paginate(5);
     	return view('applicant.index',compact('applicants'));
     }
 
@@ -49,8 +50,12 @@ class ApplicantsController extends Controller
 
     public function search(Request $request){
         $persons = Applicant::search($request->skey);
+        $skey = $request->skey;
 
-        return view('applicant.search',compact('persons'));
+        if($request->ajax())
+            return view('applicant.search-result',compact('persons','skey'));
+
+        return view('applicant.search-page',compact('persons','skey'));
     }
 
 }
