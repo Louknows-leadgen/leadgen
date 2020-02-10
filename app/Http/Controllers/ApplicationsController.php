@@ -61,15 +61,9 @@ class ApplicationsController extends Controller
   
     public function candidates(){
         $user = Auth::user();
-        $interviews = $user->final_interviews()->with(['applicant'])->where('is_done','=',0)->paginate(1);
+        $interviews = $user->final_interviews()->with(['applicant'])->where('is_done','=',0)->paginate(5);
 
         return view('application.candidate.candidate_list',compact('interviews'));
-    }
-
-    public function search_orig(Request $request){
-        $candidates = FinalInterview::search($request->skey, $request->id);
-
-        return view('application.candidate.search',compact('candidates'));
     }
 
     public function search(Request $request){
