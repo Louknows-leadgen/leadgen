@@ -61,16 +61,26 @@ class ApplicationsController extends Controller
   
     public function candidates(){
         $user = Auth::user();
-        $user_id = Auth::id();
-        $interviews = $user->final_interviews()->with(['applicant'])->where('is_done','=',0)->get();
+        $interviews = $user->final_interviews()->with(['applicant'])->where('is_done','=',0)->paginate(1);
 
-        return view('application.candidate.candidate_list',compact('interviews','user_id'));
+        return view('application.candidate.candidate_list',compact('interviews'));
     }
 
-    public function search(Request $request){
+    public function search_orig(Request $request){
         $candidates = FinalInterview::search($request->skey, $request->id);
 
         return view('application.candidate.search',compact('candidates'));
+    }
+
+    public function search(Request $request){
+        $user_id = Auth::id();
+        $candidates = FinalInterview::search($request->skey, $user_id);
+        $skey = $request->skey;
+
+        if($request->ajax())
+            return view('application.candidate.search-result',compact('candidates','skey'));
+
+        return view('application.candidate.search-page',compact('candidates','skey'));
     }
 
     public function profile($applicant_id){

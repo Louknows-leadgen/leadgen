@@ -199,16 +199,14 @@ $(document).ready(function(){
 
 	$("#search-candidate").on("input", $.debounce(200,function(){
 		var search_text = $(this).val();
-		var user_id = $(this).data('user');
 
-		var container = $("tbody");
+		var container = $(".candidate-list");
 
 		$.ajax({
 			url: '/application/candidates/search',
 			method: 'GET',
 			data: {
-				skey: search_text,
-				id: user_id
+				skey: search_text
 			},
 			success: function(result){
 				container.empty().append(result);

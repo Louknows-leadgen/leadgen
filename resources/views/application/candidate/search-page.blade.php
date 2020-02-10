@@ -13,7 +13,7 @@
                 <div class="col-md-3">
                     <div class="form-group has-search">
                         <span class="fa fa-search form-control-feedback"></span>
-                        <input type="text" id="search-candidate" class="form-control" placeholder="Search">
+                        <input type="text" id="search-candidate" class="form-control" placeholder="Search" value="{{ $skey }}">
                     </div>
                 </div>
             </div>
@@ -31,19 +31,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if(count($interviews))
-								@foreach($interviews as $interview)
-	                                <tr>
-										<td>
-											{{$interview->applicant->person->first_name}}
-										</td>
-										<td>{{$interview->applicant->person->middle_name}}</td>
-										<td>{{$interview->applicant->person->last_name}}</td>
-										<td>{{$interview->applicant->job->name}}</td>
-										<td>{{$interview->schedule}}</td>
-										<td><a class="link" href="{{ route('applications.profile',['applicant_id'=>$interview->applicant_id]) }}">Interview</a></td>
-									</tr>
-                            	@endforeach
+                            @if(count($candidates))
+                                @foreach($candidates as $candidate)
+                                    <tr>
+                                        <td>
+                                            {{$candidate->first_name}}
+                                        </td>
+                                        <td>{{$candidate->middle_name}}</td>
+                                        <td>{{$candidate->last_name}}</td>
+                                        <td>{{$candidate->name}}</td>
+                                        <td>{{date('m/d/Y g:i A', strtotime($candidate->schedule))}}</td>
+                                        <td><a class="link" href="{{ route('applications.profile',['applicant_id'=>$candidate->applicant_id]) }}">Interview</a></td>
+                                    </tr>
+                                @endforeach
                             @else
                                 <tr>
                                     <td colspan="6">No results found</td>
@@ -51,7 +51,7 @@
                             @endif
                         </tbody>
                     </table>
-                    {!! $interviews->links() !!}
+                    {!! $candidates->appends(['skey'=>$skey])->links() !!}
                 </div>
             </div>
 		</div>
