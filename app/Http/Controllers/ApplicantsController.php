@@ -22,7 +22,7 @@ class ApplicantsController extends Controller
     // root route
     public function index(){
         //$applicants = Applicant::with('person')->get();
-        $applicants = Applicant::with('person')->paginate(5);
+        $applicants = Applicant::with('person')->orderBy('id','desc')->paginate(5);
     	return view('applicant.index',compact('applicants'));
     }
 
