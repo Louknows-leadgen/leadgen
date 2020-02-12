@@ -11433,6 +11433,10 @@ thead th {
   color: #f2f2f2;
 }
 
+.sign-in a {
+  color: #fff;
+}
+
 .sub-header {
   height: 40px;
   border-bottom: 1px solid #cccccc;

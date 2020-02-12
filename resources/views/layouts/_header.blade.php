@@ -15,12 +15,18 @@
 					</span>
 					<div class="dropdown-menu user-menu">
 
-						<a class="dropdown-item menu-item" href="{{ route('root') }}">Home page</a>
+						<a class="dropdown-item menu-item" href="{{ route('root') }}">
+							Home page
+						</a>
 
-						<a class="dropdown-item menu-item" href="{{ route('user.account') }}">My account</a>
+						<a class="dropdown-item menu-item" href="{{ route('user.account') }}">
+							My account
+						</a>
 
 			            @can('access',2)
-						<a class="dropdown-item menu-item" href="{{ route('register') }}">Create user</a>
+						<a class="dropdown-item menu-item" href="{{ route('register') }}">
+							Create user
+						</a>
 						@endcan
 
 						<a class="link dropdown-item menu-item" 
