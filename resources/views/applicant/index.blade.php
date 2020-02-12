@@ -5,7 +5,7 @@
 
 @section('contents')
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 mb-4">
             <div class="box text-center">
                 <div><a class="link" href="{{ route('applicants.index') }}">Applicants</a></div>
             </div>
