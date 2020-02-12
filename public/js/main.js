@@ -647,5 +647,5 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
+
 });

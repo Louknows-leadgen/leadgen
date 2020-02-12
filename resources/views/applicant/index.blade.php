@@ -8,7 +8,6 @@
         <div class="col-md-2">
             <div class="box text-center">
                 <div><a class="link" href="{{ route('applicants.index') }}">Applicants</a></div>
-                <div><a href="#">Employees</a></div>
             </div>
         </div>
         <div class="col-md-10">

@@ -138,3 +138,25 @@ Route::get('/account','UsersController@index')->name('user.account');
 Route::put('/account/update-email','UsersController@update_email')->name('user.update-email');
 Route::get('/account/edit-password','UsersController@edit_password')->name('user.edit-password');
 Route::put('/account/update-password','UsersController@update_password')->name('user.update-password');
+
+
+//Route::view('/resource-list','resource-list');
+
+
+use App\Models\Applicant;
+
+Route::get('/resource-list',function(){
+	$resources = Applicant::with(['person','job'])->where('application_status_id','=',7)->paginate(5);
+	return view('resource-list',compact('resources'));
+});
+
+
+Route::get('/employee-details',function(){
+	$resources = Applicant::with(['person','job'])->where('application_status_id','=',7)->paginate(5);
+	return view('resource-list',compact('resources'));
+});
+
+
+Route::get('/dashboard',function(){
+	return view('dashboard');
+});

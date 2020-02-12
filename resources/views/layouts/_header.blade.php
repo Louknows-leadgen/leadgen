@@ -2,7 +2,8 @@
 	<div class="col-md-12">
 		<div class="header">
 			<div class="logo">
-		        <img src="{{ URL::asset('images/logo.svg') }}">
+		        <img src="{{ asset('images/leadgen_logo.png') }}">
+		        <span>LEADGEN RECRUITMENT SYSTEM</span>
 		    </div>
 		    <div class="sign-in">
 		    	@guest
@@ -44,13 +45,11 @@
 			<ul class="d-flex align-items-center">
 		        @can('access',2)
 		            <li class="list-inline-item mr-4" id="tab-resource">
-		                <span>Resources</span>
+		                <span class="dropdown-toggle">Resources</span>
 		                <div class="drop-down">
 		                    <a href="{{ route('applicants.index') }}">Applicants</a>
-		                    <a href="#">Employees</a>
 		                </div>
 		            </li>
-		            <li class="list-inline-item"><a href="#">Training Rooster</a></li>
 		        @endcan
 		        @can('access',3)
 		            <li class="list-inline-item"><a href="{{ route('applications.candidates') }}">Candidates</a></li>
