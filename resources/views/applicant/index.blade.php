@@ -26,12 +26,12 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr class="std-blue-bg text-white">
-                                    <th>First Name</th>
-                                    <th>Middle Name</th>
-                                    <th>Last Name</th>
-                                    <th>Mobile Number</th>
-                                    <th>Email Address</th>
-                                    <th>Application Status</th>
+                                    <th class="th-lg">First Name</th>
+                                    <th class="th-lg">Middle Name</th>
+                                    <th class="th-lg">Last Name</th>
+                                    <th class="th-lg">Mobile Number</th>
+                                    <th class="th-lg">Email Address</th>
+                                    <th class="th-lg">Application Status</th>
                                 </tr>
                             </thead>
                             <tbody>

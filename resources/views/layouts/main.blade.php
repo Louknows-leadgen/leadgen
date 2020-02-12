@@ -23,7 +23,7 @@
     
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="min-width: 1024px;">
         @include('layouts._header')
 
         @yield('contents')

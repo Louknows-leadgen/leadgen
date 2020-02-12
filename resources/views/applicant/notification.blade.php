@@ -5,8 +5,7 @@
 		<div class="row">
 			<div class="col-md-12 mx-auto">
 				<h4 class="text-success">Form Submitted!</h4>
-				<p>We have received your details. Please wait for our hiring staff to call you for an interview.</p>
-				<p>Click this <a href="/application/form">link</a> to return to the form page.</p>
+				<p>Click this <a class="exam-page" href="https://forms.gle/9b2GGkR3kG2VXYqx5" target="_blank">link</a> for the exam page. If you need help, contact the HR staff near you.</p>
 			</div>
 		</div>
 	</div>	
