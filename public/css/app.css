@@ -11443,6 +11443,31 @@ thead th {
   font-size: 16px;
   background: -webkit-gradient(linear, left top, right top, from(#0069aa), to(#119422));
   background: linear-gradient(to right, #0069aa, #119422);
+  position: relative;
+}
+
+.sub-header .toggle-icon {
+  position: absolute;
+  top: 17.5px;
+  left: 10px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 20px;
+  cursor: pointer;
+}
+
+.sub-header .toggle-icon .bar {
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+}
+
+.sub-header .toggle-icon .bar:first-child {
+  margin-bottom: 5px;
+}
+
+.sub-header .toggle-icon .bar:last-child {
+  margin-top: 5px;
 }
 
 .sub-header ul li > span {

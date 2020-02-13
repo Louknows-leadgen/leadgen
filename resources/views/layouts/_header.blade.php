@@ -48,7 +48,12 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="sub-header mb-4">
-			<ul class="d-flex align-items-center">
+			<div class="toggle-icon">
+				<div class="bar"></div>
+				<div class="bar"></div>
+				<div class="bar"></div>
+			</div>
+			<ul class="d-flex align-items-center ml-5">
 		        @can('access',2)
 		            <li class="list-inline-item mr-4" id="tab-resource">
 		                <span class="dropdown-toggle">Resources</span>
