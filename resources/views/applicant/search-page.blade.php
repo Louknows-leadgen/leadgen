@@ -5,13 +5,7 @@
 
 @section('contents')
     <div class="row">
-        <div class="col-md-2">
-            <div class="box text-center">
-                <div><a class="link" href="{{ route('applicants.index') }}">Applicants</a></div>
-                <div><a href="#">Employees</a></div>
-            </div>
-        </div>
-        <div class="col-md-10">
+        <div class="col-md-10 mx-auto">
             <div class="box">
                 <h5>Applicant List</h5>
                 <div class="row mt-4">

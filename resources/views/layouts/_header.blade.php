@@ -48,24 +48,28 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="sub-header mb-4">
-			<div class="toggle-icon">
-				<div class="bar"></div>
-				<div class="bar"></div>
-				<div class="bar"></div>
-			</div>
-			<ul class="d-flex align-items-center ml-5">
-		        @can('access',2)
-		            <li class="list-inline-item mr-4" id="tab-resource">
-		                <span class="dropdown-toggle">Resources</span>
-		                <div class="drop-down">
-		                    <a href="{{ route('applicants.index') }}">Applicants</a>
-		                </div>
-		            </li>
-		        @endcan
-		        @can('access',3)
-		            <li class="list-inline-item"><a href="{{ route('applications.candidates') }}">Candidates</a></li>
-		        @endcan
-		    </ul>
+			@auth
+				@unless(Auth::user()->roleid == 1)
+					<div class="toggle-icon">
+						<div class="bar"></div>
+						<div class="bar"></div>
+						<div class="bar"></div>
+					</div>
+				@endunless
+				<ul class="d-flex align-items-center ml-5">
+			        @can('access',2)
+			            <li class="list-inline-item mr-4" id="tab-resource">
+			                <span class="dropdown-toggle">Resources</span>
+			                <div class="drop-down">
+			                    <a href="{{ route('applicants.index') }}">Applicants</a>
+			                </div>
+			            </li>
+			        @endcan
+			        @can('access',3)
+			            <li class="list-inline-item"><a href="{{ route('applications.candidates') }}">Candidates</a></li>
+			        @endcan
+			    </ul>
+		    @endauth
 		</div>
 	</div>
 </div>

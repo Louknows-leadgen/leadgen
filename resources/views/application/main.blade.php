@@ -5,12 +5,7 @@
 
 @section('contents')
 	<div class="row" >
-		<div class="col-md-2 mb-3">
-            <div class="box text-center">
-                <div><a class="link" href="{{ route('applicants.index') }}">Applicants</a></div>
-            </div>
-        </div>
-        <div class="col-md-10">
+        <div class="col-md-10 mx-auto">
         	<div class="row">
         		<div class="col-md-12">
 		        	@include('application._applicant-info')
@@ -24,13 +19,13 @@
 									@include('application._process-nav')
 									
 									<div class="col-md-9 border-top border-left border-right border-bottom">
-				        				<div class="dynamic-container h-100 {{$applicant->application_status->id > 2 ? 'd-none' : '' }}" data-tab="initial-screening">
+				        				<div class="dynamic-container h-100 {{$applicant->application_status_id > 2 ? 'd-none' : '' }}" data-tab="initial-screening">
 				        					@include($init_view)
 				        				</div>	
-				        				<div class="dynamic-container h-100 {{$applicant->application_status->id > 5 || $applicant->application_status->id < 3 ? 'd-none' : '' }}" data-tab="final-interview">
+				        				<div class="dynamic-container h-100 {{$applicant->application_status_id > 5 || $applicant->application_status_id < 3 ? 'd-none' : '' }}" data-tab="final-interview">
 				        					@include($fin_view)
 				        				</div>
-				        				<div class="dynamic-container h-100 {{$applicant->application_status->id < 6 ? 'd-none' : '' }}" data-tab="job-orientation">
+				        				<div class="dynamic-container h-100 {{$applicant->application_status_id < 6 ? 'd-none' : '' }}" data-tab="job-orientation">
 				        					@include($jo_view)
 				        				</div>
 				        			</div>	

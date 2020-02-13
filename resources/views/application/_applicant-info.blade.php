@@ -1,4 +1,11 @@
 <div class="box">
+
+	<div class="sign-in">
+        <div>
+            <a class="text-primary" href="{{ URL::previous() }}">Back</a>
+        </div>
+    </div>
+	
 	<h5>Applicant's Info</h5>
 	<div class="row d-flex justify-content-around">
 		<div class="col-md-5">

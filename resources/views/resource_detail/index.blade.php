@@ -11,7 +11,7 @@
 
 					<div class="sign-in">
 			            <div>
-			                <a class="text-primary" href="{{ URL::previous() }}"><< Back</a>
+			                <a class="text-primary" href="{{ URL::previous() }}">Back</a>
 			            </div>
 			        </div>
 					

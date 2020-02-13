@@ -11437,6 +11437,69 @@ thead th {
   color: #fff;
 }
 
+.side-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 200px;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+}
+
+.side-menu .q-link-border {
+  border-bottom: 1px dashed #fff;
+  opacity: 0.5;
+}
+
+.side-menu .q-link-border > div {
+  display: grid;
+  place-items: center;
+}
+
+.side-menu .q-link-item {
+  display: grid;
+  place-items: center;
+}
+
+.side-menu .q-link-item a {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.side-menu .q-link-item a:hover {
+  color: #00bfff !important;
+}
+
+.side-menu .close-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  z-index: 999;
+}
+
+.side-menu .close-toggle .bar {
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+}
+
+.side-menu .close-toggle .bar:first-child {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.side-menu .close-toggle .bar:last-child {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
 .sub-header {
   height: 40px;
   border-bottom: 1px solid #cccccc;

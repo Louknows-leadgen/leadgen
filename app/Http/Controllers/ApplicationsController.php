@@ -38,7 +38,7 @@ class ApplicationsController extends Controller
         }
 
         // this is for the view on the final interview tab
-        if($applicant->application_status->id < 3)
+        if($applicant->application_status_id < 3)
             $fin_view = 'application.unavailable';
         elseif($applicant->final_interview()->exists()){
             $fin_view = 'application.final_interview.show';
@@ -47,7 +47,7 @@ class ApplicationsController extends Controller
         }
 
         // this is for the job orientation view tab
-        if($applicant->application_status->id < 6)
+        if($applicant->application_status_id < 6)
             $jo_view = 'application.unavailable';
         elseif($applicant->job_orientation()->exists()){
             $jo_view = 'application.job_orientation.show';

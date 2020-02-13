@@ -467,7 +467,8 @@ $(document).ready(function(){
 
 		container.fadeOut(300,function(){
 			container.remove();
-			empty_cntr.css({'display':''});
+			if(!$('.grp:not(.d-none)').find('.grp-item').length)
+				empty_cntr.css({'display':''});
 		});
 	});
 
@@ -655,10 +656,12 @@ $(document).ready(function(){
 	});
 
 
-	$('.exam-page').on('click',function(e){
-		e.preventDefault();
-		window.open('https://forms.gle/9b2GGkR3kG2VXYqx5');
-		window.location.href = '/application/form';
+	$('.close-toggle').on("click",function(){
+		$('.side-menu').css({'display':'none'});
+	});
+
+	$('.toggle-icon').on("click",function(){
+		$('.side-menu').css({'display':'block'});
 	});
 
 });
