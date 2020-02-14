@@ -11424,6 +11424,10 @@ thead th {
   color: #caba00;
 }
 
+.sign-in.show {
+  z-index: 999;
+}
+
 .sign-in {
   position: absolute;
   top: 10px;
@@ -11914,5 +11918,10 @@ span.close {
 
 .card-footer ul.pagination {
   margin-bottom: 0;
+}
+
+.test-table th {
+  border-top-color: transparent;
+  border-bottom-width: 1px !important;
 }
 

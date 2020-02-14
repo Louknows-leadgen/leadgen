@@ -33,7 +33,7 @@
 			<div class="col-md-12">
 				<div class="form-group">
 					<label>Remarks</label>
-					<textarea class="form-control" rows="5" name="remarks" disabled>{{$applicant->final_interview->remarks}}</textarea>
+					<textarea class="form-control ckeditor" rows="5" disabled>{{$applicant->final_interview->remarks}}</textarea>
 				</div>
 			</div>
 		</div>

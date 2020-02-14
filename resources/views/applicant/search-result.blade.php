@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover table-responsive">
     <thead>
         <tr class="std-blue-bg text-white">
             <th>First Name</th>

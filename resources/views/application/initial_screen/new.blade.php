@@ -5,48 +5,50 @@
 		<div class="col-md-12">
 			<h6 class="mt-3">Exam</h6>
 			<div class="row">
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Test Taken</label>
-						<select name="test_id" class="custom-select custom-select-sm">
-							@foreach($tests as $test)
-								<option value="{{$test->id}}" 
-								{{ 
-									$test->id == old('test_id') ? 'selected' : '' 
-								}}>
-								{{$test->name}}</option>
-							@endforeach
-						</select>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Score</label>
-						<input type="text" name="test_score"  class="form-control form-control-sm @error('test_score') is-invalid @enderror" value="{{ old('test_score') }}">
-
-                        <span class="invalid-feedback" role="alert">
-                            @error('test_score') {{ $message }} @enderror
-                        </span>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>Result</label>
-						<select name="test_result" class="custom-select custom-select-sm">
-							<option value="Pass" 
-							{{ 
-								old('test_result') == 'Pass' ? 'selected' : '' 
-							}}>
-								Pass
-							</option>
-							<option value="Fail"
-							{{ 
-								old('test_result') == 'Fail' ? 'selected' : '' 
-							}}>
-								Fail
-							</option>
-						</select>
-					</div>
+				<div class="col-md-12">
+					<table class="table table-fixed table-sm test-table">
+						<thead>
+							<tr>
+								<th>Test taken</th>
+								<th class="th-sm">Score</th>
+								<th>Result</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="typing_test">
+								<td data-toggle="tooltip"
+									title="Passing score: 28wpm">
+									Typing Speed (wpm)
+								</td>
+								<td>
+									<input class="form-control form-control-sm w-50 test_input" 
+										   type="number" 
+										   name="typing_score">
+								</td>
+								<td>
+									<input class="form-control form-control-sm w-75 test_result" 
+										   type="text" 
+										   name="typing_result" disabled>
+								</td>
+							</tr>
+							<tr class="comprehension_test">
+								<td data-toggle="tooltip"
+									title="Passing score: 5">
+									Comprehension Test
+								</td>
+								<td>
+									<input class="form-control form-control-sm w-50 test_input" 
+										   type="number" 
+										   name="comprehension_score">
+								</td>
+								<td>
+									<input class="form-control form-control-sm w-75 test_result"
+										   type="text" 
+										   name="comprehension_result" disabled>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 			<h6 class="mt-3">Initial Interview</h6>
@@ -73,7 +75,7 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label>Remarks</label>
-						<textarea class="form-control" rows="5" name="init_interview_remarks">{{ old('init_interview_remarks') }}</textarea>
+						<textarea class="form-control ckeditor" rows="5" name="init_interview_remarks">{{ old('init_interview_remarks') }}</textarea>
 					</div>
 				</div>
 			</div>

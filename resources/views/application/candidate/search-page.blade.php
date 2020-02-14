@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 candidate-list">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover table-responsive">
                         <thead>
                             <tr class="std-blue-bg text-white">
                                 <th>First Name</th>

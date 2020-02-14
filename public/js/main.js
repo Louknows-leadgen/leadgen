@@ -1,4 +1,25 @@
 $(document).ready(function(){
+
+	/*
+	|---------------------------
+	|	Bootstrap initialization
+	|---------------------------
+	*/
+
+	 $('[data-toggle="tooltip"]').tooltip();
+
+
+	 /*
+	|---------------------------
+	|	CKEDITOR initialization
+	|---------------------------
+	*/
+
+	//if($("textarea[id='ckeditor']").length)
+	//	CKEDITOR.replace('ckeditor');
+	
+
+
 	/*
 	|-------------------------------------------------------------------------
     | initialize datefield
@@ -663,5 +684,50 @@ $(document).ready(function(){
 	$('.toggle-icon').on("click",function(){
 		$('.side-menu').css({'display':'block'});
 	});
+
+	/*
+	 |---------------------------
+	 |  Test Calculation
+	 |---------------------------
+	*/
+
+	$('.dynamic-container').on('input','.typing_test input.test_input',function(){
+		var passing_score = 28;
+		var score = $(this).val();
+		var result_input = $('.typing_test input.test_result');
+		
+
+		if(score){
+			var result = checkResult(score,passing_score);
+			if(result)
+				result_input.val('Pass');
+			else
+				result_input.val('Fail');
+		}else{
+			result_input.val('');
+		}
+	});
+
+	$('.dynamic-container').on('input','.comprehension_test input.test_input',function(){
+		var passing_score = 5;
+		var score = $(this).val();
+		var result_input = $('.comprehension_test input.test_result');
+
+		if(score){
+			var result = checkResult(score,passing_score);
+			if(result)
+				result_input.val('Pass');
+			else
+				result_input.val('Fail');
+		}else{
+			result_input.val('');
+		}
+	});
+
+	function checkResult(score,passing_score){
+		return score >= passing_score ? true : false;
+	}
+
+	//------------------------------
 
 });

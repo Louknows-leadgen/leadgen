@@ -18,7 +18,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 applicant-list">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover table-responsive">
                             <thead>
                                 <tr class="std-blue-bg text-white">
                                     <th class="th-lg">First Name</th>
