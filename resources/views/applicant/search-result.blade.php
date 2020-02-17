@@ -23,7 +23,7 @@
                 <td>{{ $person->mobile_1 }}</td>
                 <td>{{ $person->email }}</td>
                 <td>
-                    <a href="{{route('applications.procedure',[$person->person_id])}}">
+                    <a href="{{route('applications.procedure',[$person->applicant_id])}}">
                         {{ $person->status_name}}
                     </a>
                 </td>
