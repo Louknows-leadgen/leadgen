@@ -15,7 +15,7 @@ class InitialScreeningsController extends Controller
             'typing_score' => 'required',
             'comprehension_score' => 'required'
         ],[
-            'typing_score.required' => 'Typing score is required.'
+            'typing_score.required' => 'Typing score is required.',
             'comprehension_score.required' => 'Comprehension score is required.'
         ]);
 
