@@ -9,9 +9,10 @@ class InitialScreening extends Model
     //
     protected $fillable = [
     	'applicant_id',
-    	'test_id',
-    	'test_score',
-    	'test_result',
+    	'typing_score',
+        'typing_result',
+    	'comprehension_score',
+    	'comprehension_result',
     	'init_interview_result',
     	'init_interview_remarks',
     	'overall_result'

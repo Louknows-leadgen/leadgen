@@ -304,7 +304,9 @@ $(document).ready(function(){
 					    }
 					}
                 }else{
-                	container.load(response.url);
+                	container.load(response.url,function(){
+                		CKEDITOR.replace('remarks');
+                	});
                 }
 			}
 		});

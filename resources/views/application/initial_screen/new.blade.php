@@ -33,7 +33,7 @@
 							</tr>
 							<tr class="comprehension_test">
 								<td data-toggle="tooltip"
-									title="Passing score: 5">
+									title="Passing score: 5/10">
 									Comprehension Test
 								</td>
 								<td>

@@ -12,9 +12,11 @@ class InitialScreeningsController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'test_score' => 'required'
+            'typing_score' => 'required',
+            'comprehension_score' => 'required'
         ],[
-            'test_score.required' => 'Test score is required.'
+            'typing_score.required' => 'Typing score is required.'
+            'comprehension_score.required' => 'Comprehension score is required.'
         ]);
 
     	$applicant = Applicant::find($request->applicant_id);

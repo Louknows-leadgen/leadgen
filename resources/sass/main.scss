@@ -545,3 +545,8 @@ span.close{
     border-bottom-width: 1px !important;
   }
 }
+
+.req::before{
+  content: '* ';
+  color: #ff0000;
+}

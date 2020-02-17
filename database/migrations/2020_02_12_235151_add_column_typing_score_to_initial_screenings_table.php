@@ -15,8 +15,8 @@ class AddColumnTypingScoreToInitialScreeningsTable extends Migration
     {
         Schema::table('initial_screenings', function (Blueprint $table) {
             //
-            $table->integer('typing_score');
-            $table->integer('typing_result');
+            $table->integer('typing_score')->nullable();
+            $table->string('typing_result')->nullable();
             $table->renameColumn('test_score','comprehension_score');
             $table->renameColumn('test_result','comprehension_result');
             $table->dropColumn('test_id');

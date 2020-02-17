@@ -55,7 +55,7 @@ class Applicant extends Model
     */
     public static function search($skey){
         $query = DB::table('applicants')
-                ->join('people','applicants.id','=','people.id')
+                ->join('people','applicants.person_id','=','people.id')
                 ->leftJoin('application_statuses', 'application_statuses.id', '=', 'applicants.application_status_id');
 
         if(!empty($skey))

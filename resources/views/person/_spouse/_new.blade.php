@@ -3,7 +3,7 @@
 	<div class="col-md-12">
 		<div class="row">
 			<div class="form-group col-md-4">
-				<label>First name:</label>
+				<label class="req">First name:</label>
 				<input type="text" name="spouses[{{$idx}}][first_name]"  class="form-control form-control-sm validate">
 				<span class="invalid-feedback" role="alert">
 				</span>
@@ -15,7 +15,7 @@
 				</span>
 			</div>
 			<div class="form-group col-md-4">
-				<label>Last name:</label>
+				<label class="req">Last name:</label>
 				<input type="text" name="spouses[{{$idx}}][last_name]"  class="form-control form-control-sm validate">
 				<span class="invalid-feedback" role="alert">
 				</span>

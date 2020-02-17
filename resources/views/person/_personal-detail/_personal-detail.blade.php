@@ -2,21 +2,21 @@
 	<h5>Personal Data</h5>
 	<div class="row">
 		<div class="form-group col-md-3">
-			<label>First name:</label>
+			<label class="req">First name:</label>
 			<input type="text" name="person[first_name]"  class="form-control form-control-sm validate @error('person.first_name') is-invalid @enderror" value="{{old('person.first_name')}}">
 			<span class="invalid-feedback" role="alert">
 				@error('person.first_name') {{$message}} @enderror
 			</span>
 		</div>
 		<div class="form-group col-md-3">
-			<label>Middle name:</label>
+			<label class="req">Middle name:</label>
 			<input type="text" name="person[middle_name]" class="form-control form-control-sm validate @error('person.middle_name') is-invalid @enderror" value="{{old('person.middle_name')}}">
 			<span class="invalid-feedback" role="alert">
 				@error('person.middle_name') {{$message}} @enderror
 			</span>	
 		</div>
 		<div class="form-group col-md-3">
-			<label>Last name:</label>
+			<label class="req">Last name:</label>
 			<input type="text" name="person[last_name]" class="form-control form-control-sm validate @error('person.last_name') is-invalid @enderror" value="{{old('person.last_name')}}">
 			<span class="invalid-feedback" role="alert">
 				@error('person.last_name') {{$message}} @enderror
@@ -29,7 +29,7 @@
 	</div>
 	<div class="row">
 		<div class="form-group col-md-3">
-			<label>Mobile 1:</label>
+			<label class="req">Mobile 1:</label>
 			<input type="text" name="person[mobile_1]" class="form-control form-control-sm validate @error('person.mobile_1') is-invalid @enderror" value="{{old('person.mobile_1')}}">
 			<span class="invalid-feedback" role="alert">
 				@error('person.mobile_1') {{$message}} @enderror
@@ -43,7 +43,7 @@
 			</span>
 		</div>
 		<div class="form-group col-md-3">
-			<label>Email:</label>
+			<label class="req">Email:</label>
 			<input type="email" name="person[email]" class="form-control form-control-sm validate @error('person.email') is-invalid @enderror" value="{{old('person.email')}}">
 			<span class="invalid-feedback" role="alert">
 				@error('person.email') {{$message}} @enderror
@@ -54,7 +54,7 @@
 		<div class="col-md-3">
 			<div class="row">
 				<div class="form-group col-md-6">
-					<label>Age:</label>
+					<label class="req">Age:</label>
 					<input type="number" name="person[age]" class="form-control form-control-sm validate @error('person.age') is-invalid @enderror" value="{{old('person.age')}}">
 					<span class="invalid-feedback" role="alert">
 						@error('person.age') {{$message}} @enderror
@@ -70,7 +70,7 @@
 			</div>
 		</div>
 		<div class="form-group col-md-3">
-			<label>Birthday:</label>
+			<label class="req">Birthday:</label>
 			<input type="text" name="person[birthday]" class="form-control form-control-sm date validate @error('person.birthday') is-invalid @enderror" value="{{old('person.birthday')}}" placeholder="mm/dd/yyyy" autocomplete="off">
 			<span class="invalid-feedback" role="alert">
 				@error('person.birthday') {{$message}} @enderror
@@ -107,7 +107,7 @@
 	</div>
 	<div class="row">
 		<div class="form-group col-md-12">
-			<label>City Address:</label>
+			<label class="req">City Address:</label>
 			<input type="text" name="person[city_address]" class="form-control form-control-sm validate @error('person.city_address') is-invalid @enderror" value="{{old('person.city_address')}}">
 			<span class="invalid-feedback" role="alert">
 				@error('person.city_address') {{$message}} @enderror
