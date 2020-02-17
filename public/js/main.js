@@ -249,7 +249,9 @@ $(document).ready(function(){
 		var fin_id = $(this).data("id");
 		var container = $(this).parents(".dynamic-container");
 
-		container.load('/final_interviews/'+ fin_id +'/edit');
+		container.load('/final_interviews/'+ fin_id +'/edit',function(){
+			CKEDITOR.replace('remarks');
+		});
 
 	});
 
@@ -266,7 +268,9 @@ $(document).ready(function(){
 				url = '/job_orientation/' + id + '/form'; break;
 		}
 
-		container.load(url);
+		container.load(url,function(){
+			CKEDITOR.replace('remarks');
+		});
 	});
 
 	$(".dynamic-container").on('submit','form.update',function(e){

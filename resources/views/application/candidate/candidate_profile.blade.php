@@ -240,7 +240,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>Remarks</label>
-							<textarea id="ckeditor" name="remarks" class="form-control" rows="5"></textarea>
+							<textarea name="remarks" class="form-control ckeditor" rows="5"></textarea>
 						</div>
 					</div>
 				</div>

@@ -32,7 +32,7 @@
 			<div class="col-md-12">
 				<div class="form-group">
 					<label>Remarks</label>
-					<textarea class="form-control ckeditor" rows="5" disabled>{{$applicant->initial_screening->init_interview_remarks}}</textarea>
+					<textarea class="form-control ckeditor" rows="5" name="init_interview_remarks" disabled>{{$applicant->initial_screening->init_interview_remarks}}</textarea>
 				</div>
 			</div>
 		</div>
