@@ -706,11 +706,11 @@ $(document).ready(function(){
 		if(score){
 			var result = checkResult(score,passing_score);
 			if(result)
-				result_input.val('Pass');
+				result_input.attr('value','Pass');
 			else
-				result_input.val('Fail');
+				result_input.attr('value','Fail');
 		}else{
-			result_input.val('');
+			result_input.attr('value','');
 		}
 	});
 
@@ -722,11 +722,11 @@ $(document).ready(function(){
 		if(score){
 			var result = checkResult(score,passing_score);
 			if(result)
-				result_input.val('Pass');
+				result_input.attr('value','Pass');
 			else
-				result_input.val('Fail');
+				result_input.attr('value','Fail');
 		}else{
-			result_input.val('');
+			result_input.attr('value','');
 		}
 	});
 

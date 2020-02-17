@@ -28,7 +28,9 @@
 								<td>
 									<input class="form-control form-control-sm w-75 test_result" 
 										   type="text" 
-										   name="typing_result" disabled>
+										   name="typing_result"
+										   value=" "
+										   readonly>
 								</td>
 							</tr>
 							<tr class="comprehension_test">
@@ -44,7 +46,9 @@
 								<td>
 									<input class="form-control form-control-sm w-75 test_result"
 										   type="text" 
-										   name="comprehension_result" disabled>
+										   name="comprehension_result" 
+										   value=" "
+										   readonly>
 								</td>
 							</tr>
 						</tbody>
