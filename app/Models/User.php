@@ -52,6 +52,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\FinalInterview','interviewer_id');
     }
 
+    public function interview_histories(){
+        return $this->hasMany('App\Models\InterviewHistory','interviewer_id');
+    }
+
     /*
     |------------------------
     |     Custom Helpers

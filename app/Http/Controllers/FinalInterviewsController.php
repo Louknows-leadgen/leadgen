@@ -87,6 +87,9 @@ class FinalInterviewsController extends Controller
         $request->merge($is_done);
         $fin->update($request->all());
 
+        // event type: add record to interview history
+        InterviewHistory::create($request->all());
+
         if($request->result == 'Pass')
             $fin->applicant()->update(['application_status_id'=>6]); // 6 is the status of Job Offer schedule
         else

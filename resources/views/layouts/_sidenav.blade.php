@@ -26,6 +26,11 @@
                     <h5><a href="{{ route('applications.candidates') }}">Candidates</a></h5>
                 </div>
             </div>
+            <div class="col-md-12 mb-2">
+                <div class="q-link-item">
+                    <h5><a href="{{ route('history.index') }}">Interview History</a></h5>
+                </div>
+            </div>
         @endcan
     </div>
 </div>

@@ -225,6 +225,27 @@
 				  method="post">
 				@csrf
 				@method('PUT')
+
+				<input type="hidden" 
+					   name="interviewer_id"
+					   value="{{ $fin->interviewer_id }}">
+
+				<input type="hidden" 
+					   name="applicant_first_name"
+					   value="{{ $info->first_name }}">
+
+				<input type="hidden" 
+					   name="applicant_middle_name"
+					   value="{{ $info->middle_name }}">
+
+				<input type="hidden" 
+					   name="applicant_last_name"
+					   value="{{ $info->last_name }}">
+
+				<input type="hidden" 
+					   name="applicant_applied_for"
+					   value="{{ $info->applicant->job }}">	   	   	   	   
+				
 				<div class="row">
 					<div class="col-md-3">
 						<div class="form-group">
