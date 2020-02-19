@@ -23,7 +23,7 @@
 
             <div class="sign-in">
                 <div>
-                    <a class="text-primary" href="{{ URL::previous() }}">Go to candidates</a>
+                    <a class="text-primary" href="{{ route('applications.candidates') }}">Go to candidates</a>
                 </div>
             </div>
 
