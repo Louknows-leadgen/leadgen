@@ -236,6 +236,24 @@ $(document).ready(function(){
 
 	}));
 
+	$("#search-interview").on("input", $.debounce(200,function(){
+		var search_text = $(this).val();
+
+		var container = $(".interview-list");
+
+		$.ajax({
+			url: '/interviews/history/search',
+			method: 'GET',
+			data: {
+				skey: search_text
+			},
+			success: function(result){
+				container.empty().append(result);
+			}
+		});
+
+	}));
+
 	//-----------------------------------------------------
 
 	$(".dynamic-container").on("submit",".j_fi-submit",function(){
@@ -736,4 +754,50 @@ $(document).ready(function(){
 
 	//------------------------------
 
+
+	/*
+	|-------------------------------
+	|         Remove Interview
+	|-------------------------------
+	*/
+	$(document).on('click','.remove-trigger',function(){
+		var id = $(this).data('id');
+		$('.bg-notif').fadeIn(200,function(){
+			$('.bg-notif .btn-primary').attr('data-id',id);
+		});
+	});
+
+	$(document).on('click','.bg-notif .btn-secondary',function(){
+		$('.bg-notif').fadeOut(200,function(){
+			$('.bg-notif .btn-primary').attr('data-id','');
+		});
+	});
+
+	$(document).on('click','.bg-notif .btn-primary',function(){
+		var id = $(this).data('id');
+		var url = '/interviews/history/' + id;
+
+		$.ajaxSetup({
+		    headers: {
+		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		    }
+		});
+
+		$.ajax({
+			url: url,
+			method: 'DELETE',
+			beforeSend: function(){
+				$('.bg-notif .btn-primary').prepend("<span class='spinner-grow spinner-grow-sm'></span>");
+			},
+			success: function(){
+				location.reload();
+			}
+		});
+		
+	});
+
 });
+
+
+
+		

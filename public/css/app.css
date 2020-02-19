@@ -11930,3 +11930,26 @@ span.close {
   color: #ff0000;
 }
 
+.table > tbody > tr > td {
+  vertical-align: middle;
+}
+
+.bg-notif {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.bg-notif .card {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+

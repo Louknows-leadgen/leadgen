@@ -64,48 +64,50 @@ class TestDataSeeder extends Seeder
         $user5->password = Hash::make('Lcabalun0300');
         $user5->save();
 
-    	// Add Applicant
-    	$applicant = new Applicant;
-    	$applicant->person_id = 1;
-    	$applicant->job_id = 1;
-    	$applicant->applied_site = 1;
-    	$applicant->application_status_id = 1;
-    	$applicant->save();
+    	for($i = 1; $i <= 29; $i++){
+            // Add Applicant
+        	$applicant = new Applicant;
+        	$applicant->person_id = $i;
+        	$applicant->job_id = 1;
+        	$applicant->applied_site = 1;
+        	$applicant->application_status_id = 1;
+        	$applicant->save();
 
-    	// Add Person
-    	$person = new Person;
-    	$person->first_name = 'test1 first';
-    	$person->middle_name = 'test1 middle';
-    	$person->last_name = 'test1 last';
-    	$person->mobile_1 = '09028624357';
-    	$person->email = 'test1@email.com';
-    	$person->age = 22;
-    	$person->gender = 'Male';
-    	$person->city_address = 'Barangay Test 1 Cebu City 6000';
-    	$person->province_address = 'Barangay Test 1 Cebu City 6000';
-    	$person->weight = 55;
-    	$person->height = 164;
-    	$person->civil_status = 'Single';
-    	$person->birthday = '01/15/1990';
-    	$person->religion = 'Catholic';
-    	$person->father_name = 'test1 father';
-    	$person->mother_name = 'test1 mother';
-    	$person->save();
+    	   // Add Person
+        	$person = new Person;
+        	$person->first_name = "test{$i} first";
+        	$person->middle_name = "test{$i} middle";
+        	$person->last_name = "test{$i} last";
+        	$person->mobile_1 = '09028624357';
+        	$person->email = "test{$i}@email.com";
+        	$person->age = 22;
+        	$person->gender = 'Male';
+        	$person->city_address = "Barangay Test $i Cebu City 6000";
+        	$person->province_address = "Barangay Test $i Cebu City 6000";
+        	$person->weight = 55;
+        	$person->height = 164;
+        	$person->civil_status = 'Single';
+        	$person->birthday = '01/15/1990';
+        	$person->religion = 'Catholic';
+        	$person->father_name = "test{$i} father";
+        	$person->mother_name = "test{$i} mother";
+        	$person->save();
 
-        // Add School Details
-        $school1 = new MiddleSchool;
-        $school1->person_id = 1;
-        $school1->school_name = 'Test1 Elementary School';
-        $school1->graduated_date = 2002;
-        $school1->education_type = 1;
-        $school1->save();
+            // Add School Details
+            $school1 = new MiddleSchool;
+            $school1->person_id = $i;
+            $school1->school_name = "Test{$i} Elementary School";
+            $school1->graduated_date = 2002;
+            $school1->education_type = 1;
+            $school1->save();
 
-        $school2 = new MiddleSchool;
-        $school2->person_id = 1;
-        $school2->school_name = 'Test1 High School';
-        $school2->graduated_date = 2006;
-        $school2->education_type = 2;
-        $school2->save();
+            $school2 = new MiddleSchool;
+            $school2->person_id = $i;
+            $school2->school_name = "Test{$i} High School";
+            $school2->graduated_date = 2006;
+            $school2->education_type = 2;
+            $school2->save();
+        }
 
     }
 }

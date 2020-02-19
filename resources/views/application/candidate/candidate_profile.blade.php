@@ -9,7 +9,7 @@
 	<div class="row box mb-4">
 		<div class="sign-in">
             <div>
-                <a href="{{ URL::previous() }}"><< Back</a>
+                <a class="text-primary" href="{{ URL::previous() }}"><< Back</a>
             </div>
         </div>
 		<div class="col-md-12">
@@ -244,8 +244,10 @@
 
 				<input type="hidden" 
 					   name="applicant_applied_for"
-					   value="{{ $info->applicant->job }}">	   	   	   	   
-				
+					   value="{{ $info->applicant->job->name }}">
+				<input type="hidden" 
+					   name="applicant_applied_date"
+					   value="{{ $info->applicant->applied_date() }}">	   	   	   	   
 				<div class="row">
 					<div class="col-md-3">
 						<div class="form-group">

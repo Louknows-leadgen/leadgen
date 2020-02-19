@@ -20,6 +20,7 @@ class CreateInterviewHistoriesTable extends Migration
             $table->string('applicant_middle_name');
             $table->string('applicant_last_name');
             $table->string('applicant_applied_for');
+            $table->date('applicant_applied_date');
             $table->string('result');
             $table->text('remarks')->nullable();
             $table->timestamps();

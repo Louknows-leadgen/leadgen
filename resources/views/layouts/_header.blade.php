@@ -66,8 +66,8 @@
 			            </li>
 			        @endcan
 			        @can('access',3)
-			            <li class="list-inline-item"><a href="{{ route('applications.candidates') }}">Candidates</a></li>
-			            <li class="list-inline-item"><a href="{{ route('history.index') }}">Interview History</a></li>
+			            <li class="list-inline-item mr-4"><a href="{{ route('applications.candidates') }}">Candidates</a></li>
+			            <li class="list-inline-item mr-4"><a href="{{ route('history.index') }}">History</a></li>
 			        @endcan
 			    </ul>
 		    @endauth

@@ -8,6 +8,13 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="box">
+
+            <div class="sign-in">
+                <div>
+                    <a class="text-primary" href="{{ route('history.index') }}">Go to history</a>
+                </div>
+            </div>
+
 			<h5>Candidate List</h5>
 			<div class="row mt-4">
                 <div class="col-md-3">
@@ -46,7 +53,7 @@
                             	@endforeach
                             @else
                                 <tr>
-                                    <td colspan="6">No results found</td>
+                                    <td colspan="6">No results found. Visit <a href="{{ route('history.index') }} ">Interview history</a>.</td>
                                 </tr>
                             @endif
                         </tbody>

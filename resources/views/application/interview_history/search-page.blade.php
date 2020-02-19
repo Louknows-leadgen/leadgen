@@ -23,7 +23,7 @@
 
             <div class="sign-in">
                 <div>
-                    <a class="text-primary" href="{{ route('applications.candidates') }}">Go to candidates</a>
+                    <a class="text-primary" href="{{ URL::previous() }}">Go to candidates</a>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
                 <div class="col-md-3">
                     <div class="form-group has-search">
                         <span class="fa fa-search form-control-feedback"></span>
-                        <input type="text" id="search-interview" class="form-control" placeholder="Search">
+                        <input type="text" id="search-interview" class="form-control" placeholder="Search" value="{{ $skey }}">
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                                             {{$interview->applicant_applied_for}}
                                         </td>
                                         <td>{{$interview->applicant_applied_date}}</td>
-                                        <td>{{ $interview->result }}</td>
+                                        <td>{{$interview->result}}</td>
 										<td>
                                             <a class="btn btn-secondary" 
                                                href="{{ route('history.show',['history'=>$interview->id]) }}">
@@ -84,7 +84,7 @@
                             @endif
                         </tbody>
                     </table>
-                    {!! $interviews->links() !!}
+                    {!! $interviews->appends(['skey'=>$skey])->links() !!}
                 </div>
             </div>
 		</div>

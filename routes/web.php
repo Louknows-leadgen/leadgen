@@ -45,6 +45,9 @@ Route::get('/application/candidate/{applicant_id}/profile','ApplicationsControll
 Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@update_result')->name('fin.update_result');
 Route::get('/final_interview/{id}/form','FinalInterviewsController@form')->name('fin.form');
 
+//- interview history
+Route::get('/interviews/history/search','InterviewHistoriesController@search')->name('history.search');
+
 //- job orientation
 Route::get('/job_orientation/{id}/form','JobOrientationsController@form')->name('jo.form');
 

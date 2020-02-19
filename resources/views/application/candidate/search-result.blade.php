@@ -25,7 +25,7 @@
             @endforeach
         @else
             <tr>
-                <td colspan="6">No results found</td>
+                <td colspan="6">No results found. Visit <a href="{{ route('history.index') }} ">Interview history</a>.</td>
             </tr>
         @endif
     </tbody>

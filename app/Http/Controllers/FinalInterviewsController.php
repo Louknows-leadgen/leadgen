@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\FinalInterview;
 use App\Models\User;
 use App\Models\Applicant;
+use App\Models\InterviewHistory;
 use App\Mail\SendMail;
 use App\Rules\CompareDatetime;
 

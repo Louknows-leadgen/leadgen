@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\InterviewHistory;
 
 class InterviewHistoriesController extends Controller
 {
     //
     public function index(){
-    	$interviews = InterviewHistory::all();
+    	$interviewer_id = Auth::id();
+    	$interviews = InterviewHistory::where('interviewer_id','=',$interviewer_id)
+    	                                ->paginate(5);
     	return view('application.interview_history.index',compact('interviews'));
     }
 
@@ -23,5 +27,16 @@ class InterviewHistoriesController extends Controller
     public function destroy($interview_id){
     	$interview = InterviewHistory::find($interview_id);
         $interview->delete();
+    }
+
+    public function search(Request $request){
+        $user_id = Auth::id();
+        $interviews = InterviewHistory::search($request->skey, $user_id);
+        $skey = $request->skey;
+
+        if($request->ajax())
+            return view('application.interview_history.search-result',compact('interviews','skey'));
+
+        return view('application.interview_history.search-page',compact('interviews','skey'));
     }
 }
