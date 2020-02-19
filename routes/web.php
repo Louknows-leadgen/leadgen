@@ -146,21 +146,3 @@ Route::put('/account/update-password','UsersController@update_password')->name('
 
 //Route::view('/resource-list','resource-list');
 
-
-use App\Models\Applicant;
-
-Route::get('/resource-list',function(){
-	$resources = Applicant::with(['person','job'])->where('application_status_id','=',7)->paginate(5);
-	return view('resource-list',compact('resources'));
-});
-
-
-Route::get('/employee-details',function(){
-	$resources = Applicant::with(['person','job'])->where('application_status_id','=',7)->paginate(5);
-	return view('resource-list',compact('resources'));
-});
-
-
-Route::get('/dashboard',function(){
-	return view('dashboard');
-});
