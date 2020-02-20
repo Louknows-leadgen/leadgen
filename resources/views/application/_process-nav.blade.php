@@ -17,8 +17,8 @@
 				text-center 
 				process-tab  
 				{{ $icon['fi'] }}
-				@if(in_array($applicant->application_status_id, [3,4,5])) text-primary border-top border-bottom border-left actv @endif
-				@if(!in_array($applicant->application_status_id, [3,4,5])) bg-secondary text-light @endif
+				@if(in_array($applicant->application_status_id, [3,4,5,11])) text-primary border-top border-bottom border-left actv @endif
+				@if(!in_array($applicant->application_status_id, [3,4,5,11])) bg-secondary text-light @endif
 				"
 		 data-process="final-interview" 
 		 data-id="{{$applicant->id}}"

@@ -58,7 +58,7 @@ class ApplicationStatusesTableSeeder extends Seeder
                 'updated_at'=>Carbon::now()
             ],
             [
-                'name'=>'No Show',
+                'name'=>'JO - No Show',
                 'stat_id'=>8,
                 'created_at'=>Carbon::now(), 
                 'updated_at'=>Carbon::now()
@@ -75,7 +75,12 @@ class ApplicationStatusesTableSeeder extends Seeder
                 'created_at'=>Carbon::now(), 
                 'updated_at'=>Carbon::now()
             ]
-
+            [
+                'name'=>'Final Interview - No Show',
+                'stat_id'=>11,
+                'created_at'=>Carbon::now(), 
+                'updated_at'=>Carbon::now()
+            ]
     	]);
     }
 }

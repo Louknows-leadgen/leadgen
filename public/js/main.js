@@ -323,7 +323,15 @@ $(document).ready(function(){
 					}
                 }else{
                 	container.load(response.url,function(){
-                		CKEDITOR.replace('remarks');
+                		if($(".dynamic-container:not(.d-none) textarea[name='remarks']").length)
+                			CKEDITOR.replace('remarks');
+                		
+                		var notif = $('.notif-process');
+                		notif.show(0,function(){
+                			setTimeout(function(){
+                				notif.fadeOut(500)
+                			},1000);
+                		});
                 	});
                 }
 			}

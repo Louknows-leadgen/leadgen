@@ -7,7 +7,7 @@
             <th>Applied For</th>
             <th>Applied Date</th>
             <th>Assessment</th>
-            <th>Action</th>
+            <th colspan="2">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -26,14 +26,17 @@
                     <td>
                         {{$interview->applicant_applied_for}}
                     </td>
-                    <td>{{$interview->applicant_applied_date}}</td>
+                    <td>{{date('m/d/Y', strtotime($interview->applicant_applied_date))}}</td>
+                    
                     <td>{{$interview->result}}</td>
                     <td>
-                        <a class="btn btn-secondary" 
+                        <a class="shadow-sm btn btn-outline-secondary" 
                            href="{{ route('history.show',['history'=>$interview->id]) }}">
                             View result
                         </a>
-                        <span class="btn btn-danger remove-trigger" data-id="{{ $interview->id }}">Remove</span>
+                    </td>
+                    <td>
+                        <span class="shadow-sm btn btn-outline-danger remove-trigger" data-id="{{ $interview->id }}">Remove</span>
                     </td>
                 </tr>
             @endforeach

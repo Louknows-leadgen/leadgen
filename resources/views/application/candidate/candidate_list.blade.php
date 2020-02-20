@@ -9,6 +9,20 @@
 	<div class="col-md-12">
 		<div class="box">
 
+            @if(Session('success'))
+                <div class="notif-process alert alert-success alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Success! </strong>{{ Session('success') }}
+                </div>
+            @endif
+
+           @if(Session('error'))
+                <div class="notif-process alert alert-danger alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Error! </strong>{{ Session('error') }}
+                </div>
+            @endif
+
             <div class="sign-in">
                 <div>
                     <a class="text-primary" href="{{ route('history.index') }}">Go to history</a>
@@ -34,7 +48,7 @@
 								<th>Last Name</th>
 								<th>Applied For</th>
 								<th>Schedule</th>
-								<th>Action</th>
+								<th colspan="2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,7 +62,28 @@
 										<td>{{$interview->applicant->person->last_name}}</td>
 										<td>{{$interview->applicant->job->name}}</td>
 										<td>{{$interview->schedule}}</td>
-										<td><a class="link" href="{{ route('applications.profile',['applicant_id'=>$interview->applicant_id]) }}">Interview</a></td>
+										<td>
+                                            <a class="shadow-sm btn btn-outline-primary" href="{{ route('applications.profile',['applicant_id'=>$interview->applicant_id]) }}">Interview</a>
+                                        </td>
+                                        <td>
+                                            <a class="fin-no-show 
+                                                      shadow-sm 
+                                                      btn 
+                                                      btn-outline-danger" 
+                                                href="#" 
+                                                onclick="event.preventDefault();
+                                                         document.getElementById('{{ $interview->applicant_id }}').submit();">
+                                                No Show
+                                            </a>
+
+                                            <form id="{{$interview->applicant_id}}"      action="{{ route('fin.no_show',['id'=>$interview->applicant_id]) }}" 
+                                                  method="POST" 
+                                                  style="display: none;">
+                                                @csrf
+                                                @method('PUT')
+                                            </form>
+
+                                        </td>
 									</tr>
                             	@endforeach
                             @else

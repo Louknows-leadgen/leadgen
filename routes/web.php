@@ -44,6 +44,7 @@ Route::get('/application/candidate/{applicant_id}/profile','ApplicationsControll
 //- final interviews
 Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@update_result')->name('fin.update_result');
 Route::get('/final_interview/{id}/form','FinalInterviewsController@form')->name('fin.form');
+Route::put('/final_interviews/{id}/no_show','ApplicationsController@no_show')->name('fin.no_show');
 
 //- interview history
 Route::get('/interviews/history/search','InterviewHistoriesController@search')->name('history.search');
@@ -147,20 +148,3 @@ Route::put('/account/update-password','UsersController@update_password')->name('
 //Route::view('/resource-list','resource-list');
 
 
-use App\Models\Applicant;
-
-Route::get('/resource-list',function(){
-	$resources = Applicant::with(['person','job'])->where('application_status_id','=',7)->paginate(5);
-	return view('resource-list',compact('resources'));
-});
-
-
-Route::get('/employee-details',function(){
-	$resources = Applicant::with(['person','job'])->where('application_status_id','=',7)->paginate(5);
-	return view('resource-list',compact('resources'));
-});
-
-
-Route::get('/dashboard',function(){
-	return view('dashboard');
-});

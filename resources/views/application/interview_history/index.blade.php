@@ -21,6 +21,13 @@
 	<div class="col-md-12">
 		<div class="box">
 
+            @if(Session('success'))
+                <div class="notif-process alert alert-success alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Success! </strong>{{ Session('success') }}
+                </div>
+            @endif
+
             <div class="sign-in">
                 <div>
                     <a class="text-primary" href="{{ route('applications.candidates') }}">Go to candidates</a>
@@ -47,7 +54,7 @@
 								<th>Applied For</th>
                                 <th>Applied Date</th>
                                 <th>Assessment</th>
-								<th>Action</th>
+								<th colspan="2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,11 +76,13 @@
                                         <td>{{$interview->applicant_applied_date}}</td>
                                         <td>{{ $interview->result }}</td>
 										<td>
-                                            <a class="btn btn-secondary" 
+                                            <a class="shadow-sm btn btn-outline-secondary" 
                                                href="{{ route('history.show',['history'=>$interview->id]) }}">
                                                 View result
                                             </a>
-                                            <span class="btn btn-danger remove-trigger" data-id="{{ $interview->id }}">Remove</span>
+                                        </td>
+                                        <td>
+                                            <span class="shadow-sm btn btn-outline-danger remove-trigger" data-id="{{ $interview->id }}">Remove</span>
                                         </td>
 									</tr>
                             	@endforeach

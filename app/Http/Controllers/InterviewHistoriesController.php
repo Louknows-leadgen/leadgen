@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\InterviewHistory;
+use Session;
 
 class InterviewHistoriesController extends Controller
 {
@@ -27,6 +28,9 @@ class InterviewHistoriesController extends Controller
     public function destroy($interview_id){
     	$interview = InterviewHistory::find($interview_id);
         $interview->delete();
+
+        $name = implode(' ',[$interview->applicant_first_name, $interview->applicant_last_name]);
+        Session::flash('success',"$name was removed from the history list");
     }
 
     public function search(Request $request){

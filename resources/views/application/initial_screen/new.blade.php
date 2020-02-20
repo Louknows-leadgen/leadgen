@@ -21,15 +21,25 @@
 									Typing Speed (wpm)
 								</td>
 								<td>
-									<input class="form-control form-control-sm w-50 test_input" 
-										   type="number" 
-										   name="typing_score">
+									<div class="form-group">
+										<input class="form-control form-control-sm w-50 test_input @error('typing_score') is-invalid @enderror" 
+											   type="number" 
+											   name="typing_score"
+											   value="{{ old('typing_score') }}">
+										
+										<span class="invalid-feedback feedback-inline" 
+											  role="alert">
+				                            @error('typing_score') 
+				                            	{{ $message }} 
+				                            @enderror
+				                        </span>
+									</div>	   
 								</td>
 								<td>
 									<input class="form-control form-control-sm w-75 test_result" 
 										   type="text" 
 										   name="typing_result"
-										   value=" "
+										   value="{{ old('typing_result') }}"
 										   readonly>
 								</td>
 							</tr>
@@ -39,15 +49,25 @@
 									Comprehension Test
 								</td>
 								<td>
-									<input class="form-control form-control-sm w-50 test_input" 
-										   type="number" 
-										   name="comprehension_score">
+									<div class="form-group">
+										<input class="form-control form-control-sm w-50 test_input @error('comprehension_score') is-invalid @enderror" 
+											   type="number" 
+											   name="comprehension_score"
+											   value="{{ old('comprehension_score') }}">
+
+										<span class="invalid-feedback feedback-inline" 
+											  role="alert">
+				                            @error('comprehension_score') 
+				                            	{{ $message }} 
+				                            @enderror
+				                        </span>
+									</div>	   
 								</td>
 								<td>
 									<input class="form-control form-control-sm w-75 test_result"
 										   type="text" 
 										   name="comprehension_result" 
-										   value=" "
+										   value="{{ old('comprehension_result') }}"
 										   readonly>
 								</td>
 							</tr>

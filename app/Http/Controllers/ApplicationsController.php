@@ -10,6 +10,8 @@ use App\Models\JobOrientation;
 use App\Models\Applicant;
 use App\Models\Test;
 use App\Models\User;
+use App\Models\InterviewHistory;
+use Session;
 
 class ApplicationsController extends Controller
 {
@@ -38,7 +40,7 @@ class ApplicationsController extends Controller
         }
 
         // this is for the view on the final interview tab
-        if($applicant->application_status_id < 3)
+        if(in_array($applicant->application_status_id,[1,2]))
             $fin_view = 'application.unavailable';
         elseif($applicant->final_interview()->exists()){
             $fin_view = 'application.final_interview.show';
@@ -47,7 +49,7 @@ class ApplicationsController extends Controller
         }
 
         // this is for the job orientation view tab
-        if($applicant->application_status_id < 6)
+        if(in_array($applicant->application_status_id,[1,2,3,4,5,11]))
             $jo_view = 'application.unavailable';
         elseif($applicant->job_orientation()->exists()){
             $jo_view = 'application.job_orientation.show';
@@ -86,5 +88,38 @@ class ApplicationsController extends Controller
         $fin = $applicant->final_interview;
 
         return view('application.candidate.candidate_profile',compact('info','elem','high','init','fin'));
+    }
+
+    public function no_show($applicant_id){
+        $fin_interview = Applicant::find($applicant_id)->final_interview;
+        
+        // update final interviews table
+        $fin_interview->result = 'No Show';
+        $fin_interview->is_done = 1;
+        
+
+        if($fin_interview->save()){
+            // insert to history
+            $info = Applicant::with(['person','final_interview'])->find($applicant_id);
+            $history_data['interviewer_id'] = $info->final_interview->interviewer_id;
+            $history_data['applicant_first_name'] = $info->person->first_name;
+            $history_data['applicant_middle_name'] = $info->person->middle_name;
+            $history_data['applicant_last_name'] = $info->person->last_name;
+            $history_data['applicant_applied_for'] = $info->job->name;
+            $history_data['applicant_applied_date'] = $info->applied_date();
+            $history_data['result'] = $info->final_interview->result;
+            $history_data['remarks'] = $info->final_interview->remarks;
+
+            InterviewHistory::create($history_data);
+
+            // update application status
+            $fin_interview->applicant()->update(['application_status_id'=>11]);
+
+            Session::flash('success',"{$info->person->name()} was tagged as no show");
+            return back();
+        }else{
+            Session::flash('error','Something went wrong');
+            return back();
+        }
     }
 }
