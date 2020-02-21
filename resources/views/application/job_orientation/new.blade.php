@@ -8,7 +8,7 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>Schedule</label>
-						<input type="text" name="jo_date" class="form-control form-control-sm date @error('jo_date') is-invalid @enderror" placeholder="mm/dd/yyyy" autocomplete="off" value="{{ old('jo_date') }}">
+						<input type="text" name="jo_date" class="form-control form-control-sm datetime @error('jo_date') is-invalid @enderror" placeholder="eg. 01/31/1900 12:00 AM" autocomplete="off" value="{{ old('jo_date') }}">
 
 						<span class="invalid-feedback feedback-inline" role="alert">
                             @error('jo_date') {{ $message }} @enderror

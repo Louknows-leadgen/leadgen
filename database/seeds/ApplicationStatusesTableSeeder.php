@@ -74,7 +74,7 @@ class ApplicationStatusesTableSeeder extends Seeder
                 'stat_id'=>10,
                 'created_at'=>Carbon::now(), 
                 'updated_at'=>Carbon::now()
-            ]
+            ],
             [
                 'name'=>'Final Interview - No Show',
                 'stat_id'=>11,

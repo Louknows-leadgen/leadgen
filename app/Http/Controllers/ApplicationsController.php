@@ -90,7 +90,7 @@ class ApplicationsController extends Controller
         return view('application.candidate.candidate_profile',compact('info','elem','high','init','fin'));
     }
 
-    public function no_show($applicant_id){
+    public function no_show($applicant_id, Request $request){
         $fin_interview = Applicant::find($applicant_id)->final_interview;
         
         // update final interviews table
@@ -116,10 +116,8 @@ class ApplicationsController extends Controller
             $fin_interview->applicant()->update(['application_status_id'=>11]);
 
             Session::flash('success',"{$info->person->name()} was tagged as no show");
-            return back();
         }else{
             Session::flash('error','Something went wrong');
-            return back();
         }
     }
 }

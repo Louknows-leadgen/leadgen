@@ -20,7 +20,7 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>Schedule</label>
-						<input type="text" name="schedule" class="form-control form-control-sm datetime" placeholder="mm/dd/yyyy" autocomplete="off" value="{{$procedure->schedule}}">
+						<input type="text" name="schedule" class="form-control form-control-sm datetime" placeholder="eg. 01/31/1900 12:00 AM" autocomplete="off" value="{{$procedure->schedule}}">
 
 						<span class="invalid-feedback feedback-inline schedule" role="alert">
 						</span>

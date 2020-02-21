@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\JobOrientation;
 use App\Models\Applicant;
-
+use App\Rules\CompareDatetime;
 
 
 class JobOrientationsController extends Controller
@@ -15,11 +15,10 @@ class JobOrientationsController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'jo_date' => ['bail','required','date_format:m/d/Y','after_or_equal:today']
+            'jo_date' => ['bail','required','date_format:m/d/Y h:i A',new CompareDatetime]
         ],[
             'jo_date.required' => 'Schedule date is required.',
-            'jo_date.date_format' => 'Wrong date format.',
-            'jo_date.after_or_equal' => 'Date should be present or above.'
+            'jo_date.date_format' => 'Wrong date format.'
         ]);
 
     	$id = $request->applicant_id;
@@ -39,11 +38,10 @@ class JobOrientationsController extends Controller
     public function update($jo_id, Request $request){
 
         $validator = Validator::make($request->all(), [
-            'jo_date' => ['bail','required','date_format:m/d/Y','after_or_equal:today']
+            'jo_date' => ['bail','required','date_format:m/d/Y h:i A',new CompareDatetime]
         ],[
             'jo_date.required' => 'Schedule date is required.',
-            'jo_date.date_format' => 'Date format should be mm/dd/yyyy.',
-            'jo_date.after_or_equal' => 'Date should be present or above.'
+            'jo_date.date_format' => 'Wrong date format.'
         ]);
 
         if ($validator->fails()){

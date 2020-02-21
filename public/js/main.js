@@ -825,12 +825,17 @@ $(document).ready(function(){
 					method = 'DELETE';
 					url = '/interviews/history/' + id;
 					break;
-			// when tagging applicant to no show
+			// when tagging applicant to no show in job offer
 			case 'job-offering'	:
 					method = 'PUT';
 					url = '/applicants/' + id;
 					data['application_status_id'] = 8 // 8 is for job offer - no show
 					break;
+			// when tagging applicant to no show in final interview
+			case 'candidate-list'	:
+					method = 'PUT';
+					url = '/final_interviews/' + id + '/no_show';
+					break;		
 		}
 
 

@@ -15,7 +15,7 @@
 		        		<div class="col-md-12">
 			        		<div class="box process">
 
-			        			<div class="d-none notif-process alert alert-success alert-dismissible fade show">
+			        			<div class="hide notif-process alert alert-success alert-dismissible fade show">
 			        				You have updated the record successfully!
 			        			</div>
 

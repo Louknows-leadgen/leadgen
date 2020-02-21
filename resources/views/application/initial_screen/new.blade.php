@@ -21,19 +21,17 @@
 									Typing Speed (wpm)
 								</td>
 								<td>
-									<div class="form-group">
-										<input class="form-control form-control-sm w-50 test_input @error('typing_score') is-invalid @enderror" 
+									<input class="form-control form-control-sm w-50 test_input @error('typing_score') is-invalid @enderror" 
 											   type="number" 
 											   name="typing_score"
 											   value="{{ old('typing_score') }}">
-										
-										<span class="invalid-feedback feedback-inline" 
+									
+									@error('typing_score')
+										<span class="invalid-feedback" 
 											  role="alert">
-				                            @error('typing_score') 
 				                            	{{ $message }} 
-				                            @enderror
 				                        </span>
-									</div>	   
+			                        @enderror	   
 								</td>
 								<td>
 									<input class="form-control form-control-sm w-75 test_result" 
@@ -49,19 +47,17 @@
 									Comprehension Test
 								</td>
 								<td>
-									<div class="form-group">
-										<input class="form-control form-control-sm w-50 test_input @error('comprehension_score') is-invalid @enderror" 
-											   type="number" 
-											   name="comprehension_score"
-											   value="{{ old('comprehension_score') }}">
+									<input class="form-control form-control-sm w-50 test_input @error('comprehension_score') is-invalid @enderror" 
+										   type="number" 
+										   name="comprehension_score"
+										   value="{{ old('comprehension_score') }}">
 
-										<span class="invalid-feedback feedback-inline" 
-											  role="alert">
-				                            @error('comprehension_score') 
-				                            	{{ $message }} 
-				                            @enderror
+									@error('comprehension_score')
+										<span class="invalid-feedback" 
+											  role="alert"> 
+				                            	{{ $message }}
 				                        </span>
-									</div>	   
+			                        @enderror   
 								</td>
 								<td>
 									<input class="form-control form-control-sm w-75 test_result"

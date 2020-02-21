@@ -5,6 +5,21 @@
 
 @section('contents')
 
+
+<div class="bg-notif">
+    <div class="card w-25">
+        <div class="card-header font-weight-bold">No Show</div>
+        <div class="card-body">
+            Tag this applicant as no show?
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button class="btn btn-secondary mr-3">No</button>
+            <button class="btn btn-primary" data-page="candidate-list">Yes</button>
+        </div>
+    </div>
+</div>
+
+
 <div class="row">
 	<div class="col-md-12">
 		<div class="box">
@@ -16,7 +31,7 @@
                 </div>
             @endif
 
-           @if(Session('error'))
+            @if(Session('error'))
                 <div class="notif-process alert alert-danger alert-dismissible fade show">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>Error! </strong>{{ Session('error') }}
@@ -65,24 +80,14 @@
 										<td>
                                             <a class="shadow-sm btn btn-outline-primary" href="{{ route('applications.profile',['applicant_id'=>$interview->applicant_id]) }}">Interview</a>
                                         </td>
-                                        <td>
-                                            <a class="fin-no-show 
-                                                      shadow-sm 
-                                                      btn 
-                                                      btn-outline-danger" 
-                                                href="#" 
-                                                onclick="event.preventDefault();
-                                                         document.getElementById('{{ $interview->applicant_id }}').submit();">
-                                                No Show
-                                            </a>
-
-                                            <form id="{{$interview->applicant_id}}"      action="{{ route('fin.no_show',['id'=>$interview->applicant_id]) }}" 
-                                                  method="POST" 
-                                                  style="display: none;">
-                                                @csrf
-                                                @method('PUT')
-                                            </form>
-
+                                        <td>     
+                                            <span data-id="{{ $interview->applicant_id }}" 
+                                                  class="btn 
+                                                         btn-outline-danger
+                                                         shadow-sm 
+                                                         remove-trigger">
+                                              No show
+                                            </span>
                                         </td>
 									</tr>
                             	@endforeach

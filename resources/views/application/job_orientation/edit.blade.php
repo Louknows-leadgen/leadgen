@@ -9,7 +9,7 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>Schedule</label>
-						<input type="text" name="jo_date" class="form-control date" placeholder="mm/dd/yyyy" autocomplete="off" value="{{$procedure->jo_date}}">
+						<input type="text" name="jo_date" class="form-control datetime" placeholder="eg. 01/31/1900 12:00 AM" autocomplete="off" value="{{$procedure->jo_date}}">
 						<span class="invalid-feedback feedback-inline jo_date" role="alert">
 						</span>	
 					</div>

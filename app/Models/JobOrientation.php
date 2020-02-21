@@ -23,8 +23,8 @@ class JobOrientation extends Model
     |---------------------
     */
     public function setJoDateAttribute($value){
-        $date = date_create_from_format("m/d/Y",$value);
-        $this->attributes['jo_date'] = date_format($date,"Y-m-d");
+        $date = date_create_from_format("m/d/Y g:i A",$value);
+        $this->attributes['jo_date'] = date_format($date,"Y-m-d H:i:s");
     }
 
     /*
@@ -33,7 +33,7 @@ class JobOrientation extends Model
     |---------------------
     */
     public function getJoDateAttribute($value){
-        $date = date_create_from_format("Y-m-d",$value);
-        return date_format($date,"m/d/Y");
+        $date = date_create_from_format("Y-m-d H:i:s",$value);
+        return date_format($date,"m/d/Y g:i A");
     }
 }

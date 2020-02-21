@@ -65,24 +65,14 @@
                                         <td>
                                             <a class="shadow-sm btn btn-outline-primary" href="{{ route('applications.profile',['applicant_id'=>$candidate->applicant_id]) }}">Interview</a>
                                         </td>
-                                        <td>
-                                            <a class="fin-no-show 
-                                                      shadow-sm 
-                                                      btn 
-                                                      btn-outline-danger" 
-                                                href="#" 
-                                                onclick="event.preventDefault();
-                                                         document.getElementById('{{ $candidate->applicant_id }}').submit();">
-                                                No Show
-                                            </a>
-
-                                            <form id="{{$candidate->applicant_id}}"      
-                                                  action="{{ route('fin.no_show',['id'=>$candidate->applicant_id]) }}" 
-                                                  method="POST" 
-                                                  style="display: none;">
-                                                @csrf
-                                                @method('PUT')
-                                            </form>
+                                        <td>     
+                                            <span data-id="{{ $candidate->applicant_id }}" 
+                                                  class="btn 
+                                                         btn-outline-danger
+                                                         shadow-sm 
+                                                         remove-trigger">
+                                              No show
+                                            </span>
                                         </td>
                                     </tr>
                                 @endforeach
