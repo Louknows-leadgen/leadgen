@@ -8,6 +8,7 @@ use App\Models\Person;
 use App\Models\Job;
 use App\Models\Site;
 use App\Models\ApplicationStatus;
+use Session;
 
 
 class ApplicantsController extends Controller
@@ -46,6 +47,15 @@ class ApplicantsController extends Controller
 
         //return redirect()->route('root');
         return redirect()->route('person.notification');
+    }
+
+    public function update($applicant_id, Request $request){
+        $applicant = Applicant::find($applicant_id);
+        
+        $applicant->update($request->all());
+
+        $name = $applicant->person->name();
+        Session::flash('success',"$name was tagged as no show");
     }
 
     public function search(Request $request){

@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="row mt-4">
-        @can('access',2)
+        @can('access',[2])
             <div class="col-md-12 mb-2">
                 <div class="q-link-item">
                     <h5><a href="{{ route('applicants.index') }}">Applicants</a></h5>
@@ -20,7 +20,7 @@
             </div>
         @endcan
 
-        @can('access',3)
+        @can('access',[3])
             <div class="col-md-12 mb-2">
                 <div class="q-link-item">
                     <h5><a href="{{ route('applications.candidates') }}">Candidates</a></h5>
@@ -29,6 +29,19 @@
             <div class="col-md-12 mb-2">
                 <div class="q-link-item">
                     <h5><a href="{{ route('history.index') }}">Interview History</a></h5>
+                </div>
+            </div>
+        @endcan
+
+        @can('access',[4])
+            <div class="col-md-12 mb-2">
+                <div class="q-link-item">
+                    <h5><a href="{{ route('hr-managers.index') }}">Dashboard</a></h5>
+                </div>
+            </div>
+            <div class="col-md-12 mb-2">
+                <div class="q-link-item">
+                    <h5><a href="{{ route('job-offerings.index') }}">Job Offerings</a></h5>
                 </div>
             </div>
         @endcan

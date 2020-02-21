@@ -30,6 +30,9 @@ class CheckRole
                     case 3:
                         return redirect()->route('applications.candidates');
                         break;
+                    case 4:
+                        return redirect()->route('hr-managers.index');
+                        break;
                 }
             }
         }else{

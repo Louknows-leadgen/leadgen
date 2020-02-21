@@ -12,7 +12,7 @@
         </div>
         <div class="card-footer d-flex justify-content-end">
             <button class="btn btn-secondary mr-3">No</button>
-            <button class="btn btn-primary">Yes</button>
+            <button class="btn btn-primary" data-page="interview-history">Yes</button>
         </div>
     </div>
 </div>

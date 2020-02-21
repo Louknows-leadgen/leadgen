@@ -55,6 +55,15 @@ class TestDataSeeder extends Seeder
     	$user4->password = Hash::make('Lcabalun0300');
     	$user4->save();
 
+        $user6 = new User;
+        $user6->username = 'hr_manager1';
+        $user6->email = 'lourencejohn@digicononline.com';
+        $user6->roleid = 4;
+        $user6->first_name = 'hr';
+        $user6->last_name = 'manager';
+        $user6->password = Hash::make('Lcabalun0300');
+        $user6->save();
+
         $user5 = new User;
         $user5->username = 'guest1';
         $user5->email = 'lourencejohn@digicononline.com';

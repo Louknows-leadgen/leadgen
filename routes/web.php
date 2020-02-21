@@ -46,6 +46,9 @@ Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@upd
 Route::get('/final_interview/{id}/form','FinalInterviewsController@form')->name('fin.form');
 Route::put('/final_interviews/{id}/no_show','ApplicationsController@no_show')->name('fin.no_show');
 
+//- hr manager
+Route::get('hr-managers/dashboard','HrManagerDashboardsController@index')->name('hr-managers.index');
+
 //- interview history
 Route::get('/interviews/history/search','InterviewHistoriesController@search')->name('history.search');
 
@@ -137,6 +140,7 @@ Route::resource('job_orientations','JobOrientationsController')->only(['store','
 Route::resource('interviews/history','InterviewHistoriesController')->only(['index','show','destroy']);
 Route::resource('job-offerings','JobOfferingsController')->only(['index']);
 
+
 /*
 |------------------------------------------ 
 |-- Authentication Routes
@@ -148,10 +152,3 @@ Route::get('/account','UsersController@index')->name('user.account');
 Route::put('/account/update-email','UsersController@update_email')->name('user.update-email');
 Route::get('/account/edit-password','UsersController@edit_password')->name('user.edit-password');
 Route::put('/account/update-password','UsersController@update_password')->name('user.update-password');
-
-
-
-
-Route::get('/dashboard',function(){
-	return view('dashboard');
-});

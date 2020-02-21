@@ -9,6 +9,12 @@ use App\Models\JobOffering;
 class JobOfferingsController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('checkrole:4');
+    }
+
     public function index(){
 	    $applicants = Applicant::with(['person','job'])->where('application_status_id','=',7)->paginate(5);
 		return view('job_offer.index',compact('applicants'));

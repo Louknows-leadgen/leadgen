@@ -23,9 +23,15 @@
 							My account
 						</a>
 
-			            @can('access',2)
+			            @can('access',[2])
 						<a class="dropdown-item menu-item" href="{{ route('register') }}">
 							Create user
+						</a>
+						@endcan
+
+						@can('access',[4])
+						<a class="dropdown-item menu-item" href="{{ route('job-offerings.index') }}">
+							Job Offerings
 						</a>
 						@endcan
 
@@ -57,7 +63,7 @@
 					</div>
 				@endunless
 				<ul class="d-flex align-items-center ml-5">
-			        @can('access',2)
+			        @can('access',[2])
 			            <li class="list-inline-item mr-4" id="tab-resource">
 			                <span class="dropdown-toggle">Resources</span>
 			                <div class="drop-down">
@@ -65,9 +71,15 @@
 			                </div>
 			            </li>
 			        @endcan
-			        @can('access',3)
+			        
+			        @can('access',[3])
 			            <li class="list-inline-item mr-4"><a href="{{ route('applications.candidates') }}">Candidates</a></li>
 			            <li class="list-inline-item mr-4"><a href="{{ route('history.index') }}">History</a></li>
+			        @endcan
+
+			        @can('access',[4])
+			            <li class="list-inline-item mr-4"><a href="{{ route('hr-managers.index') }}">Dashboard</a></li>
+			            <li class="list-inline-item mr-4"><a href="{{ route('job-offerings.index') }}">Job Offerings</a></li>
 			        @endcan
 			    </ul>
 		    @endauth

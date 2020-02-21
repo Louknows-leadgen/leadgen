@@ -10,12 +10,20 @@
         </div>
         <div class="card-footer d-flex justify-content-end">
             <button class="btn btn-secondary mr-3">No</button>
-            <button class="btn btn-primary">Yes</button>
+            <button class="btn btn-primary" data-page="job-offering">Yes</button>
         </div>
     </div>
 </div>
 
 <div class="container box mb-5">
+
+	@if(Session('success'))
+        <div class="notif-process-top alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Success! </strong>{{ Session('success') }}
+        </div>
+    @endif
+
 	<div class="row">
 		<div class="mx-auto col-md-6">
 			<h5 class="mb-4">List of applicants for job offering</h5>

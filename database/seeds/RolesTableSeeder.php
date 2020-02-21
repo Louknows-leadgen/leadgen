@@ -35,7 +35,14 @@ class RolesTableSeeder extends Seeder
     			'description'=>'Can only view the Candidate page',
     		 	'created_at'=>Carbon::now(), 
     		 	'updated_at'=>Carbon::now()
-    		]
+    		],
+            [
+                'roleid'=>4,
+                'name'=>'HR Manager',
+                'description'=>'Can add user. Can tag applicant as no show, declined offer, or hired.',
+                'created_at'=>Carbon::now(), 
+                'updated_at'=>Carbon::now()
+            ]
     	]);
     }
 }

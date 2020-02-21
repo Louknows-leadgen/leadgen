@@ -809,7 +809,10 @@ $(document).ready(function(){
 
 	$(document).on('click','.bg-notif .btn-primary',function(){
 		var id = $(this).data('id');
-		var url = '/interviews/history/' + id;
+		var page = $(this).data('page');
+		var method = '';
+		var url = '';
+		var data = {};
 
 		$.ajaxSetup({
 		    headers: {
@@ -817,9 +820,24 @@ $(document).ready(function(){
 		    }
 		});
 
+		switch(page){
+			case 'interview-history':
+					method = 'DELETE';
+					url = '/interviews/history/' + id;
+					break;
+			// when tagging applicant to no show
+			case 'job-offering'	:
+					method = 'PUT';
+					url = '/applicants/' + id;
+					data['application_status_id'] = 8 // 8 is for job offer - no show
+					break;
+		}
+
+
 		$.ajax({
 			url: url,
-			method: 'DELETE',
+			method: method,
+			data: data,
 			beforeSend: function(){
 				$('.bg-notif .btn-primary').prepend("<span class='spinner-grow spinner-grow-sm'></span>");
 			},
