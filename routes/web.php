@@ -49,6 +49,9 @@ Route::put('/final_interviews/{id}/no_show','ApplicationsController@no_show')->n
 //- interview history
 Route::get('/interviews/history/search','InterviewHistoriesController@search')->name('history.search');
 
+//- job offer
+Route::get('/job-offerings/search','JobOfferingsController@search')->name('job-offerings.search');
+
 //- job orientation
 Route::get('/job_orientation/{id}/form','JobOrientationsController@form')->name('jo.form');
 
@@ -57,6 +60,7 @@ Route::get('/person/{item}/new','PersonsController@new')->name('person.new');
 Route::get('/application/form','PersonsController@create')->name('person.form');
 Route::view('/application/notification','applicant.notification')->name('person.notification');
 Route::get('/application/validate','PersonsController@validate_field')->name('person.validate');
+
 
 /*
 |-------------------------
@@ -131,6 +135,7 @@ Route::resource('initial_screenings','InitialScreeningsController')->only(['stor
 Route::resource('final_interviews','FinalInterviewsController')->only(['store','edit','update']);
 Route::resource('job_orientations','JobOrientationsController')->only(['store','edit','update']);
 Route::resource('interviews/history','InterviewHistoriesController')->only(['index','show','destroy']);
+Route::resource('job-offerings','JobOfferingsController')->only(['index']);
 
 /*
 |------------------------------------------ 
@@ -145,6 +150,8 @@ Route::get('/account/edit-password','UsersController@edit_password')->name('user
 Route::put('/account/update-password','UsersController@update_password')->name('user.update-password');
 
 
-//Route::view('/resource-list','resource-list');
 
 
+Route::get('/dashboard',function(){
+	return view('dashboard');
+});

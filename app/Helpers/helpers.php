@@ -54,3 +54,15 @@ function get_status_icon($status_id){
 
 	return $tab;
 }
+
+function get_avatar($gender){
+	switch ($gender) {
+        case 'Male':
+            return asset('images/man.svg');
+            break;
+        
+        case 'Female':
+            return asset('images/woman.svg');
+            break;
+    }
+}

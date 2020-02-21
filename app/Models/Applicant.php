@@ -68,6 +68,8 @@ class Applicant extends Model
         return date('m/d/Y', strtotime($this->created_at));
     }
 
+    
+
 
     /*
     |------------------------
@@ -76,10 +78,22 @@ class Applicant extends Model
     */
 
     // used to create custom attribute 'job_name'
-    protected $appends = ['job_name'];
+    protected $appends = ['job_name','avatar','full_name'];
     
     public function getJobNameAttribute(){
         return $this->job->name;
+    }
+
+    public function getAvatarAttribute(){
+        switch ($this->person->gender) {
+            case 'Male':
+                return asset('images/man.svg');
+                break;
+            
+            case 'Female':
+                return asset('images/woman.svg');
+                break;
+        }
     }
 
 }

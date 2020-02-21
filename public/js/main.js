@@ -254,6 +254,32 @@ $(document).ready(function(){
 
 	}));
 
+	$("#search-offer").on("click", function(){
+		var search_text = $('#search-input').val();
+
+		var container = $(".jo-list");
+
+		$.ajax({
+			url: '/job-offerings/search',
+			method: 'GET',
+			data: {
+				skey: search_text
+			},
+			success: function(result){
+				container.empty().append(result);
+			}
+		});
+
+	});
+
+	$('#search-input').on('keypress',function(e){
+		if(e.which == 13){
+			$("#search-offer").click();
+		}
+	}).on('blur',function(){
+		$("#search-offer").click();
+	});
+
 	//-----------------------------------------------------
 
 	$(".dynamic-container").on("submit",".j_fi-submit",function(){

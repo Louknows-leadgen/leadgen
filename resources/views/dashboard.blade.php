@@ -2,25 +2,28 @@
 
 @section('contents')
 
-	<div class="container">
+	<div class="container box">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="card p-4">
-					<h5 class="">Admin Dashboard</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac malesuada mauris. Nulla facilisis dictum nibh convallis volutpat. Nulla facilisi.</p>
-
-					<div class="row">
-						<div class="col-md-3">
-							<div class="card">
-								<img class="card-img-top" 
-									 src="{{ asset('images/passers.svg') }}">
-								<div></div>
-							</div>
-						</div>
-					</div>
-
+				<h5>Admin Dashboard</h5>
+				<p>Welcome to Admin dashboard. Please select available actions below.</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<div class="d-flex flex-column p-2">
+					<img class="mx-auto mb-1 border border-primary" src="{{ asset('images/passers.svg') }}" width="100px" height="100px">
+					<a class="btn btn-primary" href="#">Job Offer</a>
 				</div>
 			</div>
+
+			<div class="col-md-2">
+				<div class="d-flex flex-column p-2">
+					<img class="mx-auto mb-1 border border-primary" src="{{ asset('images/employees.svg') }}" width="100px" height="100px">
+					<a class="btn btn-primary" href="#">Employees</a>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
