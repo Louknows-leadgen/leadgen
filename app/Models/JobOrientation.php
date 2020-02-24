@@ -9,7 +9,8 @@ class JobOrientation extends Model
     //
     protected $fillable = [
     	'applicant_id',
-    	'jo_date'
+    	'jo_date',
+        'scheduler'
     ];
 
     public function applicant(){

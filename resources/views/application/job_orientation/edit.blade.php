@@ -2,6 +2,7 @@
 	  action="{{ route('job_orientations.update',['job_orientation'=>$procedure->id]) }}" method="POST">
 	@csrf
 	@method('PUT')
+	<input type="hidden" name="scheduler" value="{{ Auth::id() }}">
 	<div class="row">
 		<div class="col-md-12">
 			<h6 class="mt-3">Schedule Job Orientation</h6>

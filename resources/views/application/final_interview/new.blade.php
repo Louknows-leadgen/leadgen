@@ -1,5 +1,6 @@
 <form class="j_fi-submit" action="{{ route('final_interviews.store') }}" method="POST">
 	@csrf
+	<input type="hidden" name="scheduler" value="{{ Auth::id() }}">
 	<input type="hidden" name="applicant_id" value="{{$applicant->id}}">
 	<div class="row">
 		<div class="col-md-12">

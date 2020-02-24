@@ -1,5 +1,6 @@
 <form class="store" action="{{ route('initial_screenings.store') }}" method="POST">
 	@csrf
+	<input type="hidden" name="init_interviewer" value="{{ Auth::id() }}">
 	<input type="hidden" name="applicant_id" value="{{$applicant->id}}">
 	<div class="row">
 		<div class="col-md-12">

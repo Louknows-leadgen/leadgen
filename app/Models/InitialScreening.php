@@ -15,7 +15,8 @@ class InitialScreening extends Model
     	'comprehension_result',
     	'init_interview_result',
     	'init_interview_remarks',
-    	'overall_result'
+    	'overall_result',
+        'init_interviewer'
     ];
 
     /*

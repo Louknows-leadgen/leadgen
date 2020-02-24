@@ -14,7 +14,8 @@ class FinalInterview extends Model
     	'schedule',
     	'result',
     	'remarks',
-        'is_done'
+        'is_done',
+        'scheduler'
     ];
 
     /*
