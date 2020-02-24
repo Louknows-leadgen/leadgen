@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\JobOrientation;
 use App\Models\Applicant;
 use App\Rules\CompareDatetime;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendJONotifMail;
+use Session;
 
 
 class JobOrientationsController extends Controller
@@ -22,10 +25,24 @@ class JobOrientationsController extends Controller
         ]);
 
     	$id = $request->applicant_id;
-    	JobOrientation::create($request->all());
-    	Applicant::find($id)->update(['application_status_id'=>7]);
+    	if(JobOrientation::create($request->all())){
+        	$applicant = Applicant::find($id);
+            $applicant->update(['application_status_id'=>7]);
+            $email_to = $applicant->person->email;
 
-    	return redirect()->route('applications.procedure',['applicant_id'=>$id]);
+            $details = [
+                'name' => $applicant->person->name(),
+                'schedule' => $applicant->job_orientation->jo_date
+            ];
+
+            Mail::to($email_to)->send(new SendJONotifMail($details));
+            Session::flash('success',"Email has been sent to the applicant");
+
+        	return redirect()->route('applications.procedure',['applicant_id'=>$id]);
+        }else{
+            Session::flash('error',"Failed to submit the form.");
+            return redirect()->route('applications.procedure',['applicant_id'=>$id]);
+        }
     }
 
     public function edit($jo_id){
@@ -65,6 +82,7 @@ class JobOrientationsController extends Controller
         }
     }
 
+    // this is used when the user clicks cancel when editing the schedule on the job orientation tab
     public function form($applicant_id){
         $applicant = Applicant::with('job_orientation')->find($applicant_id);
 

@@ -1,4 +1,4 @@
-<form class="store" action="{{ route('job_orientations.store') }}" method="POST">
+<form class="store j_fi-submit" action="{{ route('job_orientations.store') }}" method="POST">
 	@csrf
 	<input type="hidden" name="applicant_id" value="{{$applicant->id}}">
 	<div class="row">
@@ -17,7 +17,7 @@
 				</div>
 				<div class="col-md-4 d-flex align-items-end justify-content-center">
 					<div class="form-group">
-						<input class="btn btn-primary" type="submit" name="submit" value="Submit">
+						<button class="btn btn-primary" name="submit">Submit</button>
 					</div>
 				</div>
 			</div>

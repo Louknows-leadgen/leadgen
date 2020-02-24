@@ -19,6 +19,20 @@
 			        				You have updated the record successfully!
 			        			</div>
 
+			        			@if(Session('success'))
+					                <div class="notif-process alert alert-success alert-dismissible fade show">
+					                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+					                    <strong>Success! </strong>{{ Session('success') }}
+					                </div>
+					            @endif
+
+					            @if(Session('error'))
+					                <div class="notif-process alert alert-danger alert-dismissible fade show">
+					                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+					                    <strong>Error! </strong>{{ Session('error') }}
+					                </div>
+					            @endif
+
 			        			<h5>Application Process</h5>
 			        			<div class="row">
 									@include('application._process-nav')

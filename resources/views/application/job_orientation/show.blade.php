@@ -8,11 +8,13 @@
 					<input type="text" class="form-control" value="{{$applicant->job_orientation->jo_date}}" disabled>
 				</div>
 			</div>
-			<div class="col-md-4 d-flex align-items-end justify-content-start">
-				<div class="form-group">
-					<button class="btn btn-primary edit_jo" data-id="{{$applicant->job_orientation->id}}">Edit</button>
+			@can('edit-jo-date',$applicant->application_status_id)
+				<div class="col-md-4 d-flex align-items-end justify-content-start">
+					<div class="form-group">
+						<button class="btn btn-primary edit_jo" data-id="{{$applicant->job_orientation->id}}">Edit</button>
+					</div>
 				</div>
-			</div>
+			@endcan
 		</div>
 	</div>
 </div>

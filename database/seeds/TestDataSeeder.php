@@ -88,7 +88,7 @@ class TestDataSeeder extends Seeder
         	$person->middle_name = "test{$i} middle";
         	$person->last_name = "test{$i} last";
         	$person->mobile_1 = '09028624357';
-        	$person->email = "test{$i}@email.com";
+        	$person->email = "lou.lamperouge@gmail.com";
         	$person->age = 22;
         	$person->gender = 'Male';
         	$person->city_address = "Barangay Test $i Cebu City 6000";

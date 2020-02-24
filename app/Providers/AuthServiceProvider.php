@@ -30,5 +30,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('access', function ($user, ...$access_type) {
             return in_array($user->roleid,$access_type);
         });
+
+        Gate::define('edit-jo-date', function($user,$app_stat_id){
+            // return true if application_status_id is "For Job Orientation" in application_statuses table
+            return $app_stat_id == 7 ? true : false;
+        });
     }
 }

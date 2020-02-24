@@ -313,7 +313,8 @@ $(document).ready(function(){
 		}
 
 		container.load(url,function(){
-			CKEDITOR.replace('remarks');
+			if($(".dynamic-container:not(.d-none) textarea[name='remarks']").length)
+				CKEDITOR.replace('remarks');
 		});
 	});
 
