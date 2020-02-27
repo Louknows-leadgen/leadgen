@@ -11975,3 +11975,23 @@ span.close {
   display: none;
 }
 
+.bell-notif {
+  position: relative;
+}
+
+.bell-notif::after {
+  content: attr(data-after);
+  display: block;
+  border-radius: 50%;
+  background-color: #dc3545;
+  position: absolute;
+  top: 0;
+  right: -25px;
+  color: #fff;
+  min-width: 20px;
+  min-height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 10px;
+}
+

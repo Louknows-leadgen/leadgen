@@ -9,6 +9,12 @@
 		    	@guest
                     <a href="{{ route('login') }}">{{ __('Login') }}</a>
                 @else
+                	@can('access',[2])
+                		<span class="mr-5 bell @if(notifications()) bell-notif @endif" 
+                			  data-after="{{ notifications() }}">
+                			<a href="{{ route('notifications.index') }}">Notifications</a>
+                		</span>
+                	@endcan
 			    	Logged in as
 					<span class="dropdown-toggle" data-toggle="dropdown">
 						{{ Auth::user()->username }}

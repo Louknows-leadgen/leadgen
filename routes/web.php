@@ -139,7 +139,7 @@ Route::resource('final_interviews','FinalInterviewsController')->only(['store','
 Route::resource('job_orientations','JobOrientationsController')->only(['store','edit','update']);
 Route::resource('interviews/history','InterviewHistoriesController')->only(['index','show','destroy']);
 Route::resource('job-offerings','JobOfferingsController')->only(['index']);
-
+Route::resource('hiring-staff/notifications','PusherNotificationsController')->only(['index','destroy']);
 
 /*
 |------------------------------------------ 
@@ -152,3 +152,11 @@ Route::get('/account','UsersController@index')->name('user.account');
 Route::put('/account/update-email','UsersController@update_email')->name('user.update-email');
 Route::get('/account/edit-password','UsersController@edit_password')->name('user.edit-password');
 Route::put('/account/update-password','UsersController@update_password')->name('user.update-password');
+
+
+
+// use App\Events\FinalInterviewCompleted;
+
+// Route::get('/pusher/test',function(){
+// 	event(new FinalInterviewCompleted());
+// });

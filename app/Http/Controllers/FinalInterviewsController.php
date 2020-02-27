@@ -10,6 +10,7 @@ use App\Models\Applicant;
 use App\Models\InterviewHistory;
 use App\Mail\SendMail;
 use App\Rules\CompareDatetime;
+use App\Events\FinalInterviewCompleted;
 
 class FinalInterviewsController extends Controller
 {
@@ -95,6 +96,10 @@ class FinalInterviewsController extends Controller
             $fin->applicant()->update(['application_status_id'=>6]); // 6 is the status of Job Offer schedule
         else
             $fin->applicant()->update(['application_status_id'=>5]); // 5 is the status of Final Interview Failed
+        
+        // insert record to notification table and notify hr
+        event(new FinalInterviewCompleted($fin));
+
         return redirect()->action('ApplicationsController@candidates');
     }
 

@@ -47,6 +47,10 @@ class Applicant extends Model
         return $this->hasOne('App\Models\JobOrientation');
     }
 
+    public function pusher_notification(){
+        return $this->hasOne('App\Models\PusherNotification');
+    }
+
 
     /*
     |---------------------

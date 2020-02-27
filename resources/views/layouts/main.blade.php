@@ -20,6 +20,7 @@
     <script src="{{ asset('ckeditor/ckeditor.js') }}" defer></script>
     <script src="{{ asset('js/jquery-throttle-debounce.min.js') }}" defer></script>
     <script src="{{ asset('js/tail.datetime.min.js')}}" defer></script>
+    <script src="https://js.pusher.com/5.1/pusher.min.js" defer></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
     
 </head>

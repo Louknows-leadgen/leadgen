@@ -2,6 +2,32 @@ $(document).ready(function(){
 
 	/*
 	|---------------------------
+	|	Pusher notification
+	|---------------------------
+	*/
+
+	var pusher = new Pusher('eb13dbd5677b089edd50', {
+      cluster: 'ap1',
+      forceTLS: true
+    });
+
+	var channel = pusher.subscribe('my-channel');
+	channel.bind('my-event', function(data) {
+		var notif = document.querySelector('.bell');
+		if(notif){
+			notif.dataset.after = data.count;
+			document.querySelector('.bell').classList.remove('bell-notif');
+			document.querySelector('.bell').classList.add('bell-notif');
+		}
+
+		// var notif = document.querySelector('.bell');
+		// notif.dataset.after = data.count;
+		// document.querySelector('.bell').classList.add('bell-notif');
+	});
+
+
+	/*
+	|---------------------------
 	|	Bootstrap initialization
 	|---------------------------
 	*/
@@ -852,6 +878,28 @@ $(document).ready(function(){
 			}
 		});
 		
+	});
+
+	$(document).on('click','.mark-read',function(e){
+		e.preventDefault();
+
+		var notif_id = $(this).data('id');
+		var redirect_url = $(this).attr('href');
+		var endpoint = '/hiring-staff/notifications/' + notif_id;
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+		$.ajax({
+			url: endpoint,
+			method: 'DELETE',
+			success: function(){
+				location.href = redirect_url;
+			}
+		});
 	});
 
 });
