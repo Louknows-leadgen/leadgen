@@ -902,6 +902,13 @@ $(document).ready(function(){
 		});
 	});
 
+
+	$(document).on('click','.hit',function(){
+		var id = $(this).data('id');
+
+		location.href = '/blacklists/' + id;
+	});
+
 });
 
 

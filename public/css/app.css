@@ -11995,3 +11995,26 @@ span.close {
   font-size: 10px;
 }
 
+.fa-birthday-cake {
+  color: #e1c693;
+}
+
+.fa-mars {
+  color: #029ff7;
+  font-weight: 700;
+}
+
+.fa-venus {
+  color: #e647a1;
+  font-weight: 700;
+}
+
+.fa-map-marker {
+  color: #1bbc9b;
+}
+
+.hit {
+  font-weight: 400 !important;
+  cursor: pointer;
+}
+

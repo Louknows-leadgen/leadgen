@@ -66,3 +66,7 @@ function get_avatar($gender){
             break;
     }
 }
+
+function full_name($fn,$mn,$ln){
+	return implode(' ', [$fn,$mn,$ln]);
+}

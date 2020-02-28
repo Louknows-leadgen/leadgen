@@ -40,6 +40,8 @@ Route::get('/application/candidates/search','ApplicationsController@search')->na
 
 Route::get('/application/candidate/{applicant_id}/profile','ApplicationsController@profile')->name('applications.profile');
 
+//- blacklist hit
+Route::get('/blacklists/{applicant_id}','BlacklistsController@hit')->name('blacklists.hit');
 
 //- final interviews
 Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@update_result')->name('fin.update_result');
@@ -140,6 +142,7 @@ Route::resource('job_orientations','JobOrientationsController')->only(['store','
 Route::resource('interviews/history','InterviewHistoriesController')->only(['index','show','destroy']);
 Route::resource('job-offerings','JobOfferingsController')->only(['index']);
 Route::resource('hiring-staff/notifications','PusherNotificationsController')->only(['index','destroy']);
+Route::resource('blacklists','BlacklistsController')->only(['index','store']);
 
 /*
 |------------------------------------------ 
@@ -155,8 +158,3 @@ Route::put('/account/update-password','UsersController@update_password')->name('
 
 
 
-// use App\Events\FinalInterviewCompleted;
-
-// Route::get('/pusher/test',function(){
-// 	event(new FinalInterviewCompleted());
-// });

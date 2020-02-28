@@ -44,7 +44,8 @@
         ],
         "files": [
             "app/Helpers/helpers.php",
-            "app/Helpers/pusher_notification.php"
+            "app/Helpers/pusher_notification.php",
+            "app/Helpers/blacklists.php"
         ]
     },
     "autoload-dev": {

@@ -10,7 +10,15 @@
 	<div class="row d-flex justify-content-around">
 		<div class="col-md-5">
 			<div class="form-group">
-				<label>Applicant's name</label>
+				<label>
+					Applicant's name
+					@if(hit_count($applicant->id))
+						<span class="hit badge badge-danger"
+						      data-id="{{ $applicant->id }}">
+						  Hit!
+						</span>
+					@endif
+				</label>
 				<input type="text" class="form-control form-control-sm" value="{{$applicant->person->name()}}" disabled>
 			</div>
 		</div>
