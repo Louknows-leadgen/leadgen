@@ -17,6 +17,24 @@ function get_profile($applicant_id){
 }
 
 
+// function hit_profiles($applicant_id){
+//     $person = get_profile($applicant_id);
+
+//     $blacklists = DB::table('blacklists')
+//                   ->where('first_name','=',$person['first_name'])
+//                   ->where(function($q) use($person){
+//                         $q->where('middle_name','=',$person['middle_name'])
+//                           ->orWhereRaw("? is null",[$person['middle_name']]);
+//                     })
+//                   ->where('last_name','=',$person['last_name'])
+//                   ->where('gender','=',$person['gender'])
+//                   ->whereDate('birthday',$person['birthday'])
+//                   ->get();
+
+//     return $blacklists;
+// }
+
+
 function hit_profiles($applicant_id){
     $person = get_profile($applicant_id);
 
@@ -27,8 +45,14 @@ function hit_profiles($applicant_id){
                           ->orWhereRaw("? is null",[$person['middle_name']]);
                     })
                   ->where('last_name','=',$person['last_name'])
-                  ->where('gender','=',$person['gender'])
-                  ->whereDate('birthday',$person['birthday'])
+                  ->where(function($q) use($person){
+                        $q->where('gender','=',$person['gender'])
+                          ->orWhereRaw("? is null",[$person['gender']]);
+                    })
+                  ->where(function($q) use($person){
+                        $q->whereDate('birthday',$person['birthday'])
+                          ->orWhereRaw("? is null",[$person['birthday']]);
+                    })
                   ->get();
 
     return $blacklists;
