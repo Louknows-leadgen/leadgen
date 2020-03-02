@@ -9,7 +9,7 @@
             <div class="form-group">
                 <h6 class="text-primary">Filter search:</h6>
                 <select class="form-control form-control-sm" id="filter-by-status">
-                    <option value="0"></option>
+                    <option value="0">All</option>
                     @foreach($app_statuses as $status)
                         <option value="{{ $status->id }}"
                                 {{ $status->id == $stat_filter ? 'selected' : '' }}>
