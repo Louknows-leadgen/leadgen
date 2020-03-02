@@ -5,7 +5,20 @@
 
 @section('contents')
     <div class="row">
-        <div class="col-md-10 mx-auto">
+        <div class="col-md-2">
+            <div class="form-group">
+                <h6 class="text-primary">Filter search:</h6>
+                <select class="form-control form-control-sm" id="filter-by-status">
+                    <option value="0"></option>
+                    @foreach($app_statuses as $status)
+                        <option value="{{ $status->id }}">
+                            {{ $status->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-md-10">
             <div class="box">
                 <h5>Applicant List</h5>
                 <div class="row mt-4">

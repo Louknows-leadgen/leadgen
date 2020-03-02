@@ -36,5 +36,5 @@
         @endif
     </tbody>
 </table>
-{!! $persons->appends(['skey'=>$skey])->links() !!}
+{!! $persons->appends(['skey'=>$skey,'stat_filter'=>$stat_filter])->links() !!}
 

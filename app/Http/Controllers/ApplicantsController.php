@@ -23,8 +23,9 @@ class ApplicantsController extends Controller
     // root route
     public function index(){
         //$applicants = Applicant::with('person')->get();
+        $app_statuses = ApplicationStatus::all()->sortBy('name');
         $applicants = Applicant::with('person')->orderBy('id','desc')->paginate(5);
-    	return view('applicant.index',compact('applicants'));
+    	return view('applicant.index',compact('applicants','app_statuses'));
     }
 
     // new applicant form
@@ -59,13 +60,15 @@ class ApplicantsController extends Controller
     }
 
     public function search(Request $request){
-        $persons = Applicant::search($request->skey);
+        $persons = Applicant::search($request->skey, $request->stat_filter);
+        $app_statuses = ApplicationStatus::all()->sortBy('name');
         $skey = $request->skey;
+        $stat_filter = $request->stat_filter;
 
         if($request->ajax())
-            return view('applicant.search-result',compact('persons','skey'));
+            return view('applicant.search-result',compact('persons','skey','stat_filter'));
 
-        return view('applicant.search-page',compact('persons','skey'));
+        return view('applicant.search-page',compact('persons','skey','stat_filter','app_statuses'));
     }
 
 }

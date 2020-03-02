@@ -6,7 +6,7 @@ $(document).ready(function(){
 	|---------------------------
 	*/
 
-	var pusher = new Pusher('eb13dbd5677b089edd50', {
+	var pusher = new Pusher('62438edb18210a10439b', {
       cluster: 'ap1',
       forceTLS: true
     });
@@ -228,13 +228,15 @@ $(document).ready(function(){
 
 	$("#search-applicant").on("input", $.debounce(200,function(){
 		var search_text = $(this).val();
+		var status_filter = $("#filter-by-status").val();
 		var container = $(".applicant-list");
 
 		$.ajax({
 			url: '/applicants/search',
 			method: 'GET',
 			data: {
-				skey: search_text
+				skey: search_text,
+				stat_filter: status_filter
 			},
 			success: function(result){
 				container.empty().append(result);
@@ -242,6 +244,24 @@ $(document).ready(function(){
 		});
 
 	}));
+
+	$(document).on('change','#filter-by-status',function(){
+		var status_filter = $(this).val();
+		var search_text = $('#search-applicant').val();
+		var container = $(".applicant-list");
+
+		$.ajax({
+			url: '/applicants/search',
+			method: 'GET',
+			data: {
+				skey: search_text,
+				stat_filter: status_filter
+			},
+			success: function(result){
+				container.empty().append(result);
+			}
+		});
+	});
 
 
 	$("#search-candidate").on("input", $.debounce(200,function(){

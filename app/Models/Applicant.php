@@ -57,10 +57,14 @@ class Applicant extends Model
     |   Custom Helpers
     |---------------------
     */
-    public static function search($skey){
+    public static function search($skey, $stat_filter){
         $query = DB::table('applicants')
                 ->join('people','applicants.person_id','=','people.id')
-                ->leftJoin('application_statuses', 'application_statuses.id', '=', 'applicants.application_status_id');
+                ->leftJoin('application_statuses', 'application_statuses.id', '=', 'applicants.application_status_id')
+                ->where(function($q) use($stat_filter){
+                    $q->where('application_statuses.id','=',$stat_filter)
+                      ->orWhereRaw('? = 0',$stat_filter);
+                  });
 
         if(!empty($skey))
             $query->whereRaw("concat(people.first_name,' ',people.middle_name, ' ', people.last_name) LIKE ?",['%'.$skey.'%']);
