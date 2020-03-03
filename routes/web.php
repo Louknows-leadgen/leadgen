@@ -143,6 +143,7 @@ Route::resource('interviews/history','InterviewHistoriesController')->only(['ind
 Route::resource('job-offerings','JobOfferingsController')->only(['index']);
 Route::resource('hiring-staff/notifications','PusherNotificationsController')->only(['index','destroy']);
 Route::resource('blacklists','BlacklistsController')->only(['index','store']);
+Route::resource('employees','EmployeesController');
 
 /*
 |------------------------------------------ 
