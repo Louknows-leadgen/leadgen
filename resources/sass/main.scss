@@ -635,3 +635,12 @@ span.close{
   font-weight: 400 !important;
   cursor: pointer;
 }
+
+.modal-list{
+  max-height: 241px;
+  overflow-y: auto;
+}
+
+.list-item{
+  cursor: pointer;
+}

@@ -12018,3 +12018,12 @@ span.close {
   cursor: pointer;
 }
 
+.modal-list {
+  max-height: 241px;
+  overflow-y: auto;
+}
+
+.list-item {
+  cursor: pointer;
+}
+

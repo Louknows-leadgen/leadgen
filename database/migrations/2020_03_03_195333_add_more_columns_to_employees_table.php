@@ -18,7 +18,7 @@ class AddMoreColumnsToEmployeesTable extends Migration
             $table->string('company_number');
             $table->string('bank_account')->nullable();
             $table->integer('cost_center_id');
-            $table->string('cluster')->nullable();
+            $table->integer('cluster_id')->nullable();
             $table->integer('site_id');
             $table->integer('job_id');
             $table->string('status');
@@ -51,10 +51,10 @@ class AddMoreColumnsToEmployeesTable extends Migration
         Schema::table('employees', function (Blueprint $table) {
             //
             $table->dropColumn([
-                'company_id',
+                'company_number',
                 'bank_account',
                 'cost_center_id',
-                'cluster',
+                'cluster_id',
                 'site_id',
                 'job_id',
                 'status',

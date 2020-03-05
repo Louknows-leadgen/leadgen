@@ -929,6 +929,28 @@ $(document).ready(function(){
 		location.href = '/blacklists/' + id;
 	});
 
+	$(document).on('click','.list-item',function(){
+		var modal = $(this).parents('.modal');
+		var modal_type = $(this).data('modal');
+		var input = $("input[data-modal='"+ modal_type +"']");
+		var val = $(this).text().trim();
+
+		input.val(val);
+		modal.modal('hide');
+	});
+
+	$(document).on('click','.search-cluster',function(){
+		var list_group = $(this).parents('.modal-body').find('.list-group');
+		var lists = list_group.children();
+		var search_key = $(this).parents('.input-group').find('input').val();
+
+		var size = lists.length;
+		var i;
+		for(i = 0; i < size; i++){
+			
+		}
+	});
+
 });
 
 
