@@ -43,6 +43,9 @@ Route::get('/application/candidate/{applicant_id}/profile','ApplicationsControll
 //- blacklist hit
 Route::get('/blacklists/{applicant_id}','BlacklistsController@hit')->name('blacklists.hit');
 
+//- employees
+Route::get('/employees/{applicant_id}/create','EmployeesController@create')->name('employees.create');
+
 //- final interviews
 Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@update_result')->name('fin.update_result');
 Route::get('/final_interview/{id}/form','FinalInterviewsController@form')->name('fin.form');
@@ -143,7 +146,9 @@ Route::resource('interviews/history','InterviewHistoriesController')->only(['ind
 Route::resource('job-offerings','JobOfferingsController')->only(['index']);
 Route::resource('hiring-staff/notifications','PusherNotificationsController')->only(['index','destroy']);
 Route::resource('blacklists','BlacklistsController')->only(['index','store']);
-Route::resource('employees','EmployeesController');
+Route::resource('employees','EmployeesController')->except(['create']);
+Route::resource('clusters','ClustersController');
+Route::resource('contracts','ContractsController');
 
 /*
 |------------------------------------------ 

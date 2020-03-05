@@ -929,6 +929,20 @@ $(document).ready(function(){
 		location.href = '/blacklists/' + id;
 	});
 
+
+	/*
+	|------------------------------------------------
+	|				Adding New Employee
+	|------------------------------------------------*/
+
+
+	$(document).on('click','.custom-modal',function(){
+		$('.modal-list ul>li').css({'display':''});
+		$('.modal-search-inp').val('');
+		$('.otf-add').find('span.spinner-grow').remove();
+		$('.otf-input').val('').removeClass('is-invalid');
+	});
+
 	$(document).on('click','.list-item',function(){
 		var modal = $(this).parents('.modal');
 		var modal_type = $(this).data('modal');
@@ -939,20 +953,101 @@ $(document).ready(function(){
 		modal.modal('hide');
 	});
 
-	$(document).on('click','.search-cluster',function(){
+	$(document).on('click','.modal-search-btn',function(){
 		var list_group = $(this).parents('.modal-body').find('.list-group');
 		var lists = list_group.children();
-		var search_key = $(this).parents('.input-group').find('input').val();
+		var search_key = $(this).parents('.input-group').find('input').val().toUpperCase().trim();
 
 		var size = lists.length;
 		var i;
 		for(i = 0; i < size; i++){
-			
+			var list_txt = $(lists[i]).text().toUpperCase().trim();
+			if(list_txt.search(search_key) >= 0)
+				$(lists[i]).css({'display':''});
+			else
+				$(lists[i]).css({'display':'none'});
 		}
 	});
 
+	$(document).on('keypress','.modal-search-inp',function(e){
+		if(e.which == '13')
+			$('.modal-search-btn').click();
+	});
+
+	$(document).on('click','.otf-add',function(){
+		var add_type = $(this).data('add');
+		var modal = $(this).parents('.modal');
+		var btn = $(this).find('span');
+		var input = $(this).siblings('input'); // input field containing the new item
+		var lists = $(this).parents('.modal').find('.list-item');
+		var notif = $(this).siblings('.invalid-feedback');
+		var url;
+		var form_input;
+		var data = {};
+
+		// cleanup value
+		var val = input.val().trim();
+		val = val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();
+
+		switch(add_type){
+			case 'cluster':
+					url = '/clusters';
+					form_input = $("input[data-modal='cluster']");
+					data['cluster_name'] = val;
+					break;
+			case 'contract':
+					url = '/contracts';
+					form_input = $("input[data-modal='contract']");
+					data['contract_name'] = val;
+					break;
+		}
+		
+		//if(val.length){
+
+			$.ajaxSetup({
+		        headers: {
+		            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		        }
+		    });
+
+			$.ajax({
+				url: url,
+				method: 'POST',
+				data: data,
+				beforeSend: function(){
+					btn.prepend("<span class='spinner-grow spinner-grow-sm'></span>");
+				},
+				success: function(response){
+					if($.isEmptyObject(response.errors)){
+						// insert value to the form input
+						form_input.val(val);
+						modal.modal('hide');
+
+						var i;
+						var el = '<li class="list-group-item list-item" data-modal="'+ add_type +'">'+ val +'</li>';
+						for(i = 0; i < lists.length; i++){
+							if($(lists[i]).text().trim().toUpperCase() > val.toUpperCase()){
+								$(el).insertBefore(lists[i]);
+								break;
+							}
+						}
+
+						if($(lists[i-1]).text().trim().toUpperCase() < val.toUpperCase()){
+							$(el).insertAfter(lists[i-1]);
+						}
+
+						input.removeClass('is-invalid');
+						notif.empty();
+					}else{
+						input.addClass('is-invalid');
+						var key = Object.keys(response.errors)[0];
+						notif.text(response.errors[key]);
+						btn.find('span.spinner-grow').remove();
+					}
+				}
+			});
+		//}
+	});
+
 });
-
-
-
 		

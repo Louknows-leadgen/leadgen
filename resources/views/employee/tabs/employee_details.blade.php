@@ -6,6 +6,11 @@
 				<div class="col-md-6 pr-5">
 					
 					<div class="form-group">
+						<label>Applicant Name</label>
+						<input type="text" class="form-control form-control-sm" value="{{ $applicant->person->name() }}" disabled>
+					</div>
+
+					<div class="form-group">
 						<label>Company ID</label>
 						<input type="text" class="form-control form-control-sm" placeholder="Generated upon submission" disabled>
 					</div>
@@ -13,9 +18,11 @@
 					<div class="form-group">
 						<label>Cost Center</label>
 						<select class="form-control form-control-sm">
-							<option value="1">AGNT</option>
-							<option value="2">FCL</option>
-							<option value="3">IT</option>
+							@foreach($cost_centers as $cost_center)
+								<option value="{{ $cost_center->id }}">
+									{{ $cost_center->cost_name }}
+								</option>
+							@endforeach
 						</select>
 					</div>
 
@@ -24,7 +31,7 @@
 						<div class="input-group input-group-sm">
 							<input type="text" class="form-control form-control-sm" data-modal="cluster">
 							<div class="input-group-append">
-								<span class="btn btn-primary" data-toggle="modal" data-target="#cluster-modal">
+								<span class="btn btn-primary custom-modal" data-toggle="modal" data-target="#cluster-modal">
 									Browse
 								</span>
 							</div>
@@ -33,26 +40,24 @@
 
 					<div class="form-group">
 						<label>Site</label>
-						<div class="input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm">
-							<div class="input-group-append">
-								<span class="btn btn-primary" data-toggle="modal" data-target="#site-modal">
-									Browse
-								</span>
-							</div>
-						</div>
+						<select class="form-control form-control-sm">
+							@foreach($sites as $site)
+								<option value="{{ $site->id }}">{{ $site->name }}</option>
+							@endforeach
+						</select>
 					</div>
 
 					<div class="form-group">
 						<label>Position</label>
-						<input type="text" class="form-control form-control-sm" readonly>
+						<input type="text" class="form-control form-control-sm" value="{{ $applicant->job->name }}" readonly>
 					</div>
 
 					<div class="form-group">
 						<label>Company</label>
 						<select class="form-control form-control-sm">
-							<option value="1">DCI</option>
-							<option value="2">Leadgen</option>
+							@foreach($companies as $company)
+								<option value="{{ $company->id }}">{{ $company->company_name }}</option>
+							@endforeach
 						</select>
 					</div>
 
@@ -64,9 +69,9 @@
 					<div class="form-group">
 						<label>Contract Type</label>
 						<div class="input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm">
+							<input type="text" class="form-control form-control-sm" data-modal="contract">
 							<div class="input-group-append">
-								<span class="btn btn-primary">
+								<span class="btn btn-primary custom-modal" data-toggle="modal" data-target="#contract-modal">
 									Browse
 								</span>
 							</div>
@@ -76,32 +81,33 @@
 					<div class="form-group">
 						<label>Department</label>
 						<select class="form-control form-control-sm">
-							<option value="1">Operations</option>
-							<option value="2">IT</option>
+							@foreach($departments as $department)
+								<option value="{{ $department->id }}">{{ $department->department_name }}</option>
+							@endforeach
 						</select>
 					</div>
 
 					<div class="form-group">
 						<label>Immediate Supervisor</label>
 						<div class="input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm">
+							<input type="text" class="form-control form-control-sm" data-modal="supervisor">
 							<div class="input-group-append">
-								<span class="btn btn-primary">
+								<span class="btn btn-primary custom-modal" data-toggle="modal" data-target="#supervisor-modal">
 									Browse
 								</span>
 							</div>
 						</div>
 					</div>
 
-					<div class="form-group">
-						<label>J.O date</label>
-						<input type="text" class="form-control form-control-sm" readonly>
-					</div>
-
 				</div>
 
 
 				<div class="col-md-6 pr-5">
+
+					<div class="form-group">
+						<label>J.O date</label>
+						<input type="text" class="form-control form-control-sm" readonly>
+					</div>
 
 					<div class="form-group">
 						<label>Nesting Date</label>
@@ -166,4 +172,5 @@
 
 <!-- Modals Here -->
 @include('employee.modals.cluster_modal')
-@include('employee.modals.site_modal')
+@include('employee.modals.contract_modal')
+@include('employee.modals.supervisor_modal')
