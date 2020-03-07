@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Person extends Model
 {
@@ -90,6 +91,17 @@ class Person extends Model
 
     public function name(){
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+
+    public static function get_employee_id($employee_name){
+        $employee = DB::table('applicants as e')
+                       ->join('people as p','p.id', '=', 'e.person_id')
+                       ->whereRaw("concat(p.first_name,' ',p.last_name) = ?",[$employee_name])
+                       ->get('e.id as employee_id')
+                       ->first();
+
+        return isset($employee) ? $employee->employee_id : null;             
     }
 
 }

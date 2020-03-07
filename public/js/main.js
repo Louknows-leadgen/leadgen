@@ -1002,51 +1002,98 @@ $(document).ready(function(){
 					break;
 		}
 		
-		//if(val.length){
 
-			$.ajaxSetup({
-		        headers: {
-		            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		        }
-		    });
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
 
-			$.ajax({
-				url: url,
-				method: 'POST',
-				data: data,
-				beforeSend: function(){
-					btn.prepend("<span class='spinner-grow spinner-grow-sm'></span>");
-				},
-				success: function(response){
-					if($.isEmptyObject(response.errors)){
-						// insert value to the form input
-						form_input.val(val);
-						modal.modal('hide');
+		$.ajax({
+			url: url,
+			method: 'POST',
+			data: data,
+			beforeSend: function(){
+				btn.prepend("<span class='spinner-grow spinner-grow-sm'></span>");
+			},
+			success: function(response){
+				if($.isEmptyObject(response.errors)){
+					// insert value to the form input
+					form_input.val(val);
+					modal.modal('hide');
 
-						var i;
-						var el = '<li class="list-group-item list-item" data-modal="'+ add_type +'">'+ val +'</li>';
-						for(i = 0; i < lists.length; i++){
-							if($(lists[i]).text().trim().toUpperCase() > val.toUpperCase()){
-								$(el).insertBefore(lists[i]);
-								break;
-							}
+					// insert the newly added item to the DOM
+					var i;
+					var el = '<li class="list-group-item list-item" data-modal="'+ add_type +'">'+ val +'</li>';
+					for(i = 0; i < lists.length; i++){
+						if($(lists[i]).text().trim().toUpperCase() > val.toUpperCase()){
+							$(el).insertBefore(lists[i]);
+							break;
 						}
-
-						if($(lists[i-1]).text().trim().toUpperCase() < val.toUpperCase()){
-							$(el).insertAfter(lists[i-1]);
-						}
-
-						input.removeClass('is-invalid');
-						notif.empty();
-					}else{
-						input.addClass('is-invalid');
-						var key = Object.keys(response.errors)[0];
-						notif.text(response.errors[key]);
-						btn.find('span.spinner-grow').remove();
 					}
+
+					if($(lists[i-1]).text().trim().toUpperCase() < val.toUpperCase()){
+						$(el).insertAfter(lists[i-1]);
+					}
+
+					input.removeClass('is-invalid');
+					notif.empty();
+				}else{
+					input.addClass('is-invalid');
+					var key = Object.keys(response.errors)[0];
+					notif.text(response.errors[key]);
+					btn.find('span.spinner-grow').remove();
 				}
-			});
-		//}
+			}
+		});
+	});
+
+
+	$(document).on('submit','form.create_employee',function(e){
+		var form_data = {};
+		var url = $(this).attr("action");
+
+		$(this).find('[name]').each(function(){
+			form_data[this.name] = this.value;
+		});
+
+		e.preventDefault();
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+	    	url: url,
+	    	method: 'post',
+	    	data: form_data,
+	    	beforeSend: function(){
+	    		$('.btn-emp-submit').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
+	    	},
+	    	complete: function(){
+	    		$('.btn-emp-submit').text('Create');
+	    	},
+	    	success: function(response){
+	    		// record successfully added
+	    		if($.isEmptyObject(response.errors)){
+	    			location.href = '/employees/'+ response.id;
+	    		}
+	    		// invalid input encountered
+	    		else{
+	    			$("span[role='alert']").text('');
+	    			$("input.is-invalid").removeClass('is-invalid');
+	    			for (var key in response.errors) {
+					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
+					        $("input[name='"+ key +"']").addClass('is-invalid');
+					        $("span."+ key).empty().append(response.errors[key]);
+					    }
+					}
+	    		}
+	    	}
+	    });
+
 	});
 
 });
