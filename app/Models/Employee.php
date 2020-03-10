@@ -45,6 +45,29 @@ class Employee extends Model
     	return $this->belongsTo('App\Models\Person');
     }
 
+    public function cluster(){
+        return $this->belongsTo('App\Models\Cluster');
+    }
+
+    public function site(){
+        return $this->belongsTo('App\Models\Site');
+    }
+
+    public function job(){
+        return $this->belongsTo('App\Models\Job');
+    }
+
+    public function contract(){
+        return $this->belongsTo('App\Models\Contract');
+    }
+
+    public function employee(){
+        return $this->belongsTo('App\Models\Employee');
+    }
+
+    public function government_detail(){
+        return $this->hasOne('App\Models\GovernmentDetail');
+    }
 
     /*
     |---------------------
@@ -157,5 +180,15 @@ class Employee extends Model
 				       ->first();
 
 		return isset($employee) ? $employee->employee_id : null;	       
+    }
+
+    public static function all_employees_name(){
+        $employees = DB::table('employees as e')
+                     ->join('people as p','p.id','=','e.person_id')
+                     ->selectRaw("e.id,e.person_id,concat(p.first_name,' ',p.last_name) as name")
+                     ->orderBy('name')
+                     ->get();
+
+        return $employees;
     }
 }

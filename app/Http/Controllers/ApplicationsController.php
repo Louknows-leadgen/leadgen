@@ -113,7 +113,7 @@ class ApplicationsController extends Controller
             InterviewHistory::create($history_data);
 
             // update application status
-            $fin_interview->applicant()->update(['application_status_id'=>11]);
+            $fin_interview->applicant()->update(['application_status_id'=>application_status('FINS')]);
 
             Session::flash('success',"{$info->person->name()} was tagged as no show");
         }else{

@@ -1086,7 +1086,7 @@ $(document).ready(function(){
 	    			$("input.is-invalid").removeClass('is-invalid');
 	    			for (var key in response.errors) {
 					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
-					        $("input[name='"+ key +"']").addClass('is-invalid');
+					        $("input[id='"+ key +"']").addClass('is-invalid');
 					        $("span."+ key).empty().append(response.errors[key]);
 					    }
 					}
@@ -1094,6 +1094,110 @@ $(document).ready(function(){
 	    	}
 	    });
 
+	});
+
+	$(document).on('submit','form.update_employee',function(e){
+		var form_data = {};
+		var url = $(this).attr("action");
+
+		$(this).find('[name]').each(function(){
+			form_data[this.name] = this.value;
+		});
+
+		e.preventDefault();
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+			url: url,
+			method: 'PUT',
+			data: form_data,
+			beforeSend: function(){
+	    		$('.btn-emp-submit').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
+	    	},
+	    	complete: function(){
+	    		$('.btn-emp-submit').text('Create');
+	    	},
+			success: function(response){
+				if(!$.isEmptyObject(response.errors)){
+                    for (var key in response.errors) {
+					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
+					        $("input[id='"+ key +"']").addClass('is-invalid');
+					        $("span."+ key).empty().append(response.errors[key]);
+					    }
+					}
+                }else{
+            		var notif = $('.employee-notif');
+            		notif.removeClass('d-none');
+            		notif.fadeIn(500);
+                }
+			}
+		});
+	});
+
+
+	$(document).on('click','button[data-close]',function(){
+		var parent_name = $(this).data('close');
+		var parent = $("."+parent_name);
+		parent.fadeOut(300,function(){
+			parent.addClass('d-none');
+		});
+	});
+
+
+	$(document).on('submit','form.government',function(e){
+		var form = $(this);
+		var form_data = {};
+		var url = $(this).attr("action");
+		var method = $(this).attr('method');
+
+		$(this).find('[name]').each(function(){
+			form_data[this.name] = this.value;
+		});
+
+		e.preventDefault();
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+			url: url,
+			method: method,
+			data: form_data,
+			beforeSend: function(){
+	    		$('.btn-emp-submit').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
+	    	},
+	    	complete: function(){
+	    		$('.btn-emp-submit').text('Create');
+	    	},
+			success: function(response){
+				if(method == 'POST'){
+					var gov_id = response.id;
+					form.attr('method','PUT');
+					form.attr('action','/government_details/'+gov_id);
+				}
+
+				if(!$.isEmptyObject(response.errors)){
+                    for (var key in response.errors) {
+					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
+					        $("input[id='"+ key +"']").addClass('is-invalid');
+					        $("span."+ key).empty().append(response.errors[key]);
+					    }
+					}
+                }else{
+            		var notif = $('.employee-notif');
+            		notif.removeClass('d-none');
+            		notif.fadeIn(500);
+                }
+			}
+		});
 	});
 
 });

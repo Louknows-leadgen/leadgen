@@ -43,7 +43,7 @@ class ApplicantsController extends Controller
             'job_id' => $request->job_id,
             'applied_site' => $request->applied_site,
             'referror' => $request->referror,
-            'application_status_id' => 1 // 1 is the status of initial screening
+            'application_status_id' => application_status('IS') // 1 is the status of initial screening
         ]);
 
         //return redirect()->route('root');

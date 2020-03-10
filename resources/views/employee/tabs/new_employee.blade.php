@@ -1,25 +1,29 @@
 <div class="row mt-3">
 	<div class="col-md-12">
-		<form class="update_employee" action="{{ route('employees.update',['employee'=>$employee->id]) }}">
+		<form class="create_employee" action="{{ route('employees.store') }}" method="post">
+			@csrf
 			<div class="row">
 				<div class="col-md-6 pr-5">
 					
 					<div class="form-group">
-						<label>Employee Name</label>
-						<input type="text" id="person_id" class="form-control form-control-sm" value="{{ $employee->person->name() }}" data-id="{{ $employee->id }}" disabled>
+						<label>Applicant Name</label>
+						<input type="text" id="person_id" class="form-control form-control-sm" value="{{ $applicant->person->name() }}" disabled>
+						<input type="hidden" name="person_id" value="{{ $applicant->person->id }}">
+
+						<span class="invalid-feedback person_id" role="alert">
+						</span>
 					</div>
 
 					<div class="form-group">
 						<label>Company ID</label>
-						<input type="text" class="form-control form-control-sm" value="{{ $employee->company_number }}" disabled>
+						<input type="text" class="form-control form-control-sm" placeholder="Generated upon submission" disabled>
 					</div>
 
 					<div class="form-group">
 						<label>Cost Center</label>
 						<select class="form-control form-control-sm" name="cost_center_id">
 							@foreach($cost_centers as $cost_center)
-								<option value="{{ $cost_center->id }}" 
-									{{ $cost_center->id == $employee->cost_center_id ? 'selected' : '' }}>
+								<option value="{{ $cost_center->id }}">
 									{{ $cost_center->cost_name }}
 								</option>
 							@endforeach
@@ -29,7 +33,7 @@
 					<div class="form-group">
 						<label>Cluster</label>
 						<div class="input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm" name="cluster_name" id="cluster_name" data-modal="cluster" value="{{ $employee->cluster->cluster_name }}">
+							<input type="text" class="form-control form-control-sm" name="cluster_name" id="cluster_name" data-modal="cluster">
 							<div class="input-group-append">
 								<span class="btn btn-primary custom-modal" data-toggle="modal" data-target="#cluster-modal">
 									Browse
@@ -44,41 +48,29 @@
 						<label>Site</label>
 						<select class="form-control form-control-sm" name="site_id">
 							@foreach($sites as $site)
-								<option value="{{ $site->id }}"
-									{{ $site->id == $employee->site_id ? 'selected' : '' }}>
-									{{ $site->name }}
-								</option>
+								<option value="{{ $site->id }}">{{ $site->name }}</option>
 							@endforeach
 						</select>
 					</div>
 
 					<div class="form-group">
 						<label>Position</label>
-						<select class="form-control form-control-sm" name="job_id">
-							@foreach($jobs as $job)
-								<option value="{{ $job->id }}"
-									{{ $job->id == $employee->job_id ? 'selected' : '' }}>
-									{{ $job->name }}
-								</option>
-							@endforeach
-						</select>
+						<input type="text" class="form-control form-control-sm" value="{{ $applicant->job->name }}" readonly>
+						<input type="hidden" name="job_id" value="{{$applicant->job_id}}">
 					</div>
 
 					<div class="form-group">
 						<label>Company</label>
 						<select class="form-control form-control-sm" name="company_id">
 							@foreach($companies as $company)
-								<option value="{{ $company->id }}" 
-									{{ $company->id == $employee->company_id ? 'selected' : '' }}>
-									{{ $company->company_name }}
-								</option>
+								<option value="{{ $company->id }}">{{ $company->company_name }}</option>
 							@endforeach
 						</select>
 					</div>
 
 					<div class="form-group">
 						<label>Date Signed</label>
-						<input type="text" class="form-control form-control-sm date" name="date_signed" id="date_signed" autocomplete="off" value="{{ isset($employee->date_signed) ? $employee->date_signed : '' }}">
+						<input type="text" class="form-control form-control-sm date" name="date_signed" id="date_signed" autocomplete="off">
 						<span class="invalid-feedback date_signed" role="alert">
 						</span>
 					</div>
@@ -86,7 +78,7 @@
 					<div class="form-group">
 						<label>Contract Type</label>
 						<div class="input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm" name="contract_name" id="contract_name" data-modal="contract" value="{{ $employee->contract->contract_name }}">
+							<input type="text" class="form-control form-control-sm" name="contract_name" id="contract_name" data-modal="contract">
 							<div class="input-group-append">
 								<span class="btn btn-primary custom-modal" data-toggle="modal" data-target="#contract-modal">
 									Browse
@@ -101,10 +93,7 @@
 						<label>Department</label>
 						<select class="form-control form-control-sm" name="department_id">
 							@foreach($departments as $department)
-								<option value="{{ $department->id }}" 
-									{{ $department->id == $employee->department_id ? 'selected' : '' }}>
-									{{ $department->department_name }}
-								</option>
+								<option value="{{ $department->id }}">{{ $department->department_name }}</option>
 							@endforeach
 						</select>
 					</div>
@@ -112,7 +101,7 @@
 					<div class="form-group">
 						<label>Immediate Supervisor</label>
 						<div class="input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm" name="supervisor" id="supervisor" data-modal="supervisor" value="{{ isset($employee->employee) ? $employee->employee->person->name() : '' }}">
+							<input type="text" class="form-control form-control-sm" name="supervisor" id="supervisor" data-modal="supervisor">
 							<div class="input-group-append">
 								<span class="btn btn-primary custom-modal" data-toggle="modal" data-target="#supervisor-modal">
 									Browse
@@ -129,79 +118,80 @@
 				<div class="col-md-6 pr-5">
 
 					<div class="form-group">
-						<label>J.O Date</label>
+						<label>J.O date</label>
 						<input type="text" 
 							   class="form-control form-control-sm"
-							   value="{{ isset($employee->jo_date) ? date('m/d/Y',strtotime($employee->jo_date)) : '' }}" 
+							   name="jo_date"
+							   value="{{ isset($applicant->job_orientation->jo_date) ? date('m/d/Y',strtotime($applicant->job_orientation->jo_date)) : '' }}" 
 							   readonly>
 					</div>
 
 					<div class="form-group">
 						<label>Nesting Date</label>
-						<input type="text" class="form-control form-control-sm date" name="nesting_date" id="nesting_date" autocomplete="off" value="{{ isset($employee->nesting_date) ? date('m/d/Y',strtotime($employee->nesting_date)) : '' }}">
+						<input type="text" class="form-control form-control-sm date" name="nesting_date" id="nesting_date" autocomplete="off">
 						<span class="invalid-feedback nesting_date" role="alert">
 						</span>
 					</div>
 
 					<div class="form-group">
 						<label>Training Extension Date</label>
-						<input type="text" class="form-control form-control-sm date" name="trng_ext_date" id="trng_ext_date" autocomplete="off" value="{{ isset($employee->trng_ext_date) ? date('m/d/Y',strtotime($employee->trng_ext_date)) : '' }}">
+						<input type="text" class="form-control form-control-sm date" name="trng_ext_date" id="trng_ext_date" autocomplete="off">
 						<span class="invalid-feedback trng_ext_date" role="alert">
 						</span>
 					</div>
 
 					<div class="form-group">
 						<label>Evaluation Period</label>
-						<input type="text" class="form-control form-control-sm date" name="eval_period" id="eval_period" autocomplete="off" value="{{ isset($employee->eval_period) ? date('m/d/Y',strtotime($employee->eval_period)) : '' }}">
+						<input type="text" class="form-control form-control-sm date" name="eval_period" id="eval_period" autocomplete="off">
 						<span class="invalid-feedback eval_period" role="alert">
 						</span>
 					</div>
 
 					<div class="form-group">
 						<label>Reprofile Date</label>
-						<input type="text" class="form-control form-control-sm date" name="reprofile_date" id="reprofile_date" autocomplete="off" value="{{ isset($employee->reprofile_date) ? date('m/d/Y',strtotime($employee->reprofile_date)) : '' }}">
+						<input type="text" class="form-control form-control-sm date" name="reprofile_date" id="reprofile_date" autocomplete="off">
 						<span class="invalid-feedback reprofile_date" role="alert">
 						</span>
 					</div>
 
 					<div class="form-group">
 						<label>Start Date</label>
-						<input type="text" class="form-control form-control-sm date" name="start_date" id="start_date" autocomplete="off" value="{{ isset($employee->start_date) ? date('m/d/Y',strtotime($employee->start_date)) : '' }}">
+						<input type="text" class="form-control form-control-sm date" name="start_date" id="start_date" autocomplete="off">
 						<span class="invalid-feedback start_date" role="alert">
 						</span>
 					</div>
 
 					<div class="form-group">
 						<label>Assoc. Date</label>
-						<input type="text" class="form-control form-control-sm date" name="assoc_date" id="assoc_date" autocomplete="off" value="{{ isset($employee->assoc_date) ? date('m/d/Y',strtotime($employee->assoc_date)) : '' }}">
+						<input type="text" class="form-control form-control-sm date" name="assoc_date" id="assoc_date" autocomplete="off">
 						<span class="invalid-feedback assoc_date" role="alert">
 						</span>
 					</div>
 
 					<div class="form-group">
 						<label>Consultant Date</label>
-						<input type="text" class="form-control form-control-sm date" name="consultant_date" id="consultant_date" autocomplete="off" value="{{ isset($employee->consultant_date) ? date('m/d/Y',strtotime($employee->consultant_date)) : '' }}">
+						<input type="text" class="form-control form-control-sm date" name="consultant_date" id="consultant_date" autocomplete="off">
 						<span class="invalid-feedback consultant_date" role="alert">
 						</span>
 					</div>
 
 					<div class="form-group">
 						<label>3rd Month Evaluation</label>
-						<input type="text" class="form-control form-control-sm date" name="month_eval3" id="month_eval3" autocomplete="off" value="{{ isset($employee->month_eval3) ? date('m/d/Y',strtotime($employee->month_eval3)) : '' }}">
+						<input type="text" class="form-control form-control-sm date" name="month_eval3" id="month_eval3" autocomplete="off">
 						<span class="invalid-feedback month_eval3" role="alert">
 						</span>
 					</div>
 
 					<div class="form-group">
 						<label>5th Month Evaluation</label>
-						<input type="text" class="form-control form-control-sm date" name="month_eval5" id="month_eval5" autocomplete="off" value="{{ isset($employee->month_eval5) ? date('m/d/Y',strtotime($employee->month_eval5)) : '' }}">
+						<input type="text" class="form-control form-control-sm date" name="month_eval5" id="month_eval5" autocomplete="off">
 						<span class="invalid-feedback month_eval5" role="alert">
 						</span>
 					</div>
 
 					<div class="form-group">
 						<label>Regularization Date</label>
-						<input type="text" class="form-control form-control-sm date" name="regularize_date" id="regularize_date" autocomplete="off" value="{{ isset($employee->regularize_date) ? date('m/d/Y',strtotime($employee->regularize_date)) : '' }}">
+						<input type="text" class="form-control form-control-sm date" name="regularize_date" id="regularize_date" autocomplete="off">
 						<span class="invalid-feedback regularize_date" role="alert">
 						</span>
 					</div>
@@ -212,7 +202,7 @@
 
 			<div class="row mt-5 mb-2 pr-4">
 				<div class="col-md-12">
-					<button class="btn btn-primary btn-block btn-emp-submit">Update</button>
+					<button class="btn btn-primary btn-block btn-emp-submit">Create</button>
 				</div>
 			</div>
 

@@ -10,4 +10,13 @@ class Contract extends Model
     protected $fillable = [
     	'contract_name'
     ];
+
+    /*
+    |---------------------
+    |   Association
+    |---------------------
+    */
+    public function employee(){
+    	return $this->hasMany('App\Models\Employee');
+    }
 }

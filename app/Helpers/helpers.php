@@ -70,3 +70,32 @@ function get_avatar($gender){
 function full_name($fn,$mn,$ln){
 	return implode(' ', [$fn,$mn,$ln]);
 }
+
+
+
+function application_status($status){
+	switch ($status) {
+		case 'IS': // Initial Screening
+			return 1;
+		case 'ISF': // Initial Screening - Failed
+			return 2;
+		case 'AFI': // Appoint Final Interview
+			return 3;
+		case 'FFI': // For Final Interview
+			return 4;
+		case 'FIF': // Final Interview - Failed
+			return 5;
+		case 'SJO': // Schedule Job Orientation
+			return 6;
+		case 'FJO': // For Job Orientation
+			return 7;
+		case 'JNS': // JO - No show
+			return 8;
+		case 'H': // Hired
+			return 9;
+		case 'DO': // Declined Offer
+			return 10;
+		case 'FINS': // Final Interview - No Show
+			return 11;									
+	}
+}

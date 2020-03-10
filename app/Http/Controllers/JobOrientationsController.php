@@ -27,7 +27,7 @@ class JobOrientationsController extends Controller
     	$id = $request->applicant_id;
     	if(JobOrientation::create($request->all())){
         	$applicant = Applicant::find($id);
-            $applicant->update(['application_status_id'=>7]);
+            $applicant->update(['application_status_id'=>application_status('FJO')]); // For Job Orientation
             $email_to = $applicant->person->email;
 
             $details = [

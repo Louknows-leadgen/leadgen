@@ -11,7 +11,16 @@ class Job extends Model
     	'name'
     ];
 
+    /*
+    |---------------------
+    |   Association
+    |---------------------
+    */
     public function applicants(){
     	return $this->hasMany('App\Models\Applicant');
+    }
+
+    public function employee(){
+    	return $this->hasMany('App\Models\Employee');
     }
 }

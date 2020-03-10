@@ -149,6 +149,8 @@ Route::resource('blacklists','BlacklistsController')->only(['index','store']);
 Route::resource('employees','EmployeesController')->except(['create']);
 Route::resource('clusters','ClustersController');
 Route::resource('contracts','ContractsController');
+Route::resource('contracts','ContractsController');
+Route::resource('government_details','GovernmentDetailsController');
 
 /*
 |------------------------------------------ 

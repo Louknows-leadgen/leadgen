@@ -23,7 +23,7 @@
 							  		<div class="col-md-10">
 							  			<h5>{{ $notification->full_name }}</h5>
 							  			<p><span class="fa fa-briefcase text-muted"></span> {{$notification->applied_for}}</p>
-							  			<p><span class="{{ $notification->applicant->application_status_id == 5 ? 'text-danger' : 'text-success'}}">Status:</span> {{ $notification->applicant->application_status->name }} </p>
+							  			<p><span class="{{ $notification->applicant->application_status_id == application_status('FIF') ? 'text-danger' : 'text-success'}}">Status:</span> {{ $notification->applicant->application_status->name }} </p>
 							  			<a href="{{ $notification->procedure_url }}" 
 							  			   class="btn btn-primary mr-2 mark-read"
 							  			   data-id="{{ $notification->id }}">

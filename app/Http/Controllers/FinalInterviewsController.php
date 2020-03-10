@@ -26,7 +26,7 @@ class FinalInterviewsController extends Controller
 
         $id = $request->applicant_id;
         $applicant = Applicant::find($id);
-        $applicant->update(['application_status_id'=>4]); // For Final Interview
+        $applicant->update(['application_status_id'=>application_status('FFI')]); // For Final Interview
     	$fin = FinalInterview::create($request->all());
         $to_email = User::find($request->interviewer_id)->email;
 
@@ -93,9 +93,9 @@ class FinalInterviewsController extends Controller
         InterviewHistory::create($request->all());
 
         if($request->result == 'Pass')
-            $fin->applicant()->update(['application_status_id'=>6]); // 6 is the status of Job Offer schedule
+            $fin->applicant()->update(['application_status_id'=>application_status('SJO')]); // 6 is the status of Job Offer schedule
         else
-            $fin->applicant()->update(['application_status_id'=>5]); // 5 is the status of Final Interview Failed
+            $fin->applicant()->update(['application_status_id'=>application_status('FIF')]); // 5 is the status of Final Interview Failed
         
         // insert record to notification table and notify hr
         event(new FinalInterviewCompleted($fin));

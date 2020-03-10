@@ -47,7 +47,7 @@
 								  		<div class="col-md-10">
 								  			<h5>{{ implode(' ',[$applicant->first_name,$applicant->last_name]) }}</h5>
 								  			<p><span class="fa fa-briefcase text-muted"></span> {{$applicant->job_name}}</p>
-								  			<a href="#" class="btn btn-primary mr-2">Offer job</a>
+								  			<a href="{{ route('employees.create',['applicant_id'=>$applicant->applicant_id]) }}" class="btn btn-primary mr-2">Offer job</a>
 								  			<span data-id="{{ $applicant->applicant_id }}" class="btn btn-secondary remove-trigger">No show</span>
 								  		</div>
 								  	</div>

@@ -22,12 +22,12 @@ class InitialScreeningsController extends Controller
     	$applicant = Applicant::find($request->applicant_id);
         InitialScreening::create($request->all());
     	if($request->overall_result == 'Pass'){
-    		$applicant->application_status_id = 3; // Appoint Final Interview
+    		$applicant->application_status_id = application_status('AFI'); // Appoint Final Interview
             $applicant->save();
             return redirect()->route('applications.procedure',['applicant_id'=>$applicant->id]);
         }
     	else{
-    		$applicant->application_status_id = 2; // Initial Screening - Failed
+    		$applicant->application_status_id = application_status('ISF'); // Initial Screening - Failed
             $applicant->save();
             return redirect()->route('root');
         } 	       

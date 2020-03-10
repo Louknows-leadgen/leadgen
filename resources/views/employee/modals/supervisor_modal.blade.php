@@ -25,7 +25,7 @@
             @foreach($employees as $employee)
               <li class="list-group-item list-item" 
                   data-modal="supervisor">
-                {{ ucwords($employee->name()) }}
+                {{ ucwords($employee->name) }}
               </li>
             @endforeach
           </ul>
