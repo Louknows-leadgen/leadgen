@@ -69,6 +69,10 @@ class Employee extends Model
         return $this->hasOne('App\Models\GovernmentDetail');
     }
 
+    public function compensation(){
+        return $this->hasOne('App\Models\Compensation');
+    }
+
     /*
     |---------------------
     |   Mutators
@@ -190,5 +194,24 @@ class Employee extends Model
                      ->get();
 
         return $employees;
+    }
+
+
+    /*
+    |------------------------
+    |     Custom Attributes
+    |------------------------
+    */
+
+    // used to create custom attribute 'job_name'
+    protected $appends = ['job_name'];
+    
+    public function getJobNameAttribute(){
+        return $this->job->name;
+    }
+
+    public function getFullNameAttribute(){
+        $name = implode(' ',[$this->person->first_name,$this->person->last_name]);
+        return $name;
     }
 }

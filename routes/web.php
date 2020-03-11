@@ -53,6 +53,7 @@ Route::put('/final_interviews/{id}/no_show','ApplicationsController@no_show')->n
 
 //- hr manager
 Route::get('hr-managers/dashboard','HrManagerDashboardsController@index')->name('hr-managers.index');
+Route::get('hr-managers/employees','HrManagerDashboardsController@employees')->name('hr-managers.employees');
 
 //- interview history
 Route::get('/interviews/history/search','InterviewHistoriesController@search')->name('history.search');
@@ -149,8 +150,8 @@ Route::resource('blacklists','BlacklistsController')->only(['index','store']);
 Route::resource('employees','EmployeesController')->except(['create']);
 Route::resource('clusters','ClustersController');
 Route::resource('contracts','ContractsController');
-Route::resource('contracts','ContractsController');
 Route::resource('government_details','GovernmentDetailsController');
+Route::resource('compensations','CompensationsController');
 
 /*
 |------------------------------------------ 

@@ -1,8 +1,9 @@
 <div class="row mt-3">
 	<div class="col-md-12">
-		<form class="government"
+		<form class="employee_forms"
+			  data-form="government_detail"
 			  @if(isset($gov_detail))
-				action="{{ route('government_details.update',['government_details'=>$gov_detail->id]) }}"
+				action="{{ route('government_details.update',['government_detail'=>$gov_detail->id]) }}"
 				method="PUT"
 			  @else
 			  	action="{{ route('government_details.store') }}"
@@ -51,10 +52,11 @@
 					<div class="form-group">
 						<label>Tax Code</label>
 						<select class="form-control form-control-sm" name="tax_id">
+								<option></option>
 							@foreach($tax_codes as $tax_code)
 								@if(isset($gov_detail))
 									<option value="{{ $tax_code->id }}" 
-										{{ $tax_code->id == $$gov_detail->tax_id ? 'selected' : '' }}>
+										{{ $tax_code->id == $gov_detail->tax_id ? 'selected' : '' }}>
 										{{ $tax_code->tax_name }}
 									</option>
 								@else
@@ -81,9 +83,3 @@
 </div>
 
 
-
-
-<!-- Modals Here -->
-@include('employee.modals.cluster_modal')
-@include('employee.modals.contract_modal')
-@include('employee.modals.supervisor_modal')

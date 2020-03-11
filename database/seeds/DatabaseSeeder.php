@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             SitesTableSeeder::class,
             TestsTableSeeder::class,
             RolesTableSeeder::class,
+            TaxesTableSeeder::class,
             //TestDataSeeder::class
         ]);
     }

@@ -20,7 +20,7 @@
 			<div class="col-md-2">
 				<div class="d-flex flex-column p-2">
 					<img class="mx-auto mb-1 border border-primary" src="{{ asset('images/employees.svg') }}" width="100px" height="100px">
-					<a class="btn btn-primary" href="#">Employees</a>
+					<a class="btn btn-primary" href="{{ route('hr-managers.employees') }}">Employees</a>
 				</div>
 			</div>
 

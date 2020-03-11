@@ -20,11 +20,18 @@ use App\Models\Tax;
 
 class EmployeesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('checkrole:4');
+    }
+    
     //
     public function create($applicant_id){
     	$clusters = Cluster::all()->sortBy('cluster_name');
     	$contracts = Contract::all()->sortBy('contract_name');
-    	$employees = Person::all()->sortBy('first_name');
+    	$employees = Employee::all_employees_name();
     	$cost_centers = CostCenter::all()->sortBy('cost_name');
     	$sites = Site::all()->sortBy('name');
     	$companies = Company::all()->sortBy('cost_name');

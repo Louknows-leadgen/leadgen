@@ -1120,7 +1120,7 @@ $(document).ready(function(){
 	    		$('.btn-emp-submit').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
 	    	},
 	    	complete: function(){
-	    		$('.btn-emp-submit').text('Create');
+	    		$('.btn-emp-submit').text('Update');
 	    	},
 			success: function(response){
 				if(!$.isEmptyObject(response.errors)){
@@ -1149,8 +1149,9 @@ $(document).ready(function(){
 	});
 
 
-	$(document).on('submit','form.government',function(e){
+	$(document).on('submit','form.employee_forms',function(e){
 		var form = $(this);
+		var form_type = form.data('form');
 		var form_data = {};
 		var url = $(this).attr("action");
 		var method = $(this).attr('method');
@@ -1175,13 +1176,21 @@ $(document).ready(function(){
 	    		$('.btn-emp-submit').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
 	    	},
 	    	complete: function(){
-	    		$('.btn-emp-submit').text('Create');
+	    		$('.btn-emp-submit').text('Update');
 	    	},
 			success: function(response){
 				if(method == 'POST'){
-					var gov_id = response.id;
+					var id = response.id;
 					form.attr('method','PUT');
-					form.attr('action','/government_details/'+gov_id);
+					switch(form_type){
+						case 'government_detail':
+							form.attr('action','/government_details/'+ id);
+							break
+						case 'compensation':
+							form.attr('action','/compensations/'+ id);
+							break;
+					}
+					
 				}
 
 				if(!$.isEmptyObject(response.errors)){
