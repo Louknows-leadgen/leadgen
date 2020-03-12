@@ -73,6 +73,18 @@ class Employee extends Model
         return $this->hasOne('App\Models\Compensation');
     }
 
+    public function cost_center(){
+        return $this->belongsTo('App\Models\CostCenter');
+    }
+
+    public function company(){
+        return $this->belongsTo('App\Models\Company');
+    }
+
+    public function department(){
+        return $this->belongsTo('App\Models\Department');
+    }
+
     /*
     |---------------------
     |   Mutators
@@ -160,6 +172,57 @@ class Employee extends Model
     	}
     }
 
+
+    /*
+    |---------------------
+    |   Accessors
+    |---------------------*/
+
+    public function getDateSignedAttribute($value){
+        return isset($value) ? $value : '';
+    }
+
+    public function getNestingDateAttribute($value){
+        return isset($value) ? $value : '';
+    }
+
+    public function getTrngExtDateAttribute($value){
+        return isset($value) ? $value : '';
+    }
+
+    public function getEvalPeriodAttribute($value){
+        return isset($value) ? $value : '';
+    }
+
+    public function getReprofileDateAttribute($value){
+        return isset($value) ? $value : '';
+    }
+
+    public function getStartDateAttribute($value){
+        return isset($value) ? $value : '';
+    }
+
+    public function getAssocDateAttribute($value){
+        return isset($value) ? $value : '';
+    }
+
+    public function getConsultantDateAttribute($value){
+        return isset($value) ? $value : '';
+    }
+
+    public function getMonthEval3Attribute($value){
+        return isset($value) ? $value : '';
+    }
+
+    public function getMonthEval5Attribute($value){
+        return isset($value) ? $value : '';
+    }
+
+    public function getRegularizeDateAttribute($value){
+        return isset($value) ? $value : '';
+    }
+
+
     /*
     |---------------------
     |   Helpers
@@ -196,6 +259,22 @@ class Employee extends Model
         return $employees;
     }
 
+    public static function search($skey, $dept_filter, $scope){
+        $query = DB::table('employees as e')
+                ->join('people as p','p.id','=','e.person_id')
+                ->leftJoin('jobs as j', 'j.id', '=', 'e.job_id')
+                ->where(function($q) use($dept_filter){
+                    $q->where('e.department_id','=',$dept_filter)
+                      ->orWhereRaw('? = 0',$dept_filter);
+                  })
+                ->where('e.status','=',$scope);
+
+        if(!empty($skey))
+            $query->whereRaw("concat(p.first_name,' ', p.last_name) LIKE ?",['%'.$skey.'%']);
+
+        return $query->paginate(5,['e.id as employee_id','e.person_id','j.name as job_name','p.first_name','p.last_name','p.gender']);
+    }
+
 
     /*
     |------------------------
@@ -204,7 +283,18 @@ class Employee extends Model
     */
 
     // used to create custom attribute 'job_name'
-    protected $appends = ['job_name'];
+    protected $appends = [
+        'job_name',
+        'full_name',
+        'cost_name',
+        'site_name',
+        'cluster_name',
+        'position_name',
+        'company_name',
+        'contract_name',
+        'department_name',
+        'supervisor'
+    ];
     
     public function getJobNameAttribute(){
         return $this->job->name;
@@ -214,4 +304,37 @@ class Employee extends Model
         $name = implode(' ',[$this->person->first_name,$this->person->last_name]);
         return $name;
     }
+
+    public function getCostNameAttribute(){
+        return isset($this->cost_center) ? $this->cost_center->cost_name : '';
+    }
+
+    public function getSiteNameAttribute(){
+        return isset($this->site) ? $this->site->name : '';
+    }
+
+    public function getClusterNameAttribute(){
+        return isset($this->cluster) ? $this->cluster->cluster_name : '';
+    }
+
+    public function getPositionNameAttribute(){
+        return isset($this->job) ? $this->job->name : '';
+    }
+
+    public function getCompanyNameAttribute(){
+        return isset($this->company) ? $this->company->company_name : '';
+    }
+
+    public function getContractNameAttribute(){
+        return isset($this->contract) ? $this->contract->contract_name : '';
+    }
+
+    public function getDepartmentNameAttribute(){
+        return isset($this->department) ? $this->department->department_name : '';
+    }
+
+    public function getSupervisorAttribute(){
+        return isset($this->employee) ? $this->employee->person->name() : '';
+    }
+
 }

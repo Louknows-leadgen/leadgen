@@ -29,7 +29,7 @@
 					<div class="form-group">
 						<label>Cluster</label>
 						<div class="input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm" name="cluster_name" id="cluster_name" data-modal="cluster" value="{{ $employee->cluster->cluster_name }}">
+							<input type="text" class="form-control form-control-sm" name="cluster_name" id="cluster_name" data-modal="cluster" value="{{ isset($employee->cluster) ? $employee->cluster->cluster_name : '' }}">
 							<div class="input-group-append">
 								<span class="btn btn-primary custom-modal" data-toggle="modal" data-target="#cluster-modal">
 									Browse
@@ -86,7 +86,7 @@
 					<div class="form-group">
 						<label>Contract Type</label>
 						<div class="input-group input-group-sm">
-							<input type="text" class="form-control form-control-sm" name="contract_name" id="contract_name" data-modal="contract" value="{{ $employee->contract->contract_name }}">
+							<input type="text" class="form-control form-control-sm" name="contract_name" id="contract_name" data-modal="contract" value="{{ isset($employee->contract) ? $employee->contract->contract_name : '' }}">
 							<div class="input-group-append">
 								<span class="btn btn-primary custom-modal" data-toggle="modal" data-target="#contract-modal">
 									Browse

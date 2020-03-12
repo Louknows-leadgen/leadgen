@@ -18,4 +18,8 @@ class GovernmentDetail extends Model
     public function employee(){
         return $this->belongsTo('App\Models\Employee');
     }
+
+    public function tax(){
+        return $this->belongsTo('App\Models\Tax');
+    }
 }

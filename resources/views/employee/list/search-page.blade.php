@@ -15,24 +15,34 @@
 
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link" href="{{ route('employees.active') }}">Active</a>
+					@if($scope == 'active')
+						<a class="nav-link active" href="#employees">Active</a>
+					@else
+						<a class="nav-link" href="{{ route('employees.active') }}">Active</a>
+					@endif
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#inactive-employees">Inactive</a>
+					@if($scope == 'inactive')
+						<a class="nav-link active" href="#employees">Inactive</a>
+					@else
+						<a class="nav-link" href="{{ route('employees.inactive') }}">Inactive</a>
+					@endif
 				</li>
 			</ul>
 
-			<div class="tab-content" id="inactive-employees">
+			<div class="tab-content" id="employees">
 				<div class="row">
 					<div class="col-md-2">
 						<div class="ml-3 mt-4">
 							<h6>Filter results by:</h6>
 							<div class="form-group">
 								<label>Department</label>
-								<select class="form-control form-control-sm" id="filter-by-department">
+								<select class="form-control form-control-sm" 
+										id="filter-by-department">
 									<option value="0">All</option>
 									@foreach($departments as $department)
-										<option value="{{ $department->id }}">
+										<option value="{{ $department->id }}"
+											{{ $department->id == $dept_filter ? 'selected' : '' }}>
 											{{ $department->department_name }}
 										</option>
 									@endforeach
@@ -42,13 +52,18 @@
 					</div>
 
 					<div class="mx-auto col-md-6">
-						<h5 class="mt-4 mb-4">List of inactive employees</h5>
+						@if($scope == 'active')
+							<h5 class="mt-4 mb-4">List of active employees</h5>
+						@else
+							<h5 class="mt-4 mb-4">List of inactive employees</h5>
+						@endif
 						<div class="input-group mb-3">
 							<input type="text" 
 								   id="search-employee" 
 								   class="form-control"
-								   data-scope="inactive" 
-								   placeholder="Search">
+								   data-scope={{$scope == 'active' ? 'active' : 'inactive'}}
+								   placeholder="Search"
+								   value="{{ $skey }}">
 							<div class="input-group-append">
 								<button id="search-employee-btn" class="btn btn-success" type="submit">
 									<span class="fa fa-search"></span>
@@ -56,7 +71,7 @@
 							</div>
 						</div>
 						<div class="employee-list">
-							@include('employee.list._employees')
+							@include('employee.list._employees-search')
 						</div>
 					</div>
 				</div>

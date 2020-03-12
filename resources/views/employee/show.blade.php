@@ -33,17 +33,31 @@
 				</ul>
 
 				<!-- Tab panes -->
-				<div class="tab-content">
-				  <div class="tab-pane container active" id="emp_dtl">
-				  	@include('employee.tabs.employee_details')
-				  </div>
-				  <div class="tab-pane container fade" id="gov_dtl">
-				  	@include('employee.tabs.government_details')
-				  </div>
-				  <div class="tab-pane container fade" id="comp">
-				  	@include('employee.tabs.compensation')
-				  </div>
-				</div>
+				@if($employee->status == 'active')
+					<div class="tab-content">
+					  <div class="tab-pane container active" id="emp_dtl">
+					  	@include('employee.tabs.active.employee_details')
+					  </div>
+					  <div class="tab-pane container fade" id="gov_dtl">
+					  	@include('employee.tabs.active.government_details')
+					  </div>
+					  <div class="tab-pane container fade" id="comp">
+					  	@include('employee.tabs.active.compensation')
+					  </div>
+					</div>
+				@else
+					<div class="tab-content">
+					  <div class="tab-pane container active" id="emp_dtl">
+					  	@include('employee.tabs.inactive.employee_details')
+					  </div>
+					  <div class="tab-pane container fade" id="gov_dtl">
+					  	@include('employee.tabs.inactive.government_details')
+					  </div>
+					  <div class="tab-pane container fade" id="comp">
+					  	@include('employee.tabs.inactive.compensation')
+					  </div>
+					</div>
+				@endif
 			</div>
 		</div>
 	</div>

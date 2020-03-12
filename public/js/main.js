@@ -326,6 +326,38 @@ $(document).ready(function(){
 		$("#search-offer").click();
 	});
 
+
+	$(document).on("click","#search-employee-btn", function(){
+		var dept_filter = $("#filter-by-department").val();
+		var search_text = $("#search-employee").val();
+		var scope = $("#search-employee").data('scope');
+		var container = $(".employee-list");
+
+		$.ajax({
+			url: '/employees/search',
+			method: 'GET',
+			data: {
+				skey: search_text,
+				dept_filter: dept_filter,
+				scope: scope
+			},
+			success: function(result){
+				container.empty().append(result);
+			}
+		});
+
+	});
+
+	$(document).on('change','#filter-by-department,#search-employee',function(){
+		$("#search-employee-btn").click();
+	});
+
+	$(document).on('keypress','#search-employee',function(e){
+		if(e.which == '13')
+			$("#search-employee-btn").click();
+	});
+
+
 	//-----------------------------------------------------
 
 	$(".dynamic-container").on("submit",".j_fi-submit",function(){

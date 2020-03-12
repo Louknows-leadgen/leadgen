@@ -160,14 +160,31 @@ class EmployeesController extends Controller
     }
 
     public function active(){
+        $status = 'active';
         $employees = Employee::where('status','=','active')->paginate(5);
+        $departments = Department::all()->sortBy('department_name');
 
-        return view('employee.list.active',compact('employees'));
+        return view('employee.list.active',compact('employees','departments','status'));
     }
 
     public function inactive(){
+        $status = 'inactive';
         $employees = Employee::where('status','=','inactive')->paginate(5);
+        $departments = Department::all()->sortBy('department_name');
 
-        return view('employee.list.inactive',compact('employees'));
+        return view('employee.list.inactive',compact('employees','departments','status'));
+    }
+
+    public function search(Request $request){
+        $departments = Department::all()->sortBy('department_name');
+        $skey = $request->skey;
+        $dept_filter = $request->dept_filter;
+        $scope = $request->scope;
+        $employees = Employee::search($skey, $dept_filter, $scope);
+
+        if($request->ajax())
+            return view('employee.list.search-result',compact('employees','skey','dept_filter','scope'));
+
+        return view('employee.list.search-page',compact('employees','skey','dept_filter','departments','scope'));
     }
 }

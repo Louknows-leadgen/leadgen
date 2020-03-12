@@ -10,42 +10,53 @@
 @endif
 
 <div class="row">
-	<div class="col-md-6">
-		<h5>Filter search by:</h5>
-		<div class="form-group">
-			<label>Department</label>
-			<select>
-				<option>IT</option>
-				<option>Operations</option>
-				<option>QA</option>
-			</select>
-		</div>
-	</div>
-	<div class="col-md-6">
+	<div class="col-md-10 mx-auto">
 		<div class="box mb-5">
 
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#home">Active</a>
+					<a class="nav-link active" href="#active-employees">Active</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#menu1">Inactive</a>
+					<a class="nav-link" href="{{ route('employees.inactive') }}">Inactive</a>
 				</li>
 			</ul>
 
-			<div class="tab-content">
+			<div class="tab-content" id="active-employees">
 				<div class="row">
+					<div class="col-md-2">
+						<div class="ml-3 mt-4">
+							<h6>Filter results by:</h6>
+							<div class="form-group">
+								<label>Department</label>
+								<select class="form-control form-control-sm" 
+										id="filter-by-department">
+									<option value="0">All</option>
+									@foreach($departments as $department)
+										<option value="{{ $department->id }}">
+											{{ $department->department_name }}
+										</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+					</div>
+
 					<div class="mx-auto col-md-6">
 						<h5 class="mt-4 mb-4">List of active employees</h5>
 						<div class="input-group mb-3">
-							<input type="text" id="search-input" class="form-control" placeholder="Search">
+							<input type="text" 
+								   id="search-employee" 
+								   class="form-control"
+								   data-scope="active"
+								   placeholder="Search">
 							<div class="input-group-append">
-								<button id="search-employee" class="btn btn-success" type="submit">
+								<button id="search-employee-btn" class="btn btn-success" type="submit">
 									<span class="fa fa-search"></span>
 								</button>
 							</div>
 						</div>
-						<div class="jo-list">
+						<div class="employee-list">
 							@include('employee.list._employees')
 						</div>
 					</div>

@@ -48,6 +48,7 @@ Route::get('/blacklists/{applicant_id}','BlacklistsController@hit')->name('black
 Route::get('/employees/{applicant_id}/create','EmployeesController@create')->name('employees.create');
 Route::get('/employees/active','EmployeesController@active')->name('employees.active');
 Route::get('/employees/inactive','EmployeesController@inactive')->name('employees.inactive');
+Route::get('/employees/search','EmployeesController@search')->name('employees.search');
 
 //- final interviews
 Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@update_result')->name('fin.update_result');
