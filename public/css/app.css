@@ -11934,7 +11934,8 @@ span.close {
   vertical-align: middle;
 }
 
-.bg-notif {
+.bg-notif,
+.decline-confirm-bg {
   display: none;
   position: fixed;
   top: 0;
@@ -11945,7 +11946,8 @@ span.close {
   z-index: 9999;
 }
 
-.bg-notif .card {
+.bg-notif .card,
+.decline-confirm-bg .card {
   position: absolute;
   top: 25%;
   left: 50%;
@@ -12025,5 +12027,13 @@ span.close {
 
 .list-item {
   cursor: pointer;
+}
+
+.back {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 14px;
+  z-index: 2;
 }
 

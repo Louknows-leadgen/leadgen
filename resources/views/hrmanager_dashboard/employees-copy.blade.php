@@ -13,6 +13,12 @@
         </div>
     @endif
 
+    <div class="back">
+        <div>
+            <a class="text-primary" href="{{ route('hr-managers.index') }}">Back to dashboard</a>
+        </div>
+    </div>
+
 	<div class="row">
 		<div class="mx-auto col-md-6">
 			<h5 class="mb-4">List of active employees</h5>

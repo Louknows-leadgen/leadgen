@@ -16,6 +16,7 @@ use App\Models\Company;
 use App\Models\Department;
 use App\Models\Job;
 use App\Models\Tax;
+use App\Models\Compensation;
 
 
 class EmployeesController extends Controller
@@ -109,8 +110,9 @@ class EmployeesController extends Controller
         $employees = Employee::all_employees_name();
         $gov_detail = $employee->government_detail;
         $tax_codes = Tax::all()->sortBy('tax_name');
+        $compensation = Compensation::where('employee_id','=',$employee_id)->first();
 
-    	return view('employee.show',compact('employee','cost_centers','sites','contracts','departments','employees','companies','clusters','jobs','gov_detail','tax_codes'));
+    	return view('employee.show',compact('employee','cost_centers','sites','contracts','departments','employees','companies','clusters','jobs','gov_detail','tax_codes', 'compensation'));
     }
 
     public function update($employee_id, Request $request){
@@ -155,5 +157,17 @@ class EmployeesController extends Controller
             return response()->json(['errors'=>$validator->getMessageBag()->toArray()]);
         }
 
+    }
+
+    public function active(){
+        $employees = Employee::where('status','=','active')->paginate(5);
+
+        return view('employee.list.active',compact('employees'));
+    }
+
+    public function inactive(){
+        $employees = Employee::where('status','=','inactive')->paginate(5);
+
+        return view('employee.list.inactive',compact('employees'));
     }
 }

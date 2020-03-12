@@ -12,6 +12,13 @@
 			</div>
 
 			<div class="box mb-5">
+
+				<div class="back">
+		            <div>
+		                <a class="text-primary" href="{{ URL::previous() }}">Back</a>
+		            </div>
+		        </div>
+
 				<h4 class="mb-4">Employee Record</h4>
 				<ul class="nav nav-tabs">
 				  <li class="nav-item">

@@ -891,7 +891,7 @@ $(document).ready(function(){
 			method: method,
 			data: data,
 			beforeSend: function(){
-				$('.bg-notif .btn-primary').prepend("<span class='spinner-grow spinner-grow-sm'></span>");
+				$('.bg-notif .btn-primary').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
 			},
 			success: function(){
 				location.reload();
@@ -899,6 +899,50 @@ $(document).ready(function(){
 		});
 		
 	});
+
+
+	/*
+	|-------------------------------
+	|         Declined Offer
+	|-------------------------------
+	*/
+
+	$(document).on('click','.decline-offer-trig',function(){
+		var id = $(this).data('id');
+		$('.decline-confirm-bg').fadeIn(200,function(){
+			$('.decline-confirm-bg .btn-primary').attr('data-id',id);
+		});
+	});
+
+	$(document).on('click','.decline-confirm-bg .btn-secondary',function(){
+		$('.decline-confirm-bg').fadeOut(200,function(){
+			$('.decline-confirm-bg .btn-primary').attr('data-id','');
+		});
+	});
+
+	$(document).on('click','.decline-confirm-bg .btn-primary',function(){
+		var id = $(this).data('id');
+
+		$.ajaxSetup({
+		    headers: {
+		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		    }
+		});
+
+		$.ajax({
+			url: '/applicants/' + id + '/decline_offer',
+			method: 'PUT',
+			beforeSend: function(){
+				$('.decline-confirm-bg .btn-primary').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
+			},
+			success: function(){
+				location.reload();
+			}
+		});
+	});
+
+
+	//------------------------------
 
 	$(document).on('click','.mark-read',function(e){
 		e.preventDefault();

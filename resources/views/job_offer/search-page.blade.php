@@ -2,6 +2,8 @@
 
 @section('contents')
 
+<!-- Prompt for confirmation area -->
+
 <div class="bg-notif">
     <div class="card w-25">
         <div class="card-header font-weight-bold">No Show</div>
@@ -15,6 +17,21 @@
     </div>
 </div>
 
+<div class="decline-confirm-bg">
+    <div class="card w-25">
+        <div class="card-header font-weight-bold">Declined Offer</div>
+        <div class="card-body">
+            Proceed with this action?
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button class="btn btn-secondary mr-3">No</button>
+            <button class="btn btn-primary">Yes</button>
+        </div>
+    </div>
+</div>
+
+<!-- Prompt for confirmation area -->
+
 <div class="container box mb-5">
 
 	@if(Session('success'))
@@ -23,6 +40,12 @@
             <strong>Success! </strong>{{ Session('success') }}
         </div>
     @endif
+
+    <div class="back">
+        <div>
+            <a class="text-primary" href="{{ route('hr-managers.index') }}">Back to dashboard</a>
+        </div>
+    </div>
 
 	<div class="row">
 		<div class="mx-auto col-md-6">
@@ -47,8 +70,9 @@
 								  		<div class="col-md-10">
 								  			<h5>{{ implode(' ',[$applicant->first_name,$applicant->last_name]) }}</h5>
 								  			<p><span class="fa fa-briefcase text-muted"></span> {{$applicant->job_name}}</p>
-								  			<a href="{{ route('employees.create',['applicant_id'=>$applicant->applicant_id]) }}" class="btn btn-primary mr-2">Offer job</a>
-								  			<span data-id="{{ $applicant->applicant_id }}" class="btn btn-secondary remove-trigger">No show</span>
+								  			<a href="{{ route('employees.create',['applicant_id'=>$applicant->applicant_id]) }}" class="btn btn-primary mr-2">Hire</a>
+								  			<span data-id="{{ $applicant->applicant_id }}" class="btn btn-secondary remove-trigger mr-2">No show</span>
+								  			<span data-id="{{ $applicant->applicant_id }}" class="btn btn-danger decline-offer-trig">Declined Offer</span>
 								  		</div>
 								  	</div>
 								</li>

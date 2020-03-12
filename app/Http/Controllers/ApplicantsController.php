@@ -71,4 +71,12 @@ class ApplicantsController extends Controller
         return view('applicant.search-page',compact('persons','skey','stat_filter','app_statuses'));
     }
 
+    public function decline_offer($applicant_id){
+        $applicant = Applicant::find($applicant_id);
+        $name = $applicant->person->name();
+        $applicant->application_status_id = application_status('DO'); // Decline Offer
+        $applicant->save();
+        Session::flash('success',"$name was tagged as declined offer");
+    }
+
 }

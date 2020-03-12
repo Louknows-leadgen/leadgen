@@ -30,6 +30,7 @@ Route::get('/','ApplicantsController@index')->name('root');
 //- applicants
 Route::get('/applicants/new/{id}','ApplicantsController@create')->name('applicants.create');
 Route::get('/applicants/search','ApplicantsController@search')->name('applicants.search');
+Route::put('/applicants/{id}/decline_offer','ApplicantsController@decline_offer')->name('applicants.decline_offer');
 
 //- application routes
 Route::get('/application/{applicant_id}/procedure','ApplicationsController@procedure')->name('applications.procedure');
@@ -45,6 +46,8 @@ Route::get('/blacklists/{applicant_id}','BlacklistsController@hit')->name('black
 
 //- employees
 Route::get('/employees/{applicant_id}/create','EmployeesController@create')->name('employees.create');
+Route::get('/employees/active','EmployeesController@active')->name('employees.active');
+Route::get('/employees/inactive','EmployeesController@inactive')->name('employees.inactive');
 
 //- final interviews
 Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@update_result')->name('fin.update_result');
@@ -53,7 +56,6 @@ Route::put('/final_interviews/{id}/no_show','ApplicationsController@no_show')->n
 
 //- hr manager
 Route::get('hr-managers/dashboard','HrManagerDashboardsController@index')->name('hr-managers.index');
-Route::get('hr-managers/employees','HrManagerDashboardsController@employees')->name('hr-managers.employees');
 
 //- interview history
 Route::get('/interviews/history/search','InterviewHistoriesController@search')->name('history.search');
