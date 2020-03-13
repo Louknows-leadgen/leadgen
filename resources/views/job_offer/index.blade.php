@@ -30,6 +30,20 @@
     </div>
 </div>
 
+
+<div class="blacklist-confirm-bg">
+    <div class="card w-25">
+        <div class="card-header font-weight-bold">Blacklist Applicant</div>
+        <div class="card-body">
+            Proceed with this action?
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button class="btn btn-secondary mr-3">No</button>
+            <button class="btn btn-primary">Yes</button>
+        </div>
+    </div>
+</div>
+
 <!-- Prompt for confirmation area -->
 
 <div class="container box mb-5">
@@ -70,9 +84,10 @@
 								  		<div class="col-md-10">
 								  			<h5>{{ $applicant->person->name() }}</h5>
 								  			<p><span class="fa fa-briefcase text-muted"></span> {{$applicant->job_name}}</p>
-								  			<a href="{{ route('employees.create',['applicant_id'=>$applicant->id]) }}" class="btn btn-primary mr-2">Hire</a>
-								  			<span data-id="{{ $applicant->id }}" class="btn btn-secondary remove-trigger mr-2">No show</span>
-								  			<span data-id="{{ $applicant->id }}" class="btn btn-danger decline-offer-trig">Declined Offer</span>
+								  			<a href="{{ route('employees.create',['applicant_id'=>$applicant->id]) }}" class="btn btn-primary mr-2 mb-2">Hire</a>
+								  			<span data-id="{{ $applicant->id }}" class="btn btn-secondary remove-trigger mr-2 mb-2">No show</span>
+								  			<span data-id="{{ $applicant->id }}" class="btn btn-danger decline-offer-trig mr-2 mb-2">Declined Offer</span>
+								  			<span data-id="{{ $applicant->id }}" data-type="applicant" class="btn btn-dark blacklist-trig mr-2 mb-2">Blacklist</span>
 								  		</div>
 								  	</div>
 								</li>

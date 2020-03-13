@@ -974,6 +974,29 @@ $(document).ready(function(){
 	});
 
 
+
+	/*
+	|-------------------------------
+	|         Blacklist
+	|-------------------------------
+	*/
+
+	$(document).on('click','.blacklist-trig',function(){
+		var id = $(this).data('id');
+		var type = $(this).data('type');
+
+		switch(type){
+			case 'applicant':
+				location.href = '/blacklists/applicant/' + id;
+				break;
+			case 'employee':
+				location.href = '/blacklists/employee/' + id;
+				break;
+		}
+		
+	});
+
+
 	//------------------------------
 
 	$(document).on('click','.mark-read',function(e){

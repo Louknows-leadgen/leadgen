@@ -43,6 +43,8 @@ Route::get('/application/candidate/{applicant_id}/profile','ApplicationsControll
 
 //- blacklist hit
 Route::get('/blacklists/{applicant_id}','BlacklistsController@hit')->name('blacklists.hit');
+Route::get('/blacklists/applicant/{id}','BlacklistsController@create_applicant')->name('blacklists.create_applicant');
+Route::get('/blacklists/employee/{id}','BlacklistsController@create_employee')->name('blacklists.create_employee');
 
 //- employees
 Route::get('/employees/{applicant_id}/create','EmployeesController@create')->name('employees.create');

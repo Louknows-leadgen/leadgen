@@ -15,7 +15,7 @@ class CreateBlacklistsTable extends Migration
     {
         Schema::create('blacklists', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('company_id')->nullable();
+            $table->string('company_number')->nullable();
             $table->string('first_name')->nullable();
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();

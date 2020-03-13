@@ -11935,7 +11935,8 @@ span.close {
 }
 
 .bg-notif,
-.decline-confirm-bg {
+.decline-confirm-bg,
+.blacklist-confirm-bg {
   display: none;
   position: fixed;
   top: 0;
@@ -11947,7 +11948,8 @@ span.close {
 }
 
 .bg-notif .card,
-.decline-confirm-bg .card {
+.decline-confirm-bg .card,
+.blacklist-confirm-bg .card {
   position: absolute;
   top: 25%;
   left: 50%;

@@ -104,4 +104,8 @@ class Applicant extends Model
         }
     }
 
+    public function getFullNameAttribute(){
+        return $this->person->name();
+    }
+
 }
