@@ -26,8 +26,14 @@
 					<div class="form-group col-md-12">
 						<label>Apply For:</label>
 						<select name="job_id" class="custom-select">
-							@foreach($jobs as $job)
-								<option value="{{$job->id}}">{{$job->name}}</option>
+							@foreach($departments as $department)
+								<optgroup label="{{ $department->department_name }}">
+									@foreach($department->positions as $position)
+										<option value="{{ $position->id }}">
+											{{ $position->name }}
+										</option>
+									@endforeach
+								</optgroup>
 							@endforeach
 						</select>
 					</div>

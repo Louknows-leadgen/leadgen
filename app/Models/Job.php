@@ -23,4 +23,8 @@ class Job extends Model
     public function employee(){
     	return $this->hasMany('App\Models\Employee');
     }
+
+    public function department(){
+        return $this->belongsTo('App\Models\Department');
+    }
 }

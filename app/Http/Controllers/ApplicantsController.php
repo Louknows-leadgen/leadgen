@@ -8,6 +8,7 @@ use App\Models\Person;
 use App\Models\Job;
 use App\Models\Site;
 use App\Models\ApplicationStatus;
+use App\Models\Department;
 use Session;
 
 
@@ -30,9 +31,9 @@ class ApplicantsController extends Controller
 
     // new applicant form
     public function create($person_id){
-        $jobs = Job::all();
+        $departments = Department::all()->sortBy('department_name');
         $sites = Site::all();
-    	return view('applicant.new',compact('person_id','jobs','sites'));
+    	return view('applicant.new',compact('person_id','departments','sites'));
     }
 
     public function store(Request $request){
