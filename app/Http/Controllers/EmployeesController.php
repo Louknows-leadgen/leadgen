@@ -158,6 +158,23 @@ class EmployeesController extends Controller
 
     }
 
+    public function update_hmo($employee_id, Request $request){
+        $validator = Validator::make($request->all(),[
+            'medilink_id' => 'required'
+        ]);
+
+        if($validator->passes()){
+            $employee = Employee::find($employee_id);
+            $employee->update($validated);
+
+            return response()->json(['success'=>'Record has been updated']);
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray()]);
+        }
+
+
+    }
+
     public function active(){
         $status = 'active';
         $employees = Employee::where('status','=','active')->paginate(5);

@@ -12039,3 +12039,11 @@ span.close {
   z-index: 2;
 }
 
+table input:-moz-read-only {
+  background-color: transparent !important;
+}
+
+table input:read-only {
+  background-color: transparent !important;
+}
+

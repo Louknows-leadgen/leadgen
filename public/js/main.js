@@ -1305,5 +1305,70 @@ $(document).ready(function(){
 		});
 	});
 
+	$(document).on('click','.hmo-new',function(){
+		$(this).hide();
+		$('.hide').show();
+	});
+
+	$(document).on('click','.hmo-cancel',function(){
+		$('.hmo-new').show();
+		$('.hide').hide(0,function(){
+			$('.hide input').val('');
+		});
+	});
+
+	$(document).on('submit','.hmo-form',function(e){
+		console.log('test');
+		var form_data = {};
+		var url = $(this).attr("action");
+		var method = $(this).attr("method");
+
+		$(this).find('[name]').each(function(){
+			form_data[this.name] = this.value;
+		});
+
+		e.preventDefault();
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+	    	url: url,
+	    	method: method,
+	    	data: form_data,
+	    	success: function(response){
+	    		if(!$.isEmptyObject(response.errors)){
+                    for (var key in response.errors) {
+					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
+					        $("input[name='"+ key +"']").addClass('is-invalid');
+					        $("span."+ key).empty().append(response.errors[key]);
+					    }
+					}
+                }else{
+                	var name = $("input[name='name']").val();
+                	var hmo_no = $("input[name='medilink_number']").val();
+
+                	var row =  `<tr>
+									<td>
+										<input type="text" class="form-control form-control-sm border border-0" value="`+ name +`" readonly>
+									</td>
+									<td class="d-flex align-items-center">
+										<input type="text" class="form-control form-control-sm border border-0 mr-2" value="`+ hmo_no +`" readonly>
+										<span class="btn btn-danger badge">-</span>
+									</td>
+								</tr>`;
+
+					$(row).insertBefore($('tr.hide'));
+					$('.hmo-cancel').click();
+                }
+	    	}
+	    });
+
+	});
+
 });
-		
+
+

@@ -58,6 +58,9 @@ Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@upd
 Route::get('/final_interview/{id}/form','FinalInterviewsController@form')->name('fin.form');
 Route::put('/final_interviews/{id}/no_show','ApplicationsController@no_show')->name('fin.no_show');
 
+//- hmo
+Route::post('/hmo/{id}/store','HmoController@store')->name('hmo.store');
+
 //- hr manager
 Route::get('hr-managers/dashboard','HrManagerDashboardsController@index')->name('hr-managers.index');
 

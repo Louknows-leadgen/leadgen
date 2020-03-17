@@ -654,3 +654,7 @@ span.close{
   font-size: 14px;
   z-index: 2;
 }
+
+table input:read-only{
+  background-color: transparent !important;
+}

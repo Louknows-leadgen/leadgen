@@ -30,6 +30,9 @@
 				  <li class="nav-item">
 				    <a class="nav-link" data-toggle="tab" href="#comp">Compensation</a>
 				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" data-toggle="tab" href="#hmo">HMO</a>
+				  </li>
 				</ul>
 
 				<!-- Tab panes -->
@@ -44,6 +47,9 @@
 					  <div class="tab-pane container fade" id="comp">
 					  	@include('employee.tabs.active.compensation')
 					  </div>
+					  <div class="tab-pane container fade" id="hmo">
+					  	@include('employee.tabs.active.hmo')
+					  </div>
 					</div>
 				@else
 					<div class="tab-content">
@@ -55,6 +61,9 @@
 					  </div>
 					  <div class="tab-pane container fade" id="comp">
 					  	@include('employee.tabs.inactive.compensation')
+					  </div>
+					  <div class="tab-pane container fade" id="hmo">
+					  	@include('employee.tabs.inactive.hmo')
 					  </div>
 					</div>
 				@endif
