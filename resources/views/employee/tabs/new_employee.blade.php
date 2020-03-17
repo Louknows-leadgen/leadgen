@@ -54,6 +54,12 @@
 					</div>
 
 					<div class="form-group">
+						<label>Department</label>
+						<input type="text" class="form-control form-control-sm" value="{{ $applicant->department->department_name }}" readonly>
+						<input type="hidden" name="department_id" value="{{$applicant->department->id}}">
+					</div>
+
+					<div class="form-group">
 						<label>Position</label>
 						<input type="text" class="form-control form-control-sm" value="{{ $applicant->job->name }}" readonly>
 						<input type="hidden" name="job_id" value="{{$applicant->job_id}}">
@@ -87,15 +93,6 @@
 							<span class="invalid-feedback contract_name" role="alert">
 							</span>
 						</div>
-					</div>
-
-					<div class="form-group">
-						<label>Department</label>
-						<select class="form-control form-control-sm" name="department_id">
-							@foreach($departments as $department)
-								<option value="{{ $department->id }}">{{ $department->department_name }}</option>
-							@endforeach
-						</select>
 					</div>
 
 					<div class="form-group">

@@ -53,13 +53,24 @@
 					</div>
 
 					<div class="form-group">
+						<label>Department</label>
+						<input type="text" class="form-control form-control-sm" value="{{ $employee->department_name }}" id="department_name" readonly>
+						<input type="hidden" name="department_id" id="department_id" value="{{ $employee->job->department->id }}">
+					</div>
+
+					<div class="form-group">
 						<label>Position</label>
-						<select class="form-control form-control-sm" name="job_id">
-							@foreach($jobs as $job)
-								<option value="{{ $job->id }}"
-									{{ $job->id == $employee->job_id ? 'selected' : '' }}>
-									{{ $job->name }}
-								</option>
+						<select class="form-control form-control-sm" name="job_id" id="position">
+
+							@foreach($departments as $department)
+								<optgroup label="{{ $department->department_name }}">
+									@foreach($department->positions as $position)
+										<option value="{{ $position->id }}"
+											{{ $position->id == $employee->job_id ? 'selected' : '' }}>
+											{{ $position->name }}
+										</option>
+									@endforeach
+								</optgroup>
 							@endforeach
 						</select>
 					</div>
@@ -95,18 +106,6 @@
 							<span class="invalid-feedback contract_name" role="alert">
 							</span>
 						</div>
-					</div>
-
-					<div class="form-group">
-						<label>Department</label>
-						<select class="form-control form-control-sm" name="department_id">
-							@foreach($departments as $department)
-								<option value="{{ $department->id }}" 
-									{{ $department->id == $employee->department_id ? 'selected' : '' }}>
-									{{ $department->department_name }}
-								</option>
-							@endforeach
-						</select>
 					</div>
 
 					<div class="form-group">

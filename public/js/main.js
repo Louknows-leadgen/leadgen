@@ -1288,5 +1288,22 @@ $(document).ready(function(){
 		});
 	});
 
+	$(document).on('change','#position',function(){
+		var position = $(this).val();
+		var url = '/api/jobs/' + position;
+
+		var dept_name_input = $('#department_name');
+		var dept_id_input = $('#department_id');
+		
+		$.ajax({
+			url: url,
+			method: 'get',
+			success: function(response){
+				dept_name_input.val(response.department_name);
+				dept_id_input.val(response.department_id);
+			}
+		});
+	});
+
 });
 		

@@ -20,7 +20,6 @@
 Route::get('/','ApplicantsController@index')->name('root');
 
 
-
 /*
 |------------------------------------------ 
 |-- Custom Routes
@@ -64,6 +63,9 @@ Route::get('hr-managers/dashboard','HrManagerDashboardsController@index')->name(
 
 //- interview history
 Route::get('/interviews/history/search','InterviewHistoriesController@search')->name('history.search');
+
+//- job
+Route::get('/api/jobs/{job_id}','JobsController@api_department'); // api
 
 //- job offer
 Route::get('/job-offerings/search','JobOfferingsController@search')->name('job-offerings.search');

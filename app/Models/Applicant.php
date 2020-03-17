@@ -86,7 +86,7 @@ class Applicant extends Model
     */
 
     // used to create custom attribute 'job_name'
-    protected $appends = ['job_name','avatar','full_name'];
+    protected $appends = ['job_name','avatar','full_name','department'];
     
     public function getJobNameAttribute(){
         return $this->job->name;
@@ -106,6 +106,10 @@ class Applicant extends Model
 
     public function getFullNameAttribute(){
         return $this->person->name();
+    }
+
+    public function getDepartmentAttribute(){
+        return $this->job->department;
     }
 
 }

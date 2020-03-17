@@ -106,13 +106,12 @@ class EmployeesController extends Controller
         $contracts = Contract::all()->sortBy('contract_name');
         $departments = Department::all()->sortBy('department_name');
         $companies = Company::all()->sortBy('cost_name');
-        $jobs = Job::all()->sortBy('name');
         $employees = Employee::all_employees_name();
         $gov_detail = $employee->government_detail;
         $tax_codes = Tax::all()->sortBy('tax_name');
         $compensation = Compensation::where('employee_id','=',$employee_id)->first();
 
-    	return view('employee.show',compact('employee','cost_centers','sites','contracts','departments','employees','companies','clusters','jobs','gov_detail','tax_codes', 'compensation'));
+    	return view('employee.show',compact('employee','cost_centers','sites','contracts','departments','employees','companies','clusters','gov_detail','tax_codes', 'compensation'));
     }
 
     public function update($employee_id, Request $request){
