@@ -8,10 +8,12 @@
 			  		</div>
 			  		<div class="col-md-10">
 			  			<h5>{{ $employee->full_name }}</h5>
-			  			<p><span class="fa fa-briefcase text-muted"></span> {{$employee->job_name}}</p>
+			  			<p>
+			  				<span class="fa fa-briefcase text-muted"></span> {{$employee->job_name}}
+			  			</p>
 			  			<a href="{{ route('employees.show',['employee'=>$employee->id]) }}" class="btn btn-primary mr-2">Details</a>
 			  			@if($status == 'active')
-			  				<span data-id="{{ $employee->id }}" class="btn btn-secondary remove-trigger">Blacklist</span>\
+			  				<a href="{{route('blacklists.blacklist_employee',['id'=>$employee->id])}}" class="btn btn-secondary">Blacklist</a>
 			  			@endif
 			  		</div>
 			  	</div>

@@ -87,7 +87,9 @@
 								  			<a href="{{ route('employees.create',['applicant_id'=>$applicant->id]) }}" class="btn btn-primary mr-2 mb-2">Hire</a>
 								  			<span data-id="{{ $applicant->id }}" class="btn btn-secondary remove-trigger mr-2 mb-2">No show</span>
 								  			<span data-id="{{ $applicant->id }}" class="btn btn-danger decline-offer-trig mr-2 mb-2">Declined Offer</span>
-								  			<span data-id="{{ $applicant->id }}" data-type="applicant" class="btn btn-dark blacklist-trig mr-2 mb-2">Blacklist</span>
+								  			<a href="{{ route('blacklists.blacklist_applicant',['id'=>$applicant->id]) }}" class="btn btn-dark blacklist-trig mr-2 mb-2">
+								  				Blacklist
+								  			</a>
 								  		</div>
 								  	</div>
 								</li>

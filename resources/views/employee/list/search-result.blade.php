@@ -15,7 +15,9 @@
 			  			   class="btn btn-primary mr-2">
 			  				Details
 			  			</a>
-			  			<span data-id="{{ $employee->employee_id }}" class="btn btn-secondary remove-trigger">Blacklist</span>
+			  			@if($scope == 'active')
+			  				<a href="{{route('blacklists.blacklist_employee',['id'=>$employee->employee_id])}}" class="btn btn-secondary">Blacklist</a>
+			  			@endif
 			  		</div>
 			  	</div>
 			</li>

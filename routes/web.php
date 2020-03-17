@@ -42,9 +42,11 @@ Route::get('/application/candidates/search','ApplicationsController@search')->na
 Route::get('/application/candidate/{applicant_id}/profile','ApplicationsController@profile')->name('applications.profile');
 
 //- blacklist hit
-Route::get('/blacklists/{applicant_id}','BlacklistsController@hit')->name('blacklists.hit');
-Route::get('/blacklists/applicant/{id}','BlacklistsController@create_applicant')->name('blacklists.create_applicant');
-Route::get('/blacklists/employee/{id}','BlacklistsController@create_employee')->name('blacklists.create_employee');
+Route::get('/blacklist/{applicant_id}','BlacklistsController@hit')->name('blacklists.hit');
+Route::get('/blacklist/applicant/{id}','BlacklistsController@blacklist_applicant')->name('blacklists.blacklist_applicant');
+Route::get('/blacklists/employee/{id}','BlacklistsController@blacklist_employee')->name('blacklists.blacklist_employee');
+Route::post('/blacklist/applicant/store','BlacklistsController@blacklist_applicant_store')->name('blacklists.applicant_store');
+Route::post('/blacklists/employee/store','BlacklistsController@blacklist_employee_store')->name('blacklists.employee_store');
 
 //- employees
 Route::get('/employees/{applicant_id}/create','EmployeesController@create')->name('employees.create');

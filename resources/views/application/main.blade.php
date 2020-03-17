@@ -44,7 +44,7 @@
 				        				<div class="dynamic-container h-100 {{in_array($applicant->application_status_id,[3,4,5,11]) ? '' : 'd-none' }}" data-tab="final-interview">
 				        					@include($fin_view)
 				        				</div>
-				        				<div class="dynamic-container h-100 {{in_array($applicant->application_status_id,[6,7,8,9,10]) ? '' : 'd-none' }}" data-tab="job-orientation">
+				        				<div class="dynamic-container h-100 {{in_array($applicant->application_status_id,[6,7,8,9,10,12]) ? '' : 'd-none' }}" data-tab="job-orientation">
 				        					@include($jo_view)
 				        				</div>
 				        			</div>	

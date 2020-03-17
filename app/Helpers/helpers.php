@@ -37,9 +37,10 @@ function get_status_icon($status_id){
 			$tab['fi'] = 'completed';
 			$tab['jo'] = 'current';
 			break;
-		// applicant no show/declined offer in job orientation	
+		// applicant no show/declined offer in job orientation/blacklisted
 		case 8:
 		case 10:
+		case 12:
 			$tab['init'] = 'completed';
 			$tab['fi'] = 'completed';
 			$tab['jo'] = 'fail';
@@ -49,7 +50,7 @@ function get_status_icon($status_id){
 			$tab['init'] = 'completed';
 			$tab['fi'] = 'completed';
 			$tab['jo'] = 'completed';
-			break;						
+			break;				
 	}
 
 	return $tab;
@@ -96,6 +97,8 @@ function application_status($status){
 		case 'DO': // Declined Offer
 			return 10;
 		case 'FINS': // Final Interview - No Show
-			return 11;									
+			return 11;	
+		case 'BL': // Blacklisted
+			return 12;									
 	}
 }

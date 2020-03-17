@@ -10,7 +10,7 @@ class Blacklist extends Model
 {
     //
     protected $fillable = [
-    	'company_id',
+    	'company_number',
         'first_name',
         'middle_name',
         'last_name',

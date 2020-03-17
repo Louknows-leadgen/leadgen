@@ -11,7 +11,7 @@
 			  			<p><span class="fa fa-briefcase text-muted"></span> {{$employee->job_name}}</p>
 			  			<a href="{{ route('employees.show',['employee'=>$employee->employee_id]) }}" class="btn btn-primary mr-2">Details</a>
 			  			@if($scope == 'active')
-			  				<span data-id="{{ $employee->employee_id }}" class="btn btn-secondary remove-trigger">Blacklist</span>
+			  				<a href="{{route('blacklists.blacklist_employee',['id'=>$employee->employee_id])}}" class="btn btn-secondary">Blacklist</a>
 			  			@endif
 			  		</div>
 			  	</div>
