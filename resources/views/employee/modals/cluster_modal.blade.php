@@ -22,6 +22,7 @@
 
         <div class="modal-list">
           <ul class="list-group">
+              <li class="list-item hide"></li> <!-- dummy li -->
             @foreach($clusters as $cluster)
               <li class="list-group-item list-item" 
                   data-modal="cluster">

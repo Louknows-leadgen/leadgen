@@ -18,6 +18,10 @@ class DatabaseSeeder extends Seeder
             TestsTableSeeder::class,
             RolesTableSeeder::class,
             TaxesTableSeeder::class,
+            CompaniesTableSeeder::class,
+            CostCentersTableSeeder::class,
+            DepartmentsTableSeeder::class,
+            
             //TestDataSeeder::class
         ]);
     }

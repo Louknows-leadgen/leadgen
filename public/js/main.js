@@ -1104,16 +1104,14 @@ $(document).ready(function(){
 					// insert the newly added item to the DOM
 					var i;
 					var el = '<li class="list-group-item list-item" data-modal="'+ add_type +'">'+ val +'</li>';
+					var item;
 					for(i = 0; i < lists.length; i++){
-						if($(lists[i]).text().trim().toUpperCase() > val.toUpperCase()){
-							$(el).insertBefore(lists[i]);
-							break;
+						if($(lists[i]).text().trim().toUpperCase() < val.toUpperCase()){
+							item = lists[i];
 						}
 					}
 
-					if($(lists[i-1]).text().trim().toUpperCase() < val.toUpperCase()){
-						$(el).insertAfter(lists[i-1]);
-					}
+					$(el).insertAfter(item);
 
 					input.removeClass('is-invalid');
 					notif.empty();
@@ -1318,7 +1316,6 @@ $(document).ready(function(){
 	});
 
 	$(document).on('submit','.hmo-form',function(e){
-		console.log('test');
 		var form_data = {};
 		var url = $(this).attr("action");
 		var method = $(this).attr("method");
@@ -1341,10 +1338,14 @@ $(document).ready(function(){
 	    	data: form_data,
 	    	success: function(response){
 	    		if(!$.isEmptyObject(response.errors)){
+	    			$('.notif-box ul').empty();
                     for (var key in response.errors) {
 					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
 					        $("input[name='"+ key +"']").addClass('is-invalid');
 					        $("span."+ key).empty().append(response.errors[key]);
+					        $('.notif-box').removeClass('alert-success')
+					                       .addClass('alert-danger');
+					        $('.notif-box ul').append('<li>' + response.errors[key] + '</li>');
 					    }
 					}
                 }else{
@@ -1363,6 +1364,10 @@ $(document).ready(function(){
 
 					$(row).insertBefore($('tr.hide'));
 					$('.hmo-cancel').click();
+					$('.notif-box').removeClass('alert-danger')
+					               .addClass('alert-success');
+					$('.notif-box ul').empty()
+									  .append('<li>' + response.success + '</li>');
                 }
 	    	}
 	    });

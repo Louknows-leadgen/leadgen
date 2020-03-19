@@ -36,7 +36,7 @@
 				</ul>
 
 				<!-- Tab panes -->
-				@if($employee->status == 'active')
+				@if($employee->status == 'Active')
 					<div class="tab-content">
 					  <div class="tab-pane container active" id="emp_dtl">
 					  	@include('employee.tabs.active.employee_details')
