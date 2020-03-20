@@ -165,9 +165,10 @@ class EmployeesController extends Controller
 
         if($validator->passes()){
             $employee = Employee::find($employee_id);
-            $employee->update($validated);
+            $employee->medilink_id = $request->medilink_id;
+            $employee->save();
 
-            return response()->json(['success'=>'Record has been updated']);
+            return response()->json(['success'=>'Success! Record has been updated']);
         }else{
             return response()->json(['errors'=>$validator->getMessageBag()->toArray()]);
         }

@@ -85,6 +85,10 @@ class Employee extends Model
         return $this->belongsTo('App\Models\Department');
     }
 
+    public function health_insurances(){
+        return $this->hasMany('App\Models\HealthInsurance');
+    }
+
     /*
     |---------------------
     |   Mutators

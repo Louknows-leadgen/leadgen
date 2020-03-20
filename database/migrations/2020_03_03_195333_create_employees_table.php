@@ -40,7 +40,7 @@ class CreateEmployeesTable extends Migration
             $table->date('assoc_date')->nullable();
             $table->date('consultant_date')->nullable();
             $table->date('regularize_date')->nullable();
-            $table->date('medilink_id')->nullable();
+            $table->string('medilink_id')->nullable();
             $table->timestamps();
         });
     }

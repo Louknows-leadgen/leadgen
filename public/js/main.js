@@ -1336,21 +1336,26 @@ $(document).ready(function(){
 	    	url: url,
 	    	method: method,
 	    	data: form_data,
+	    	beforeSend: function(){
+	    		$('.dependent_hmo_save').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
+	    	},
+	    	complete: function(){
+	    		$('.dependent_hmo_save').html("Save");
+	    	},
 	    	success: function(response){
 	    		if(!$.isEmptyObject(response.errors)){
 	    			$('.notif-box ul').empty();
                     for (var key in response.errors) {
 					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
 					        $("input[name='"+ key +"']").addClass('is-invalid');
-					        $("span."+ key).empty().append(response.errors[key]);
-					        $('.notif-box').removeClass('alert-success')
-					                       .addClass('alert-danger');
 					        $('.notif-box ul').append('<li>' + response.errors[key] + '</li>');
+					    	$('.notif-box').removeClass('alert-success d-none')
+					                       .addClass('alert-danger');
 					    }
 					}
                 }else{
                 	var name = $("input[name='name']").val();
-                	var hmo_no = $("input[name='medilink_number']").val();
+                	var hmo_no = $("input[name='hmo_id']").val();
 
                 	var row =  `<tr>
 									<td>
@@ -1364,14 +1369,70 @@ $(document).ready(function(){
 
 					$(row).insertBefore($('tr.hide'));
 					$('.hmo-cancel').click();
-					$('.notif-box').removeClass('alert-danger')
-					               .addClass('alert-success');
 					$('.notif-box ul').empty()
 									  .append('<li>' + response.success + '</li>');
+					$('.notif-box').removeClass('alert-danger d-none')
+					               .addClass('alert-success');
                 }
 	    	}
 	    });
 
+	});
+
+
+	$(document).on('submit','.update_hmo',function(e){
+		var form_data = {};
+		var url = $(this).attr("action");
+		var method = $(this).attr("method");
+
+		$(this).find('[name]').each(function(){
+			form_data[this.name] = this.value;
+		});
+
+		e.preventDefault();
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+	    	url: url,
+	    	method: method,
+	    	data: form_data,
+	    	beforeSend: function(){
+	    		$('.update_hmo button').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
+	    	},
+	    	complete: function(){
+	    		$('.update_hmo button').html("Submit");
+	    	},
+	    	success: function(response){
+	    		if(!$.isEmptyObject(response.errors)){
+	    			$('.notif-box ul').empty();
+                    for (var key in response.errors) {
+					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
+					        $("input[name='"+ key +"']").addClass('is-invalid');
+					        $('.notif-box ul').append('<li>' + response.errors[key] + '</li>');
+					    	$('.notif-box').removeClass('alert-success d-none')
+					                       .addClass('alert-danger');
+					    }
+					}
+                }else{
+					$('.notif-box ul').empty()
+									  .append('<li>' + response.success + '</li>');
+					$('.notif-box').removeClass('alert-danger d-none')
+					               .addClass('alert-success');
+                }
+	    	}
+	    });
+
+	});
+
+
+	$('a.close').on('click',function(e){
+		$('.notif-box').addClass('d-none');
+		$('.hmo_input').removeClass('is-invalid');
 	});
 
 });

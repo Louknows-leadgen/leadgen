@@ -52,6 +52,7 @@ Route::get('/employees/{applicant_id}/create','EmployeesController@create')->nam
 Route::get('/employees/active','EmployeesController@active')->name('employees.active');
 Route::get('/employees/inactive','EmployeesController@inactive')->name('employees.inactive');
 Route::get('/employees/search','EmployeesController@search')->name('employees.search');
+Route::put('/employees/update_hmo/{employee_id}','EmployeesController@update_hmo')->name('employees.update_hmo');
 
 //- final interviews
 Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@update_result')->name('fin.update_result');
@@ -59,7 +60,7 @@ Route::get('/final_interview/{id}/form','FinalInterviewsController@form')->name(
 Route::put('/final_interviews/{id}/no_show','ApplicationsController@no_show')->name('fin.no_show');
 
 //- hmo
-Route::post('/hmo/{id}/store','HmoController@store')->name('hmo.store');
+Route::post('/hmo/{id}/store','HealthInsurancesController@store')->name('hmo.store');
 
 //- hr manager
 Route::get('hr-managers/dashboard','HrManagerDashboardsController@index')->name('hr-managers.index');
