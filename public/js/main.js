@@ -1356,14 +1356,15 @@ $(document).ready(function(){
                 }else{
                 	var name = $("input[name='name']").val();
                 	var hmo_no = $("input[name='hmo_id']").val();
+                	var id = response.id;
 
-                	var row =  `<tr>
+                	var row =  `<tr data-id="`+ id +`">
 									<td>
 										<input type="text" class="form-control form-control-sm border border-0" value="`+ name +`" readonly>
 									</td>
 									<td class="d-flex align-items-center">
 										<input type="text" class="form-control form-control-sm border border-0 mr-2" value="`+ hmo_no +`" readonly>
-										<span class="btn btn-danger badge">-</span>
+										<span class="btn btn-danger badge rmv-hmo-trg" data-id="`+ id +`">-</span>
 									</td>
 								</tr>`;
 
@@ -1433,6 +1434,48 @@ $(document).ready(function(){
 	$('a.close').on('click',function(e){
 		$('.notif-box').addClass('d-none');
 		$('.hmo_input').removeClass('is-invalid');
+	});
+
+	$(document).on('click','.rmv-hmo-trg',function(){
+		var id = $(this).data('id');
+		$('.bg-notif-gen').fadeIn(200,function(){
+			$('.bg-notif-gen .btn-primary').attr('data-id',id);
+		});
+	});
+
+	$(document).on('click','.bg-notif-gen .btn-secondary',function(){
+		$('.bg-notif-gen').fadeOut(200);
+	});
+
+	$(document).on('click','.rmv-dpndt-hmo',function(){
+		var id = $(this).data('id');
+		var url = '/hmo/'+ id + '/destroy';
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+		$.ajax({
+			url: url,
+			method: 'DELETE',
+			beforeSend: function(){
+				$('.rmv-dpndt-hmo').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
+			},
+			complete: function(){
+				$('.bg-notif-gen').fadeOut(200);
+				$('.rmv-dpndt-hmo').text('Yes');
+				$("tr[data-id='"+ id +"']").remove();
+			},
+			success: function(response){
+				$('.notif-box ul').empty()
+								  .append('<li>' + response.success + '</li>');
+				$('.notif-box').removeClass('alert-danger d-none')
+					           .addClass('alert-success');
+			}
+		});
+
 	});
 
 });

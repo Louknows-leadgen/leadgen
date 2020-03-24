@@ -22,10 +22,15 @@ class HealthInsurancesController extends Controller
     			     'name' => $request->name,
     			     'hmo_id' => $request->hmo_id
     		]);
-    		return response()->json(['success'=>'Success! Created hmo for the dependent']);
+    		return response()->json(['id'=>$hmo->id,'success'=>'Success! Created hmo for the dependent']);
     	}else{
     		return response()->json(['errors'=>$validator->getMessageBag()->toArray()]);
     	}
 
+    }
+
+    public function destroy($id){
+        HealthInsurance::find($id)->delete();
+        return response()->json(['success'=>'Success! Removed dependent\'s hmo']);
     }
 }

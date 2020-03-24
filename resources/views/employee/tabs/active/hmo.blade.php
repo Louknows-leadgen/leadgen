@@ -1,9 +1,26 @@
+<!-- Notification area -->
+
 <div class="alert alert-danger alert-dismissible notif-box mt-3 d-none">
 	<a href="#" class="close" aria-label="close">&times;</a>
 	<ul class="list-unstyled"></ul> 
 </div>
 
 
+<div class="bg-notif-gen">
+    <div class="card w-25">
+        <div class="card-header font-weight-bold">HMO - Remove Dependent</div>
+        <div class="card-body">
+            Proceed with this action?
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button class="btn btn-secondary mr-3">No</button>
+            <button class="btn btn-primary rmv-dpndt-hmo">Yes</button>
+        </div>
+    </div>
+</div>
+
+
+<!--  end -->
 
 <div class="row mt-3">
 	<div class="col-md-12">
@@ -45,13 +62,13 @@
 				</thead>
 				<tbody>
 						@foreach($employee->health_insurances as $insurance)
-						<tr>
+						<tr data-id="{{$insurance->id}}">
 							<td>
 								<input type="text" class="form-control form-control-sm border border-0" value="{{ $insurance->name }}" readonly>
 							</td>
 							<td class="d-flex align-items-center">
 								<input type="text" class="form-control form-control-sm border border-0 mr-2" value="{{ $insurance->hmo_id }}" readonly>
-								<span class="btn btn-danger badge" data-id="{{ $insurance->id }}">
+								<span class="btn btn-danger badge rmv-hmo-trg" data-id="{{ $insurance->id }}">
 									-
 								</span>
 							</td>

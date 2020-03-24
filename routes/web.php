@@ -61,6 +61,7 @@ Route::put('/final_interviews/{id}/no_show','ApplicationsController@no_show')->n
 
 //- hmo
 Route::post('/hmo/{id}/store','HealthInsurancesController@store')->name('hmo.store');
+Route::delete('/hmo/{id}/destroy','HealthInsurancesController@destroy')->name('hmo.destroy');
 
 //- hr manager
 Route::get('hr-managers/dashboard','HrManagerDashboardsController@index')->name('hr-managers.index');
