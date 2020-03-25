@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             CompaniesTableSeeder::class,
             CostCentersTableSeeder::class,
             DepartmentsTableSeeder::class,
-            
+            ExitTypesTableSeeder::class,
             //TestDataSeeder::class
         ]);
     }

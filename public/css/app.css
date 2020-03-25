@@ -12049,3 +12049,8 @@ table input:read-only {
   background-color: transparent !important;
 }
 
+.minimized-y {
+  height: 0px;
+  overflow: hidden;
+}
+

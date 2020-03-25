@@ -1478,6 +1478,18 @@ $(document).ready(function(){
 
 	});
 
+	$('#clear-switch').on('change',function(){
+		var $switch = $(this);
+		var $clr_dt = $('.clrdt-container');
+
+		if($switch.prop('checked') == true){
+			$clr_dt.animate({'height':'45px'});
+		}else{
+			$clr_dt.animate({'height':'0px'});
+		    $clr_dt.find('input').val('');
+		}
+	});
+
 });
 
 

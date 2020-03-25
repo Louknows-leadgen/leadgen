@@ -54,6 +54,14 @@ Route::get('/employees/inactive','EmployeesController@inactive')->name('employee
 Route::get('/employees/search','EmployeesController@search')->name('employees.search');
 Route::put('/employees/update_hmo/{employee_id}','EmployeesController@update_hmo')->name('employees.update_hmo');
 
+//- exit clearance
+
+Route::post('/exit-clearances/store','ExitClearancesController@store')->name('ext-clr.store');
+
+Route::get('/exit-clearances/{id}/create','ExitClearancesController@create')->name('ext-clr.create');
+
+Route::get('/exit-clearances','ExitClearancesController@index')->name('ext-clr.index');
+
 //- final interviews
 Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@update_result')->name('fin.update_result');
 Route::get('/final_interview/{id}/form','FinalInterviewsController@form')->name('fin.form');
@@ -178,6 +186,7 @@ Route::get('/account','UsersController@index')->name('user.account');
 Route::put('/account/update-email','UsersController@update_email')->name('user.update-email');
 Route::get('/account/edit-password','UsersController@edit_password')->name('user.edit-password');
 Route::put('/account/update-password','UsersController@update_password')->name('user.update-password');
+
 
 
 
