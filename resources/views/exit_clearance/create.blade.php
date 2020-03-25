@@ -27,11 +27,11 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Exit type:</label>
-							<select class="custom-select custom-select-sm" name="ext_type">
+							<select class="custom-select custom-select-sm" name="exit_type_id">
 								@foreach($exit_types as $type)
 									<option value="{{ $type->id }}"
 										{{ 
-											old('ext_type') == $type->id ? 'selected' : '' 
+											old('exit_type_id') == $type->id ? 'selected' : '' 
 										}}>
 											{{ $type->name }}
 									</option>
@@ -115,6 +115,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
+						<a href="{{ URL::previous() }}" class="btn btn-secondary mr-2">Cancel</a>
 						<input type="submit" class="btn btn-primary" value="Submit">
 					</div>
 				</div>

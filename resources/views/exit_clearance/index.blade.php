@@ -10,19 +10,32 @@
 						<tr>
 							<td>Name</td>
 							<td>Position</td>
-							<td>Date Cleared</td>
+							<td>Last Payment Date</td>
+							<td>Last Payment (PHP)</td>
 							<td>Action</td>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach($exit_clearances as $clearance)
 							<tr>
-								<td>{{ $clearance->employee->full_name }}</td>
+								<td>
+									<a href="{{ route('ext-clr.show',['id'=>$clearance->id]) }}">
+										{{ $clearance->employee->full_name }}
+									</a>
+								</td>
 								<td>{{ $clearance->employee->job_name }}</td>
 								<td >{{ 
-									isset($clearance->cleared_dt) ? $clearance->cleared_dt : '-,-'
+									isset($clearance->last_pay_dt) ? 
+									date('m/d/Y', strtotime($clearance->cleared_dt)) : 
+									'-,-'
 								}}</td>
-								<td></td>
+								<td>{{ number_format($clearance->last_pay_amt) }}</td>
+								<td>
+									<button class="btn btn-primary claim-last-pay"
+									        data-id="{{ $clearance->id }}">
+									    Claim
+									</button>
+								</td>
 							</tr>
 						@endforeach
 					</tbody>

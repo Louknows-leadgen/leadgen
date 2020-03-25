@@ -60,7 +60,14 @@ Route::post('/exit-clearances/store','ExitClearancesController@store')->name('ex
 
 Route::get('/exit-clearances/{id}/create','ExitClearancesController@create')->name('ext-clr.create');
 
+Route::get('/exit-clearances/{id}','ExitClearancesController@show')->name('ext-clr.show');
+
+Route::put('/exit-clearances/{id}/update','ExitClearancesController@update')->name('ext-clr.update');
+
+Route::put('/exit-clearances/{id}/claim','ExitClearancesController@claim')->name('ext-clr.claim');
+
 Route::get('/exit-clearances','ExitClearancesController@index')->name('ext-clr.index');
+
 
 //- final interviews
 Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@update_result')->name('fin.update_result');

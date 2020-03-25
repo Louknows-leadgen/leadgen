@@ -16,7 +16,7 @@ class CreateExitClearancesTable extends Migration
         Schema::create('exit_clearances', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('employee_id');
-            $table->integer('ext_type');
+            $table->integer('exit_type_id');
             $table->date('last_employment_dt')->nullable();
             $table->date('last_pay_dt')->nullable();
             $table->integer('last_pay_amt')->nullable();

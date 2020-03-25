@@ -9,11 +9,12 @@ class ExitClearance extends Model
     //
     protected $fillable = [
     	'employee_id',
-    	'ext_type',
+    	'exit_type_id',
     	'last_pay_amt',
     	'cleared_dt',
     	'last_employment_dt',
     	'last_pay_dt',
+        'claimed_dt',
     	'reason'
     ];
 
@@ -23,6 +24,10 @@ class ExitClearance extends Model
     |------------------------*/
     public function employee(){
     	return $this->belongsTo('App\Models\Employee');
+    }
+
+    public function exit_type(){
+    	return $this->belongsTo('App\Models\ExitType');
     }
 
 
@@ -50,5 +55,20 @@ class ExitClearance extends Model
 	        $date = date_create_from_format("m/d/Y",$value);
 	        $this->attributes['last_pay_dt'] = date_format($date,"Y-m-d");
     	}
+    }
+
+
+
+    /*
+    |------------------------
+    |    Custom Attributes
+    |------------------------*/
+
+    protected $appends = [
+        'exit_type_name'
+    ];
+
+    public function getExitTypeNameAttribute(){
+        return $this->exit_type->name;
     }
 }
