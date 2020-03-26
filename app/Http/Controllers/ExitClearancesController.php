@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
+//use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 use App\Models\Employee;
 use App\Models\ExitClearance;
 use App\Models\ExitType;
@@ -72,15 +73,15 @@ class ExitClearancesController extends Controller
     }
 
     public function claim(Request $request){
-    	$exit_clearance = ExitClearance::find($request->id);
+    	$exit_clearance = ExitClearance::find($request->id); // exit clearance id
 
-  //   	$dt = new DateTime("now", new DateTimeZone('Asia/Kuala_Lumpur'));
-		// $dt->format('Y-m-d');
+		date_default_timezone_set('Asia/Kuala_Lumpur');
+		$dt = Carbon::now();
 
-    	$exit_clearance->claimed_dt = date('Y-m-d');
+    	$exit_clearance->claimed_dt = $dt;
     	$exit_clearance->save();
 
-    	Session::flash('success',"Transaction has been completed");
+    	Session::flash('success',"Success! Completed transaction");
     }
    
 }

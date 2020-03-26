@@ -89,6 +89,10 @@ class Employee extends Model
         return $this->hasMany('App\Models\HealthInsurance');
     }
 
+    public function exit_clearance(){
+        return $this->hasOne('App\Models\ExitClearance');
+    }
+
     /*
     |---------------------
     |   Mutators

@@ -195,5 +195,16 @@ Route::get('/account/edit-password','UsersController@edit_password')->name('user
 Route::put('/account/update-password','UsersController@update_password')->name('user.update-password');
 
 
+use Carbon\Carbon;
 
+Route::get('/test/date',function(){
+	//$dt = new Carbon(Carbon::now(), 'Asia/Kuala_Lumpur');
+	//$dt = Carbon::createFromFormat('d/m/Y H:i:s T', $row['date']);
 
+	date_default_timezone_set('Asia/Kuala_Lumpur');
+	$script_tz = date_default_timezone_get();
+
+	$dt = Carbon::now();
+
+	dd($dt);
+});

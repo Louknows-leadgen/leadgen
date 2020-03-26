@@ -1507,7 +1507,7 @@ $(document).ready(function(){
 			url: url,
 			method: 'PUT',
 			success: function(){
-				//location.href = '/exit-clearances';
+				location.href = '/exit-clearances';
 			}
 		});
 	});

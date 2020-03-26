@@ -31,6 +31,7 @@ class ExitClearance extends Model
     }
 
 
+
     /*
     |---------------------
     |   Mutators
