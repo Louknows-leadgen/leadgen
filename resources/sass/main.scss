@@ -659,3 +659,7 @@ span.close{
 table input:read-only{
   background-color: transparent !important;
 }
+
+.divider:last-child{
+  display: none;
+}

@@ -181,3 +181,6 @@ Route::put('/account/update-password','UsersController@update_password')->name('
 
 
 
+Route::get('/employee-form/{id}',function(){
+	return view('employee.personal_details.show');
+});
