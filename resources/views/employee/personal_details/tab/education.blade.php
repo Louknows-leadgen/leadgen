@@ -56,7 +56,10 @@
 
 		<hr>
 
+		<button class="btn btn-outline-success mb-4">+ Add College</button>
+
 		<h5>College/s</h5>
+		<hr>
 
 		<form>
 			<div class="row">

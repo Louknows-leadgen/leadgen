@@ -1,4 +1,14 @@
 <div class="row mt-3">
+
+	<div class="col-md-12 mb-4">
+		<button class="btn btn-outline-success">+ Add Dependent</button>
+	</div>
+
+	<div class="col-md-12">
+		<h5>List of Dependents</h5>
+		<hr>
+	</div>
+
 	<div class="col-md-12">
 		<form>
 			<div class="row">

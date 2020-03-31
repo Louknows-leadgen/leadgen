@@ -1478,6 +1478,40 @@ $(document).ready(function(){
 
 	});
 
+	$('#clear-switch').on('change',function(){
+		var $switch = $(this);
+		var $clr_dt = $('.clrdt-container');
+
+		if($switch.prop('checked') == true){
+			$clr_dt.animate({'height':'60px'});
+		}else{
+			$clr_dt.animate({'height':'0px'});
+			$clr_dt.find('input').val('')
+		    					 .attr('data-value','');
+
+		    $clr_dt.find('input').removeClass('is-invalid');
+		}
+	});
+
+	$(document).on("click",".claim-last-pay",function(){
+		var clearance_id = $(this).data('id');
+		var url = '/exit-clearances/' + clearance_id + '/claim';
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+			url: url,
+			method: 'PUT',
+			success: function(){
+				location.href = '/exit-clearances';
+			}
+		});
+	});
+
 });
 
 

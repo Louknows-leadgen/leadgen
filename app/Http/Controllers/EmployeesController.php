@@ -70,7 +70,7 @@ class EmployeesController extends Controller
     		$cluster = Cluster::where('cluster_name','=',$request->cluster_name)->first();
     		$contract = Contract::where('contract_name','=',$request->contract_name)->first();
     		$employee_id = Employee::get_employee_id($request->supervisor);
-    		$status = 'Active';
+    		$status = 'active';
     		$employee_number = Employee::generate_id($request->start_date);
 
     		if(isset($cluster))

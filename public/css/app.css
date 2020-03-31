@@ -12053,3 +12053,8 @@ table input:read-only {
   display: none;
 }
 
+.minimized-y {
+  height: 0px;
+  overflow: hidden;
+}
+

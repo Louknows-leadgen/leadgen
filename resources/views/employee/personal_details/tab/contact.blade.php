@@ -1,4 +1,14 @@
 <div class="row mt-3">
+
+	<div class="col-md-12 mb-4">
+		<button class="btn btn-outline-success">+ Add Contact</button>
+	</div>
+
+	<div class="col-md-12">
+		<h5>List of Contacts</h5>
+		<hr>
+	</div>
+
 	<div class="col-md-12">
 		<form>
 			<div class="row">

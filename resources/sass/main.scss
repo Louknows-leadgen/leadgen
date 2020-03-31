@@ -660,6 +660,12 @@ table input:read-only{
   background-color: transparent !important;
 }
 
+
 .divider:last-child{
   display: none;
+}
+
+.minimized-y{
+  height: 0px;
+  overflow: hidden;
 }
