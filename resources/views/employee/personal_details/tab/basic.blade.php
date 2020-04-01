@@ -5,42 +5,42 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>First name</label>
-						<input type="text" class="form-control form-control-sm" value="John">
+						<input type="text" name="first_name" class="form-control form-control-sm" value="{{ $person->first_name }}">
 					</div>
 
 					<div class="form-group">
 						<label>Middle name</label>
-						<input type="text" class="form-control form-control-sm" value="Ace">
+						<input type="text" name="middle_name" class="form-control form-control-sm" value="{{ $person->middle_name }}">
 					</div>
 
 					<div class="form-group">
 						<label>Last name</label>
-						<input type="text" class="form-control form-control-sm" value="Doe">
+						<input type="text" name="last_name" class="form-control form-control-sm" value="{{ $person->last_name }}">
 					</div>
 
 					<div class="form-group">
 						<label>Suffix name</label>
-						<input type="text" class="form-control form-control-sm" value="">
+						<input type="text" name="suffix_name" class="form-control form-control-sm" value="{{ $person->suffix_name }}">
 					</div>
 
 					<div class="form-group">
 						<label>Mobile 1</label>
-						<input type="text" class="form-control form-control-sm" value="09062453746">
+						<input type="text" name="mobile_1" class="form-control form-control-sm" value="{{ $person->mobile_1 }}">
 					</div>
 
 					<div class="form-group">
 						<label>Mobile 2</label>
-						<input type="text" class="form-control form-control-sm" value="">
+						<input type="text" name="mobile_2" class="form-control form-control-sm" value="{{ $person->mobile_2 }}">
 					</div>
 
 					<div class="form-group">
 						<label>Email</label>
-						<input type="email" class="form-control form-control-sm" value="john_doe@email.com">
+						<input type="email" name="email" class="form-control form-control-sm" value="{{ $person->email }}">
 					</div>
 
 					<div class="form-group">
 						<label>Age</label>
-						<input type="text" class="form-control form-control-sm" value="25">
+						<input type="number" name="age" class="form-control form-control-sm" value="{{ $person->age }}">
 					</div>
 				</div>
 
@@ -48,48 +48,48 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Gender</label>
-						<select class="custom-select custom-select-sm">
-							<option>Male</option>
-							<option>Female</option>
+						<select class="custom-select custom-select-sm" name="gender">
+							<option value="Male" {{ $person->gender == 'Male' ? 'selected' : '' }}>Male</option>
+							<option value="Female" {{ $person->gender == 'Female' ? 'selected' : '' }}>Female</option>
 						</select>
 					</div>
 
 					<div class="form-group">
 						<label>Weight (kg)</label>
-						<input type="number" class="form-control form-control-sm" value="56">
+						<input type="number" name="weight" class="form-control form-control-sm" value="{{ $person->weight }}">
 					</div>
 
 					<div class="form-group">
 						<label>Height (cm)</label>
-						<input type="number" class="form-control form-control-sm" value="167">
+						<input type="number" name="height" class="form-control form-control-sm" value="{{ $person->height }}">
 					</div>
 
 					<div class="form-group">
 						<label>Civil Status</label>
-						<select class="custom-select custom-select-sm">
-							<option>Single</option>
-							<option>Married</option>
+						<select name="civil_status" class="custom-select custom-select-sm">
+							<option value="Single" {{ $person->civil_status == 'Single' ? 'selected' : '' }}>Single</option>
+							<option value="Married" {{ $person->civil_status == 'Married' ? 'selected' : '' }}>Married</option>
 						</select>
 					</div>
 
 					<div class="form-group">
 						<label>Birthday</label>
-						<input type="text" class="form-control form-control-sm date" value="6/24/1990">
+						<input type="text" name="birthday" class="form-control form-control-sm date" value="{{ $person->birthday }}">
 					</div>
 
 					<div class="form-group">
 						<label>Religion</label>
-						<input type="text" class="form-control form-control-sm" value="09062453746">
+						<input type="text" name="religion" class="form-control form-control-sm" value="{{ $person->religion }}">
 					</div>
 
 					<div class="form-group">
 						<label>Father's name</label>
-						<input type="text" class="form-control form-control-sm" value="James Moriaty Doe">
+						<input type="text" name="father_name" class="form-control form-control-sm" value="{{ $person->father_name }}">
 					</div>
 
 					<div class="form-group">
 						<label>Mother's name</label>
-						<input type="text" class="form-control form-control-sm" value="Rose Jen Doe">
+						<input type="text" name="mother_name" class="form-control form-control-sm" value="{{ $person->mother_name }}">
 					</div>
 				</div>
 
@@ -99,13 +99,13 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label>City address</label>
-						<input type="text" class="form-control form-control-sm" value="Labangon Cebu City, 6000">
+						<input type="text" name="city_address" class="form-control form-control-sm" value="{{ $person->city_address }}">
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-group">
 						<label>Provincial address</label>
-						<input type="text" class="form-control form-control-sm" value="Labangon Cebu City, 6000">
+						<input type="text" name="province_address" class="form-control form-control-sm" value="{{ $person->province_address }}">
 					</div>
 				</div>
 			</div>

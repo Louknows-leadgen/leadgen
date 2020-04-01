@@ -53,6 +53,7 @@ Route::get('/employees/active','EmployeesController@active')->name('employees.ac
 Route::get('/employees/inactive','EmployeesController@inactive')->name('employees.inactive');
 Route::get('/employees/search','EmployeesController@search')->name('employees.search');
 Route::put('/employees/update_hmo/{employee_id}','EmployeesController@update_hmo')->name('employees.update_hmo');
+Route::get('/employee-details/{id}','EmployeesController@employee_details')->name('employees.details');
 
 //- exit clearance
 
@@ -198,6 +199,8 @@ Route::put('/account/update-password','UsersController@update_password')->name('
 
 
 
-Route::get('/employee-form/{id}',function(){
-	return view('employee.personal_details.show');
-});
+// Route::get('/employee-form/{id}',function(){
+// 	return view('employee.personal_details.show');
+// });
+
+

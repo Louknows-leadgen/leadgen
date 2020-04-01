@@ -656,6 +656,14 @@ span.close{
   z-index: 2;
 }
 
+.align-r{
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
 table input:read-only{
   background-color: transparent !important;
 }
@@ -668,4 +676,8 @@ table input:read-only{
 .minimized-y{
   height: 0px;
   overflow: hidden;
+}
+
+.pos-relative{
+  position: relative;
 }

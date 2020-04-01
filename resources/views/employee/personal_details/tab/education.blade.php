@@ -6,14 +6,14 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>School name</label>
-						<input type="text" class="form-control form-control-sm" value="Inayawan Elementary School">
+						<input type="text" name="school_name" class="form-control form-control-sm" value="{{ $elem->school_name }}">
 					</div>
 				</div>
 
 				<div class="col-md-3">
 					<div class="form-group">
 						<label>Year graduated</label>
-						<input type="text" class="form-control form-control-sm date" value="3/10/2002">
+						<input type="text" name="graduated_date" class="form-control form-control-sm date" value="{{ $elem->graduated_date }}">
 					</div>					
 				</div>
 
@@ -34,14 +34,14 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>School name</label>
-						<input type="text" class="form-control form-control-sm" value="Pit-os National High School">
+						<input type="text" name="school_name" class="form-control form-control-sm" value="{{ $high->school_name }}">
 					</div>
 				</div>
 
 				<div class="col-md-3">
 					<div class="form-group">
 						<label>Year graduated</label>
-						<input type="text" class="form-control form-control-sm date" value="3/10/2006">
+						<input type="text" name="graduated_date" class="form-control form-control-sm date" value="{{ $high->graduated_date }}">
 					</div>					
 				</div>
 
@@ -56,72 +56,45 @@
 
 		<hr>
 
-		<button class="btn btn-outline-success mb-4">+ Add College</button>
-
-		<h5>College/s</h5>
+		<div class="pos-relative">
+			<h5>College/s</h5>
+			<button class="btn btn-outline-success align-r">+ Add College</button>
+		</div>
 		<hr>
 
+		@foreach($colleges as $college)
 		<form>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>School name</label>
-						<input type="text" class="form-control form-control-sm" value="University of San Carlos">
+						<input type="text" name="school_name" class="form-control form-control-sm" value="{{ $college->school_name }}">
 					</div>
 				</div>
 
 				<div class="col-md-3">
 					<div class="form-group">
 						<label>Year graduated</label>
-						<input type="text" class="form-control form-control-sm date" value="3/10/2010">
+						<input type="text" name="graduated_date" class="form-control form-control-sm date" value="{{ $college->graduated_date }}">
 					</div>					
 				</div>
 
 				<div class="col-md-9">
 					<div class="form-group">
 						<label>Degree</label>
-						<input type="text" class="form-control form-control-sm" value="Bachelor of Science in Information and Technology">
+						<input type="text" name="degree" class="form-control form-control-sm" value="{{ $college->degree }}">
 					</div>
 				</div>
 
 				<div class="col-md-12">
-					<button class="btn btn-primary">Update</button>
+					<button class="btn btn-primary mr-3">Update</button>
+					<span class="btn btn-danger">Remove</span>
 				</div>
 			</div>
 		</form>
 
 		<hr class="divider">
-
-		<form>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label>School name</label>
-						<input type="text" class="form-control form-control-sm" value="University of San Carlos">
-					</div>
-				</div>
-
-				<div class="col-md-3">
-					<div class="form-group">
-						<label>Year graduated</label>
-						<input type="text" class="form-control form-control-sm date" value="3/10/2010">
-					</div>					
-				</div>
-
-				<div class="col-md-9">
-					<div class="form-group">
-						<label>Degree</label>
-						<input type="text" class="form-control form-control-sm" value="Bachelor of Science in Information and Technology">
-					</div>
-				</div>
-
-				<div class="col-md-12">
-					<button class="btn btn-primary">Update</button>
-				</div>
-			</div>
-		</form>		
-
-		<hr class="divider">
+		@endforeach
 
 	</div>
 </div>

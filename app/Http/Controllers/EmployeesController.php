@@ -204,4 +204,44 @@ class EmployeesController extends Controller
 
         return view('employee.list.search-page',compact('employees','skey','dept_filter','departments','scope'));
     }
+
+    public function employee_details($employee_id){
+        $employee = Employee::find($employee_id);
+        $person = $employee->person;
+        $spouses = $person->spouses;
+        $contacts = $person->emergency_contacts;
+        $dependents = $person->dependents;
+        $elem = $person->elem();
+        $high = $person->high();
+        $colleges = $person->colleges;
+        $works = $person->work_experiences;
+
+        return view('employee.personal_details.show',compact(
+            'employee',
+            'person',
+            'spouses',
+            'contacts',
+            'dependents',
+            'elem',
+            'high',
+            'colleges',
+            'works'
+        ));
+    }
+
+    public function update_basic(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'mobile_1' => 'required|numeric',
+            'mobile_2' => 'nullable|numeric',
+            'email' => 'required|email',
+            'age' => 'required|numeric',
+            'birthday' => 'required|date_format:m/d/Y',
+            'city_address' => 'required|string'
+        ]);
+
+        $person = Employee::find($request->employee_id)->person;
+    }
 }
