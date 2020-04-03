@@ -1512,6 +1512,70 @@ $(document).ready(function(){
 		});
 	});
 
+
+	$(document).on('submit','form.employee-det-form',function(e){
+		var form = $(this);
+		var form_data = {};
+		var url = form.attr("action");
+		var method = form.attr('method');
+		var notif = form.find('.inline-notif');
+
+		form.find('[name]').each(function(){
+			form_data[this.name] = this.value;
+		});
+
+		e.preventDefault();
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+			url: url,
+			method: method,
+			data: form_data,
+			beforeSend: function(){
+				$('.employee-det-form button').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
+			},
+			complete: function(){
+				$('.employee-det-form button').text('Update');
+			},
+			success: function(response){
+				form.find('input.is-invalid')
+					.removeClass('is-invalid');
+
+				if(!$.isEmptyObject(response.errors)){
+                    for (var key in response.errors) {
+					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
+					        form.find("input[name='"+ key +"']").addClass('is-invalid');
+					        form.find("span."+ key).empty().append(response.errors[key]);
+					    }
+					}
+
+					notif.removeClass('text-success')
+						 .addClass('text-danger')
+					     .text(response.alert)
+                	     .fadeIn(200,function(){
+                			setTimeout(function(){
+                				notif.fadeOut(500);
+                			},1000);
+                		  });
+                }else{
+                	notif.removeClass('text-danger')
+                		 .addClass('text-success')
+                		 .text(response.success)
+                		 .fadeIn(200,function(){
+                			setTimeout(function(){
+                				notif.fadeOut(500);
+                			},1000);
+                		  });
+                }
+			}
+		});
+	});
+
 });
 
 

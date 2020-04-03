@@ -12071,3 +12071,11 @@ table input:read-only {
   position: relative;
 }
 
+.inline-notif {
+  position: absolute;
+  left: 100px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+

@@ -54,6 +54,11 @@ Route::get('/employees/inactive','EmployeesController@inactive')->name('employee
 Route::get('/employees/search','EmployeesController@search')->name('employees.search');
 Route::put('/employees/update_hmo/{employee_id}','EmployeesController@update_hmo')->name('employees.update_hmo');
 Route::get('/employee-details/{id}','EmployeesController@employee_details')->name('employees.details');
+Route::put('/employee-details/update_basic','EmployeesController@update_basic')->name('employees.update_basic');
+Route::put('/employee-details/update_spouse','EmployeesController@update_spouse')->name('employees.update_spouse');
+Route::put('/employee-details/update_contact','EmployeesController@update_contact')->name('employees.update_contact');
+Route::put('/employee-details/update_dependent','EmployeesController@update_dependent')->name('employees.update_dependent');
+Route::put('/employee-details/update_work','EmployeesController@update_work')->name('employees.update_work');
 
 //- exit clearance
 

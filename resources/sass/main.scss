@@ -681,3 +681,11 @@ table input:read-only{
 .pos-relative{
   position: relative;
 }
+
+.inline-notif{
+  position: absolute;
+  left: 100px;
+  top: 50%;
+  transform: translateY(-50%);
+
+}

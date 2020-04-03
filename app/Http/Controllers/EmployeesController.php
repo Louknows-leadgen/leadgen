@@ -9,6 +9,10 @@ use App\Models\Cluster;
 use App\Models\Contract;
 use App\Models\Employee;
 use App\Models\Person;
+use App\Models\Spouse;
+use App\Models\EmergencyContact;
+use App\Models\Dependent;
+use App\Models\WorkExperience;
 use App\Models\CostCenter;
 use App\Models\Site;
 use App\Models\Applicant;
@@ -232,16 +236,129 @@ class EmployeesController extends Controller
     public function update_basic(Request $request){
 
         $validator = Validator::make($request->all(),[
+            'age' => 'required|numeric',
+            'birthday' => 'required|date_format:m/d/Y', 
+            'city_address' => 'required|string',
+            'civil_status' => 'required',
+            'email' => 'required|email',           
             'first_name' => 'required',
+            'father_name' => 'nullable',
+            'gender' => 'required',
+            'height' => 'nullable|numeric',
             'last_name' => 'required',
+            'middle_name' => 'nullable',
             'mobile_1' => 'required|numeric',
             'mobile_2' => 'nullable|numeric',
-            'email' => 'required|email',
-            'age' => 'required|numeric',
-            'birthday' => 'required|date_format:m/d/Y',
-            'city_address' => 'required|string'
+            'mother_name' => 'nullable',
+            'province_address' => 'nullable|string',
+            'religion' => 'nullable',
+            'suffix_name' => 'nullable',
+            'weight' => 'nullable|numeric'   
         ]);
 
-        $person = Employee::find($request->employee_id)->person;
+        if($validator->passes()){
+            $person = Employee::find($request->employee_id)->person;
+            $validated = $validator->validate(); // returns all fields validated
+            $person->update($validated);
+            return response()->json(['success'=>'Success!']);
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
+        }
+    }
+
+    public function update_spouse(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'address' => 'nullable',
+            'birthday' => 'nullable|date_format:m/d/Y',
+            'contact_no' => array('nullable','regex:/^[0-9]+$|^\d{3}-\d{4}$/'),
+            'first_name' => 'required|regex:/^[A-z ]+$/',
+            'last_name' => 'required|regex:/^[A-z ]+$/',
+            'middle_name' => 'nullable|regex:/^[A-z ]+$/',
+            'occupation' => 'nullable'  
+        ]);
+
+        if($validator->passes()){
+            $spouse = Spouse::find($request->spouse_id);
+            $validated = $validator->validate(); // returns all fields validated
+            $spouse->update($validated);
+            return response()->json(['success'=>'Success!']);
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
+        }
+    }
+
+    public function update_contact(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'address' => 'nullable',
+            'contact_no' => array('required', 'regex:/^[0-9]+$|^\d{3}-\d{4}$/'),
+            'full_name' => 'required',
+            'relationship' => 'required'
+        ],[
+            'full_name.required' => 'Name is required.',
+            'contact_no.required' => 'Contact number is required.',
+            'contact_no.regex' => 'Invalid contact number.',
+            'relationship.required' => 'Relationship is required.',
+        ]);
+
+        if($validator->passes()){
+            $contact = EmergencyContact::find($request->contact_id);
+            $validated = $validator->validate(); // returns all fields validated
+            $contact->update($validated);
+            return response()->json(['success'=>'Success!']);
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
+        }
+    }
+
+    public function update_dependent(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'full_name' => 'required',
+            'birthday' => 'required|date_format:m/d/Y',
+        ],[
+            'full_name.required' => 'Name is required.',
+            'birthday.required' => 'Birthday is required.',
+            'birthday.date_format' => 'Invalid date format.'
+        ]);
+
+        if($validator->passes()){
+            $dependent = Dependent::find($request->dependent_id);
+            $validated = $validator->validate(); // returns all fields validated
+            $dependent->update($validated);
+            return response()->json(['success'=>'Success!']);
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
+        }
+    }
+
+    public function update_work(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'employer' => 'required',
+            'end_date' => 'required|date_format:m/d/Y|after:start_date',
+            'role_desc' => 'nullable',
+            'role_name' => 'required',
+            'start_date' => 'required|date_format:m/d/Y|before:end_date'
+        ],[
+            'employer.required' => 'Employer is required.',
+            'role_name.required' => 'Role is required.',
+            'start_date.required' => 'Start date is required.',
+            'start_date.date_format' => 'Invalid date format.',
+            'start_date.before' => 'Start date must be before End date.',
+            'end_date.required' => 'End date is required.',
+            'end_date.date_format' => 'Invalid date format.',
+            'end_date.after' => 'End date must be after Start date.',
+        ]);
+
+        if($validator->passes()){
+            $work = WorkExperience::find($request->work_id);
+            $validated = $validator->validate(); // returns all fields validated
+            $work->update($validated);
+            return response()->json(['success'=>'Success!']);
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
+        }
     }
 }
