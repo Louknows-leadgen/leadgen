@@ -1537,10 +1537,10 @@ $(document).ready(function(){
 			method: method,
 			data: form_data,
 			beforeSend: function(){
-				$('.employee-det-form button').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
+				form.find('button').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
 			},
 			complete: function(){
-				$('.employee-det-form button').text('Update');
+				form.find('button').text('Update');
 			},
 			success: function(response){
 				form.find('input.is-invalid')
@@ -1571,6 +1571,102 @@ $(document).ready(function(){
                 				notif.fadeOut(500);
                 			},1000);
                 		  });
+                }
+			}
+		});
+	});
+
+	$(document).on('click','.employee-add-detail',function(){
+		var parent = $(this).parents('.employee-det-header');
+		var form_container = parent.siblings('.form-container');
+		var form_item = form_container.find('.form-item');
+
+		// cleanup the form
+		form_item.find(':input:not([type=hidden])')
+		         .removeClass('is-invalid')
+		         .val('');
+		// show the form
+		form_item.removeClass('hide');
+
+		// hide add button
+		$(this).hide();
+	});
+
+
+	$(document).on('click','.cancel-action',function(){
+		var form_container = $(this).parents('.form-container');
+		var form_item = form_container.find('.form-item');
+		var add_btn = form_container.siblings('.employee-det-header')
+		                               .find('.employee-add-detail');
+		
+
+		// cleanup the form
+		form_item.find(':input:not([type=hidden])')
+		         .removeClass('is-invalid')
+		         .val('');
+		// hide the form
+		form_item.addClass('hide');
+
+		// show button
+		add_btn.show();
+	});
+
+
+	$(document).on('submit','form.emp-det-new-form',function(e){
+		var form = $(this);
+		var form_item = form.parent();
+		var add_btn = form_item.parent()
+		                       .siblings('.employee-det-header')
+		                       .find('.employee-add-detail');
+		var form_data = {};
+		var url = form.attr("action");
+		var method = form.attr('method');
+		var start_point = form.parent().siblings('.item-start-point');
+
+		form.find('[name]').each(function(){
+			form_data[this.name] = this.value;
+		});
+
+		e.preventDefault();
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+	    $.ajax({
+			url: url,
+			method: method,
+			data: form_data,
+			beforeSend: function(){
+				form.find('button').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
+			},
+			complete: function(){
+				form.find('button').text('Create');
+			},
+			success: function(response){
+				form.find('input.is-invalid')
+					.removeClass('is-invalid');
+
+				if(!$.isEmptyObject(response.errors)){
+                    for (var key in response.errors) {
+					    if (Object.prototype.hasOwnProperty.call(response.errors, key)) {
+					        form.find("input[name='"+ key +"']").addClass('is-invalid');
+					        form.find("span."+ key).empty().append(response.errors[key]);
+					    }
+					}
+                }else{
+                	$(response).insertAfter(start_point);
+                	// hide create form
+                	form_item.addClass('hide');
+                	// show add button
+                	add_btn.show();
+                	// show create notif
+                	var notif = $('.create-notif');
+            		notif.removeClass('d-none');
+            		notif.fadeIn(500);
+
                 }
 			}
 		});

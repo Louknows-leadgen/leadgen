@@ -12,6 +12,8 @@ use App\Models\Person;
 use App\Models\Spouse;
 use App\Models\EmergencyContact;
 use App\Models\Dependent;
+use App\Models\MiddleSchool;
+use App\Models\College;
 use App\Models\WorkExperience;
 use App\Models\CostCenter;
 use App\Models\Site;
@@ -357,6 +359,70 @@ class EmployeesController extends Controller
             $validated = $validator->validate(); // returns all fields validated
             $work->update($validated);
             return response()->json(['success'=>'Success!']);
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
+        }
+    }
+
+    public function update_school(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'graduated_date' => 'required|numeric|regex:/^\d{4}$/',            
+            'school_name' => 'required'
+        ],[
+            'graduated_date.required' => 'Year graduated is required',
+            'graduated_date.numeric' => 'Wrong year format',
+            'graduated_date.regex' => 'Wrong year format'
+        ]);
+
+        if($validator->passes()){
+            $work = MiddleSchool::find($request->school_id);
+            $validated = $validator->validate(); // returns all fields validated
+            $work->update($validated);
+            return response()->json(['success'=>'Success!']);
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
+        }
+    }
+
+    public function update_college(Request $request){
+
+        $validator = Validator::make($request->all(),[
+            'degree' => 'required',            
+            'graduated_date' => 'required|numeric|regex:/^\d{4}$/',
+            'school_name' => 'required'
+        ],[
+            'graduated_date.required' => 'Year graduated is required',
+            'graduated_date.numeric' => 'Wrong year format',
+            'graduated_date.regex' => 'Wrong year format'
+        ]);
+
+        if($validator->passes()){
+            $work = College::find($request->college_id);
+            $validated = $validator->validate(); // returns all fields validated
+            $work->update($validated);
+            return response()->json(['success'=>'Success!']);
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
+        }
+    }
+
+    public function create_spouse(Request $request){
+        $validator = Validator::make($request->all(),[
+            'address' => 'nullable',
+            'birthday' => 'nullable|date_format:m/d/Y',
+            'contact_no' => array('nullable','regex:/^[0-9]+$|^\d{3}-\d{4}$/'),
+            'first_name' => 'required|regex:/^[A-z ]+$/',
+            'last_name' => 'required|regex:/^[A-z ]+$/',
+            'middle_name' => 'nullable|regex:/^[A-z ]+$/',
+            'occupation' => 'nullable'  
+        ]);
+
+        if($validator->passes()){
+            $employee = Employee::find($request->employee_id);
+            $validated = $validator->validate(); // returns all fields validated
+            $spouse = $employee->person->spouses()->create($validated);
+            return view('employee.personal_details.forms.form_spouse',compact('spouse'));
         }else{
             return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
         }

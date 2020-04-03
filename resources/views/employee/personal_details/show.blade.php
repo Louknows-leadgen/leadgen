@@ -11,6 +11,12 @@
 				<strong>Success!</strong> Record has been updated
 			</div>
 
+			<!-- Success Notification created record -->
+			<div class="create-notif alert alert-success alert-dismissible fade show d-none">
+				<button type="button" class="close" data-close="alert">&times;</button>
+				<strong>Success!</strong> Record has been created
+			</div>
+
 			<div class="box mb-5">
 
 				<div class="back">
