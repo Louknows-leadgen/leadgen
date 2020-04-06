@@ -427,4 +427,91 @@ class EmployeesController extends Controller
             return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
         }
     }
+
+    public function create_contact(Request $request){
+        $validator = Validator::make($request->all(),[
+            'address' => 'nullable',
+            'contact_no' => array('sometimes','required', 'regex:/[0-9]+|[0-9]+-[0-9]+/'),            
+            'full_name' => 'sometimes|required',
+            'relationship' => 'sometimes|required' 
+        ]);
+
+        if($validator->passes()){
+            $employee = Employee::find($request->employee_id);
+            $validated = $validator->validate(); // returns all fields validated
+            $contact = $employee->person->emergency_contacts()->create($validated);
+            return view('employee.personal_details.forms.form_contact',compact('contact'));
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
+        }
+    }
+
+    public function create_dependent(Request $request){
+        $validator = Validator::make($request->all(),[
+            'full_name' => 'required',
+            'birthday' => 'required|date_format:m/d/Y',
+        ],[
+            'full_name.required' => 'Name is required.',
+            'birthday.required' => 'Birthday is required.',
+            'birthday.date_format' => 'Invalid date format.'
+        ]);
+
+        if($validator->passes()){
+            $employee = Employee::find($request->employee_id);
+            $validated = $validator->validate(); // returns all fields validated
+            $dependent = $employee->person->dependents()->create($validated);
+            return view('employee.personal_details.forms.form_dependent',compact('dependent'));
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
+        }
+    }
+
+    public function create_college(Request $request){
+        $validator = Validator::make($request->all(),[
+            'degree' => 'required',            
+            'graduated_date' => 'required|numeric|regex:/^\d{4}$/',
+            'school_name' => 'required'
+        ],[
+            'graduated_date.required' => 'Year graduated is required',
+            'graduated_date.numeric' => 'Wrong year format',
+            'graduated_date.regex' => 'Wrong year format'
+        ]);
+
+        if($validator->passes()){
+            $employee = Employee::find($request->employee_id);
+            $validated = $validator->validate(); // returns all fields validated
+            $college = $employee->person->colleges()->create($validated);
+            return view('employee.personal_details.forms.form_college',compact('college'));
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
+        }
+    }
+
+    public function create_work(Request $request){
+        $validator = Validator::make($request->all(),[
+            'employer' => 'required',
+            'end_date' => 'required|date_format:m/d/Y|after:start_date',
+            'role_desc' => 'nullable',
+            'role_name' => 'required',
+            'start_date' => 'required|date_format:m/d/Y|before:end_date'
+        ],[
+            'employer.required' => 'Employer is required.',
+            'role_name.required' => 'Role is required.',
+            'start_date.required' => 'Start date is required.',
+            'start_date.date_format' => 'Invalid date format.',
+            'start_date.before' => 'Start date must be before End date.',
+            'end_date.required' => 'End date is required.',
+            'end_date.date_format' => 'Invalid date format.',
+            'end_date.after' => 'End date must be after Start date.',
+        ]);
+
+        if($validator->passes()){
+            $employee = Employee::find($request->employee_id);
+            $validated = $validator->validate(); // returns all fields validated
+            $work = $employee->person->work_experiences()->create($validated);
+            return view('employee.personal_details.forms.form_work',compact('work'));
+        }else{
+            return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
+        }
+    }
 }

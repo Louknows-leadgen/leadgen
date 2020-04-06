@@ -63,6 +63,10 @@ Route::put('/employee-details/update_school','EmployeesController@update_school'
 Route::put('/employee-details/update_college','EmployeesController@update_college')->name('employees.update_college');
 
 Route::post('/employee-details/create_spouse','EmployeesController@create_spouse')->name('employees.create_spouse');
+Route::post('/employee-details/create_contact','EmployeesController@create_contact')->name('employees.create_contact');
+Route::post('/employee-details/create_dependent','EmployeesController@create_dependent')->name('employees.create_dependent');
+Route::post('/employee-details/create_college','EmployeesController@create_college')->name('employees.create_college');
+Route::post('/employee-details/create_work','EmployeesController@create_work')->name('employees.create_work');
 
 //- exit clearance
 

@@ -47,7 +47,6 @@ $(document).ready(function(){
 	//	CKEDITOR.replace('ckeditor');
 	
 
-
 	/*
 	|-------------------------------------------------------------------------
     | initialize datefield
@@ -1667,6 +1666,10 @@ $(document).ready(function(){
             		notif.removeClass('d-none');
             		notif.fadeIn(500);
 
+            		// initialize ckeditor if there's any.
+            		// important: textarea id should be named ckeditor
+            		if(form.find('textarea.ckeditor').length)
+						CKEDITOR.replace('ckeditor');
                 }
 			}
 		});

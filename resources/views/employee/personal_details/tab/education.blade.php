@@ -68,55 +68,64 @@
 
 		<hr>
 
-		<div class="pos-relative">
-			<h5>College/s</h5>
-			<button class="btn btn-outline-success align-r">+ Add College</button>
-		</div>
-		<hr>
-
-		@foreach($colleges as $college)
-		<form class="employee-det-form" action="{{ route('employees.update_college') }}" method='put'>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label>School name</label>
-						<input type="text" name="school_name" class="form-control form-control-sm" value="{{ $college->school_name }}">
-						<input type="hidden" name="college_id" value="{{ $college->id }}">
-
-						<span class="school_name invalid-feedback" role="alert"></span>
-					</div>
-				</div>
-
-				<div class="col-md-3">
-					<div class="form-group">
-						<label>Year graduated</label>
-						<input type="text" name="graduated_date" class="form-control form-control-sm" value="{{ $college->graduated_date }}">
-
-						<span class="graduated_date invalid-feedback" role="alert"></span>
-					</div>					
-				</div>
-
-				<div class="col-md-9">
-					<div class="form-group">
-						<label>Degree</label>
-						<input type="text" name="degree" class="form-control form-control-sm" value="{{ $college->degree }}">
-
-						<span class="degree invalid-feedback" role="alert"></span>
-					</div>
-				</div>
-
-				<div class="col-md-12">
-					<button class="btn btn-primary mr-3">Update</button>
-					<div class="d-inline-block pos-relative">
-						<span class="btn btn-danger">Remove</span>
-						<span class="inline-notif hide"></span>
-					</div>
-				</div>
+		<div class="col-md-12 employee-det-header">
+			<div class="pos-relative">
+				<h5>College/s</h5>
+				<button class="btn btn-outline-success align-r  employee-add-detail">+ Add College</button>
 			</div>
-		</form>
+		</div>
 
-		<hr class="divider">
-		@endforeach
+		<div class="col-md-12 form-container">
+
+			<div class="form-item hide">
+				<hr>	
+				<form class="emp-det-new-form" action="{{ route('employees.create_college') }}" method='post'>
+					<div class="row">
+						<input type="hidden" name="employee_id" value="{{ $employee->id }}">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>School name</label>
+								<input type="text" name="school_name" class="form-control form-control-sm">
+
+								<span class="school_name invalid-feedback" role="alert"></span>
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Year graduated</label>
+								<input type="text" name="graduated_date" class="form-control form-control-sm">
+
+								<span class="graduated_date invalid-feedback" role="alert"></span>
+							</div>					
+						</div>
+
+						<div class="col-md-9">
+							<div class="form-group">
+								<label>Degree</label>
+								<input type="text" name="degree" class="form-control form-control-sm">
+
+								<span class="degree invalid-feedback" role="alert"></span>
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<button class="btn btn-primary mr-3">Create</button>
+							<div class="d-inline-block pos-relative">
+								<span class="btn btn-secondary cancel-action">Cancel</span>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<hr class="divider item-start-point">
+
+			@foreach($colleges as $college)
+				@include('employee.personal_details.forms.form_college')
+			@endforeach
+
+		</div>
 
 	</div>
 </div>
