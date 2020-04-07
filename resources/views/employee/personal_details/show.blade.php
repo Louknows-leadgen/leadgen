@@ -1,6 +1,19 @@
 @extends('layouts.main')
 
 @section('contents')
+
+	<div class="bg-notif-gen" style="display: block;">
+		<div class="card w-25">
+        <div class="card-header font-weight-bold">Remove Interview</div>
+        <div class="card-body">
+            Are you sure you want to remove this interview?
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button class="btn btn-secondary mr-3">No</button>
+            <button class="btn btn-primary" data-page="interview-history">Yes</button>
+        </div>
+    </div>
+	</div>
 	
 	<div class="row">
 		<div class="col-md-9 mx-auto">

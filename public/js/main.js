@@ -1675,6 +1675,14 @@ $(document).ready(function(){
 		});
 	});
 
+	$(document).on('click','.rmv-employee-dtl-trig',function(){
+
+	});
+
+	$(document).on('click','.bg-notif-gen .rmv-employee-dtl',function(){
+
+	});
+
 });
 
 
