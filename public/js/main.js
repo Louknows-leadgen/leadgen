@@ -1608,6 +1608,8 @@ $(document).ready(function(){
 
 		// show button
 		add_btn.show();
+
+
 	});
 
 
@@ -1676,11 +1678,72 @@ $(document).ready(function(){
 	});
 
 	$(document).on('click','.rmv-employee-dtl-trig',function(){
+		var btn = $(this);
+		var type = btn.data('type');
+		var id = btn.data('id');
+
+		// mark what to be deleted
+		var parent = $(this).parents('form');
+		var divider = parent.next('.divider');
+		var cancel_btn = $('.emp-alert').find('button.btn-secondary');
+
+		parent.addClass('mark-'+type+'-'+id);
+		divider.addClass('mark-'+type+'-'+id);
+		cancel_btn.data('mark','mark-'+type+'-'+id); // used when the user clicks the no button
+
+		switch(type){
+			case 'spouse':
+				setNotif('Remove Spouse?','Are you sure you want to remove this spouse?',id,type);
+				break;
+			case 'contact':
+				setNotif('Remove Contact?','Are you sure you want to remove this contact?',id,type);
+				break;
+			case 'dependent':
+				setNotif('Remove Dependent?','Are you sure you want to remove this dependent?',id,type);
+				break;
+			case 'college':
+				setNotif('Remove College?','Are you sure you want to remove this college?',id,type);
+				break;
+			case 'work':
+				setNotif('Remove Work Experience?','Are you sure you want to remove this work experience?',id,type);
+				break;	
+		}
 
 	});
 
-	$(document).on('click','.bg-notif-gen .rmv-employee-dtl',function(){
+	function setNotif(header,body,id,type){
+		var notif = $('.bg-notif-gen');
 
+		notif.find('.card-header').text(header);
+				notif.find('.card-body').text(body);
+				notif.find('button.btn-primary').data('type',type)
+				                                .data('id',id);
+
+		notif.fadeIn(300);
+	}
+
+	$(document).on('click','.bg-notif-gen .rmv-employee-dtl',function(){
+		var id = $(this).data('id');
+		var type = $(this).data('type');
+		var remove_el = $('.mark-'+type+'-'+id);
+
+		$(this).parents('.bg-notif-gen').fadeOut(300,function(){
+			remove_el.fadeOut(300,function(){
+				remove_el.remove();
+				$('.fix-mid-notif').fadeIn(300,function(){
+					setTimeout(function(){
+						$('.fix-mid-notif').fadeOut(300);
+					},2000);
+				});
+			});
+		});
+		
+	});
+
+	$(document).on('click','.emp-alert button.btn-secondary',function(){
+		var mark = $(this).data('mark');
+
+		$('.'+mark).removeClass(mark);
 	});
 
 });

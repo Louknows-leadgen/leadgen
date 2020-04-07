@@ -2,18 +2,27 @@
 
 @section('contents')
 
-	<div class="bg-notif-gen" style="display: block;">
+	<!-- Alert Notification here -->
+	<div class="bg-notif-gen emp-alert">
 		<div class="card w-25">
-        <div class="card-header font-weight-bold">Remove Interview</div>
+        <div class="card-header font-weight-bold"><!-- updated via jquery --></div>
         <div class="card-body">
-            Are you sure you want to remove this interview?
+            <!-- updated via jquery -->
         </div>
         <div class="card-footer d-flex justify-content-end">
             <button class="btn btn-secondary mr-3">No</button>
-            <button class="btn btn-primary" data-page="interview-history">Yes</button>
+            <!-- data-type will be added via jquery -->
+            <button class="btn btn-primary rmv-employee-dtl">Yes</button>
         </div>
     </div>
 	</div>
+
+
+	<!-- Delete Notification here (Fixed centered) -->
+	<div class="fix-mid-notif alert alert-success">
+		<strong>Success!</strong> Record has been deleted
+	</div>
+
 	
 	<div class="row">
 		<div class="col-md-9 mx-auto">

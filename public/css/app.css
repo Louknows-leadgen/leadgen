@@ -12079,3 +12079,13 @@ table input:read-only {
           transform: translateY(-50%);
 }
 
+.fix-mid-notif {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  z-index: 9999;
+}
+

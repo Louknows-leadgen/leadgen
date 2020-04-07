@@ -25,7 +25,9 @@
 		<div class="col-md-12">
 			<button class="btn btn-primary mr-3">Update</button>
 			<div class="d-inline-block pos-relative">
-				<span class="btn btn-danger">Remove</span>
+				<span class="btn btn-danger rmv-employee-dtl-trig"
+					  data-type="dependent"
+					  data-id="{{ $dependent->id }}">Remove</span>
 				<span class="inline-notif hide"></span>
 			</div>
 		</div>
