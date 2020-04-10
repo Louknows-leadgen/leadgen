@@ -1,4 +1,4 @@
-<form class="employee-det-form" action="{{ route('employees.update_dependent') }}" method="put">
+<form class="employee-det-form" data-form="dependent" action="{{ route('employees.update_dependent') }}" method="put">
 	<div class="row">
 		<input type="hidden" name="dependent_id" value="{{ $dependent->id }}">
 		<div class="col-md-6">	

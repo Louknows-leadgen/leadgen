@@ -514,4 +514,39 @@ class EmployeesController extends Controller
             return response()->json(['errors'=>$validator->getMessageBag()->toArray(),'alert'=>'Failed!']);
         }
     }
+
+    public function destroy_spouse($spouse_id){
+        if(Spouse::destroy($spouse_id))
+            return response()->json(['success'=>'success'],200);
+        else
+            return response()->json(['error'=>'something went wrong'],500);
+    }
+
+    public function destroy_contact($contact_id){
+        if(EmergencyContact::destroy($contact_id))
+            return response()->json(['success'=>'success'],200);
+        else
+            return response()->json(['error'=>'something went wrong'],500);
+    }
+
+    public function destroy_dependent($dependent_id){
+        if(Dependent::destroy($dependent_id))
+            return response()->json(['success'=>'success'],200);
+        else
+            return response()->json(['error'=>'something went wrong'],500);
+    }
+
+    public function destroy_college($college_id){
+        if(College::destroy($college_id))
+            return response()->json(['success'=>'success'],200);
+        else
+            return response()->json(['error'=>'something went wrong'],500);
+    }
+
+    public function destroy_work($work_id){
+        if(WorkExperience::destroy($work_id))
+            return response()->json(['success'=>'success'],200);
+        else
+            return response()->json(['error'=>'something went wrong'],500);
+    }
 }

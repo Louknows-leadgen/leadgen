@@ -1723,22 +1723,89 @@ $(document).ready(function(){
 	}
 
 	$(document).on('click','.bg-notif-gen .rmv-employee-dtl',function(){
-		var id = $(this).data('id');
-		var type = $(this).data('type');
+		var el = $(this);
+		var id = el.data('id');
+		var type = el.data('type');
 		var remove_el = $('.mark-'+type+'-'+id);
+		var form_type = $(remove_el[0]).data('form');
+		var url = ''
 
-		$(this).parents('.bg-notif-gen').fadeOut(300,function(){
-			remove_el.fadeOut(300,function(){
-				remove_el.remove();
-				$('.fix-mid-notif').fadeIn(300,function(){
-					setTimeout(function(){
-						$('.fix-mid-notif').fadeOut(300);
-					},2000);
+		switch(form_type){
+			case 'spouse':
+				url = '/spouse/' + id + '/destroy';
+				break;
+			case 'contact':
+				url = '/contact/' + id + '/destroy';
+				break;
+			case 'dependent': 
+				url = '/dependent/' + id + '/destroy';
+				break;
+			case 'college': 
+				url = '/college/' + id + '/destroy';
+				break;
+			case 'work': 
+				url = '/work/' + id + '/destroy';
+				break;
+		}
+
+		$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }
+	    });
+
+		$.ajax({
+			url: url,
+			method: 'DELETE',
+			beforeSend: function(){
+				$('.emp-alert button.rmv-employee-dtl').html("<span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span><span class='spinner-grow spinner-grow-sm'></span>");
+			},
+			complete: function(){
+				$('.emp-alert button.rmv-employee-dtl').text('Yes');
+			},
+			success: function(){
+				initDeleteNotif('success');
+				// hide the alert
+				$(el).parents('.bg-notif-gen').fadeOut(300,function(){
+					// hide and remove the form displayed
+					remove_el.fadeOut(300,function(){
+						remove_el.remove();
+						// show success notification
+						$('.fix-mid-notif').fadeIn(300,function(){
+							setTimeout(function(){
+								$('.fix-mid-notif').fadeOut(300);
+							},2000);
+						});
+					});
 				});
-			});
+			},
+			error: function(){
+				initDeleteNotif('error');
+				// hide the alert
+				$(el).parents('.bg-notif-gen').fadeOut(300,function(){			
+					// show error notification
+					$('.fix-mid-notif').fadeIn(300,function(){
+						setTimeout(function(){
+							$('.fix-mid-notif').fadeOut(300);
+						},2000);
+					});
+				});
+			}
 		});
 		
 	});
+
+	function initDeleteNotif(status){
+		var notif = $('.fix-mid-notif');
+		if(status == 'success'){
+			notif.removeClass('alert-danger').addClass('alert-success');
+			notif.html("<strong>Success!</strong> Record has been deleted");
+		}
+		else{
+			notif.removeClass('alert-success').addClass('alert-danger');
+			notif.html("<strong>Error!</strong> Something went wrong");
+		}
+	}
 
 	$(document).on('click','.emp-alert button.btn-secondary',function(){
 		var mark = $(this).data('mark');

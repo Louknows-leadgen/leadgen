@@ -20,7 +20,7 @@
 
 	<!-- Delete Notification here (Fixed centered) -->
 	<div class="fix-mid-notif alert alert-success">
-		<strong>Success!</strong> Record has been deleted
+		<!-- Will be updated via jquery -->
 	</div>
 
 	

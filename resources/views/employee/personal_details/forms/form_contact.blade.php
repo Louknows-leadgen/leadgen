@@ -1,4 +1,4 @@
-<form class="employee-det-form" action="{{ route('employees.update_contact') }}" method="put">
+<form class="employee-det-form" data-form="contact" action="{{ route('employees.update_contact') }}" method="put">
 	<div class="row">
 		<input type="hidden" name="contact_id" value="{{ $contact->id }}">
 		<div class="col-md-6">	

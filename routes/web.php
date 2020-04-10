@@ -68,6 +68,12 @@ Route::post('/employee-details/create_dependent','EmployeesController@create_dep
 Route::post('/employee-details/create_college','EmployeesController@create_college')->name('employees.create_college');
 Route::post('/employee-details/create_work','EmployeesController@create_work')->name('employees.create_work');
 
+Route::delete('/spouse/{id}/destroy','EmployeesController@destroy_spouse')->name('spouse.destroy');
+Route::delete('/contact/{id}/destroy','EmployeesController@destroy_contact')->name('contact.destroy');
+Route::delete('/dependent/{id}/destroy','EmployeesController@destroy_dependent')->name('dependent.destroy');
+Route::delete('/college/{id}/destroy','EmployeesController@destroy_college')->name('college.destroy');
+Route::delete('/work/{id}/destroy','EmployeesController@destroy_work')->name('work.destroy');
+
 //- exit clearance
 
 Route::post('/exit-clearances/store','ExitClearancesController@store')->name('ext-clr.store');

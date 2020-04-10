@@ -1,4 +1,4 @@
-<form class="employee-det-form" action="{{ route('employees.update_college') }}" method='put'>
+<form class="employee-det-form" data-form="college" action="{{ route('employees.update_college') }}" method='put'>
 	<div class="row">
 		<div class="col-md-6">
 			<div class="form-group">
