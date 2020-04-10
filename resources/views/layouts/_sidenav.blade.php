@@ -44,6 +44,16 @@
                     <h5><a href="{{ route('job-offerings.index') }}">Job Offerings</a></h5>
                 </div>
             </div>
+            <div class="col-md-12 mb-2">
+                <div class="q-link-item">
+                    <h5><a href="{{ route('employees.active') }}">Employees</a></h5>
+                </div>
+            </div>
+            <div class="col-md-12 mb-2">
+                <div class="q-link-item">
+                    <h5><a href="{{ route('ext-clr.index') }}">Exit Clearance</a></h5>
+                </div>
+            </div>
         @endcan
     </div>
 </div>

@@ -86,6 +86,8 @@
 			        @can('access',[4])
 			            <li class="list-inline-item mr-4"><a href="{{ route('hr-managers.index') }}">Dashboard</a></li>
 			            <li class="list-inline-item mr-4"><a href="{{ route('job-offerings.index') }}">Job Offerings</a></li>
+			            <li class="list-inline-item mr-4"><a href="{{ route('employees.active') }}">Employees</a></li>
+			            <li class="list-inline-item mr-4"><a href="{{ route('ext-clr.index') }}">Exit Clearance</a></li>
 			        @endcan
 			    </ul>
 		    @endauth

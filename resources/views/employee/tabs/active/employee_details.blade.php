@@ -6,11 +6,13 @@
 					
 					<div class="form-group">
 						<label>Employee Name</label>
+						<span> <a href="{{ route('employees.details',['id'=>$employee->id]) }}">(Personal details)</a></span>
 						<input type="text" id="person_id" class="form-control form-control-sm" value="{{ $employee->person->name() }}" data-id="{{ $employee->id }}" disabled>
 					</div>
 
 					<div class="form-group">
 						<label>Company ID</label>
+						<span> <a href="{{ route('ext-clr.create',['id'=>$employee->id]) }}">(Create Exit Clearance)</a></span>
 						<input type="text" class="form-control form-control-sm" value="{{ $employee->company_number }}" disabled>
 					</div>
 
