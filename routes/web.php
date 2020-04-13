@@ -52,6 +52,42 @@ Route::get('/employees/{applicant_id}/create','EmployeesController@create')->nam
 Route::get('/employees/active','EmployeesController@active')->name('employees.active');
 Route::get('/employees/inactive','EmployeesController@inactive')->name('employees.inactive');
 Route::get('/employees/search','EmployeesController@search')->name('employees.search');
+Route::put('/employees/update_hmo/{employee_id}','EmployeesController@update_hmo')->name('employees.update_hmo');
+Route::get('/employee-details/{id}','EmployeesController@employee_details')->name('employees.details');
+Route::put('/employee-details/update_basic','EmployeesController@update_basic')->name('employees.update_basic');
+Route::put('/employee-details/update_spouse','EmployeesController@update_spouse')->name('employees.update_spouse');
+Route::put('/employee-details/update_contact','EmployeesController@update_contact')->name('employees.update_contact');
+Route::put('/employee-details/update_dependent','EmployeesController@update_dependent')->name('employees.update_dependent');
+Route::put('/employee-details/update_work','EmployeesController@update_work')->name('employees.update_work');
+Route::put('/employee-details/update_school','EmployeesController@update_school')->name('employees.update_school');
+Route::put('/employee-details/update_college','EmployeesController@update_college')->name('employees.update_college');
+
+Route::post('/employee-details/create_spouse','EmployeesController@create_spouse')->name('employees.create_spouse');
+Route::post('/employee-details/create_contact','EmployeesController@create_contact')->name('employees.create_contact');
+Route::post('/employee-details/create_dependent','EmployeesController@create_dependent')->name('employees.create_dependent');
+Route::post('/employee-details/create_college','EmployeesController@create_college')->name('employees.create_college');
+Route::post('/employee-details/create_work','EmployeesController@create_work')->name('employees.create_work');
+
+Route::delete('/spouse/{id}/destroy','EmployeesController@destroy_spouse')->name('spouse.destroy');
+Route::delete('/contact/{id}/destroy','EmployeesController@destroy_contact')->name('contact.destroy');
+Route::delete('/dependent/{id}/destroy','EmployeesController@destroy_dependent')->name('dependent.destroy');
+Route::delete('/college/{id}/destroy','EmployeesController@destroy_college')->name('college.destroy');
+Route::delete('/work/{id}/destroy','EmployeesController@destroy_work')->name('work.destroy');
+
+//- exit clearance
+
+Route::post('/exit-clearances/store','ExitClearancesController@store')->name('ext-clr.store');
+
+Route::get('/exit-clearances/{id}/create','ExitClearancesController@create')->name('ext-clr.create');
+
+Route::get('/exit-clearances/{id}','ExitClearancesController@show')->name('ext-clr.show');
+
+Route::put('/exit-clearances/{id}/update','ExitClearancesController@update')->name('ext-clr.update');
+
+Route::put('/exit-clearances/{id}/claim','ExitClearancesController@claim')->name('ext-clr.claim');
+
+Route::get('/exit-clearances','ExitClearancesController@index')->name('ext-clr.index');
+
 
 //- final interviews
 Route::put('/final_interviews/{id}/update_result','FinalInterviewsController@update_result')->name('fin.update_result');
@@ -59,7 +95,8 @@ Route::get('/final_interview/{id}/form','FinalInterviewsController@form')->name(
 Route::put('/final_interviews/{id}/no_show','ApplicationsController@no_show')->name('fin.no_show');
 
 //- hmo
-Route::post('/hmo/{id}/store','HmoController@store')->name('hmo.store');
+Route::post('/hmo/{id}/store','HealthInsurancesController@store')->name('hmo.store');
+Route::delete('/hmo/{id}/destroy','HealthInsurancesController@destroy')->name('hmo.destroy');
 
 //- hr manager
 Route::get('hr-managers/dashboard','HrManagerDashboardsController@index')->name('hr-managers.index');
@@ -177,5 +214,12 @@ Route::put('/account/update-email','UsersController@update_email')->name('user.u
 Route::get('/account/edit-password','UsersController@edit_password')->name('user.edit-password');
 Route::put('/account/update-password','UsersController@update_password')->name('user.update-password');
 
+
+
+
+
+// Route::get('/employee-form/{id}',function(){
+// 	return view('employee.personal_details.show');
+// });
 
 

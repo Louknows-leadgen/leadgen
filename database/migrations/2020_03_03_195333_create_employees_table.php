@@ -17,6 +17,7 @@ class CreateEmployeesTable extends Migration
             //
             $table->bigIncrements('id');
             $table->integer('employee_id')->nullable();
+            $table->integer('person_id')->nullable();
             $table->string('company_number');
             $table->string('bank_account')->nullable();
             $table->integer('cost_center_id');
@@ -39,7 +40,7 @@ class CreateEmployeesTable extends Migration
             $table->date('assoc_date')->nullable();
             $table->date('consultant_date')->nullable();
             $table->date('regularize_date')->nullable();
-            $table->date('medilink_id')->nullable();
+            $table->string('medilink_id')->nullable();
             $table->timestamps();
         });
     }

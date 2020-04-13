@@ -1,8 +1,33 @@
+<!-- Notification area -->
+
+<div class="alert alert-danger alert-dismissible notif-box mt-3 d-none">
+	<a href="#" class="close" aria-label="close">&times;</a>
+	<ul class="list-unstyled"></ul> 
+</div>
+
+
+<div class="bg-notif-gen">
+    <div class="card w-25">
+        <div class="card-header font-weight-bold">HMO - Remove Dependent</div>
+        <div class="card-body">
+            Proceed with this action?
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button class="btn btn-secondary mr-3">No</button>
+            <button class="btn btn-primary rmv-dpndt-hmo">Yes</button>
+        </div>
+    </div>
+</div>
+
+
+<!--  end -->
+
 <div class="row mt-3">
 	<div class="col-md-12">
 		<h5>Employee</h5>
-		<form action="" method="post">
-			<input type="hidden" value="{{ $employee->id }}" name="employee_id">
+		<form action="{{ route('employees.update_hmo',['employee_id'=>$employee->id]) }}" 
+			  method="put"
+			  class="update_hmo">
 			
 			<div class="row">
 				<div class="col-md-5">
@@ -10,7 +35,7 @@
 						<label>Medilink ID</label>
 						<div class="input-group">
 							<input type="text" 
-								   class="form-control form-control-sm" 
+								   class="form-control form-control-sm hmo_input" 
 								   value="{{ isset($employee->medilink_id) ? $employee->medilink_id : '' }}"
 								   name="medilink_id">
 							<div class="input-group-append">
@@ -27,44 +52,49 @@
 <div class="row">
 	<div class="col-md-10">
 		<h5>Dependents</h5>
-		<table class="table table-sm table-striped">
-			<thead class="thead-dark">
-				<tr>
-					<th>Name</th>
-					<th>Medilink ID</th>
-				</tr>
-			</thead>
-			<tbody>
-				<form class="hmo-form" action="{{ route('hmo.store',['id'=>$employee->id]) }}" method="post">
+		<form class="hmo-form" action="{{ route('hmo.store',['id'=>$employee->id]) }}" method="post">
+			<table class="table table-sm table-striped">
+				<thead class="thead-dark">
 					<tr>
-						<td>
-							<input type="text" class="form-control form-control-sm border border-0" value="John Doe" readonly>
-						</td>
-						<td class="d-flex align-items-center">
-							<input type="text" class="form-control form-control-sm border border-0 mr-2" value="1168016002500074" readonly>
-							<span class="btn btn-danger badge">-</span>
-						</td>
+						<th>Name</th>
+						<th>Medilink ID</th>
 					</tr>
+				</thead>
+				<tbody>
+						@foreach($employee->health_insurances as $insurance)
+						<tr data-id="{{$insurance->id}}">
+							<td>
+								<input type="text" class="form-control form-control-sm border border-0" value="{{ $insurance->name }}" readonly>
+							</td>
+							<td class="d-flex align-items-center">
+								<input type="text" class="form-control form-control-sm border border-0 mr-2" value="{{ $insurance->hmo_id }}" readonly>
+								<span class="btn btn-danger badge rmv-hmo-trg" data-id="{{ $insurance->id }}">
+									-
+								</span>
+							</td>
+						</tr>
+						@endforeach
 
-					<tr class="hide">
-						<td>
-							<input type="text" name="name" class="form-control form-control-sm" autocomplete="off">
-						</td>
-						<td class="d-flex align-items-center">
-							<input type="text" name="medilink_number" class="form-control form-control-sm mr-2" autocomplete="off">
-							<span class="btn btn-secondary badge hmo-cancel">-</span>
-						</td>
-					</tr>
+						<tr class="hide">
+							<td>
+								<input type="text" name="name" class="form-control form-control-sm hmo_input" autocomplete="off">
+							</td>
+							<td class="d-flex align-items-center">
+								<input type="text" name="hmo_id" class="form-control form-control-sm mr-2 hmo_input" autocomplete="off">
+								<span class="btn btn-secondary badge hmo-cancel">-</span>
+							</td>
+						</tr>
 
-					<tr class="table-success">
-						<td class="text-right col-save" colspan="2">
-							<span class="btn btn-success badge hmo-new">+</span>
-							<button class='btn btn-success btn-sm hide'>Save</button>
-						</td>
-					</tr>
-				</form>
-			</tbody>
-		</table>
+						<tr class="table-success">
+							<td class="text-right col-save" colspan="2">
+								<span class="btn btn-success badge hmo-new">+</span>
+								<button class='btn btn-success btn-sm hide dependent_hmo_save'>Save</button>
+							</td>
+						</tr>
+					
+				</tbody>
+			</table>
+		</form>
 	</div>	
 </div>
 

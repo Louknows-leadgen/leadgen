@@ -11934,6 +11934,7 @@ span.close {
   vertical-align: middle;
 }
 
+.bg-notif-gen,
 .bg-notif,
 .decline-confirm-bg,
 .blacklist-confirm-bg {
@@ -11947,6 +11948,7 @@ span.close {
   z-index: 9999;
 }
 
+.bg-notif-gen .card,
 .bg-notif .card,
 .decline-confirm-bg .card,
 .blacklist-confirm-bg .card {
@@ -12039,11 +12041,51 @@ span.close {
   z-index: 2;
 }
 
+.align-r {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  z-index: 2;
+}
+
 table input:-moz-read-only {
   background-color: transparent !important;
 }
 
 table input:read-only {
   background-color: transparent !important;
+}
+
+.divider:last-child {
+  display: none;
+}
+
+.minimized-y {
+  height: 0px;
+  overflow: hidden;
+}
+
+.pos-relative {
+  position: relative;
+}
+
+.inline-notif {
+  position: absolute;
+  left: 100px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.fix-mid-notif {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  z-index: 9999;
 }
 

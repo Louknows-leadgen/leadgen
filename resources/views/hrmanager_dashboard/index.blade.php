@@ -24,6 +24,13 @@
 				</div>
 			</div>
 
+			<div class="col-md-2">
+				<div class="d-flex flex-column p-2">
+					<img class="mx-auto mb-1 border border-primary" src="{{ asset('images/box.svg') }}" width="100px" height="100px">
+					<a class="btn btn-primary" href="{{ route('ext-clr.index') }}">Exit Clearance</a>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
