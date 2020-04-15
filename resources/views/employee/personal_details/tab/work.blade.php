@@ -59,7 +59,7 @@
 
 				<div class="row mt-3 mb-2">
 					<div class="col-md-12">
-						<button class="btn btn-primary mr-3">Create</button>
+						<button class="btn btn-success mr-3">Create</button>
 						<div class="d-inline-block pos-relative">
 							<span class="btn btn-secondary cancel-action">Cancel</span>
 						</div>
