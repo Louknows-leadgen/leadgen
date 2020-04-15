@@ -55,7 +55,7 @@
 	</div>
 	<div class="dtl-cntr">
 		<label>Civil status</label>
-		<select name="gender" class="custom-select">
+		<select name="civil_status" class="custom-select">
 			<option value="Single" {{ $person->civil_status == 'Single' ? 'selected' : '' }}>Single</option>
 			<option value="Married" {{ $person->civil_status == 'Married' ? 'selected' : '' }}>Married</option>
 		</select>
