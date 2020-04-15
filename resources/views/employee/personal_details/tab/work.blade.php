@@ -52,7 +52,7 @@
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>Role description</label>
-							<textarea class="ckeditor" name="role_desc"></textarea>
+							<textarea class="ckeditor" id="work_editor" name="role_desc"></textarea>
 						</div>
 					</div>
 				</div>

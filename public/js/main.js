@@ -1603,6 +1603,10 @@ $(document).ready(function(){
 		form_item.find(':input:not([type=hidden])')
 		         .removeClass('is-invalid')
 		         .val('');
+
+		// cleanup ckeditor
+		CKEDITOR.instances.work_editor.setData('');
+
 		// hide the form
 		form_item.addClass('hide');
 
@@ -1670,8 +1674,11 @@ $(document).ready(function(){
 
             		// initialize ckeditor if there's any.
             		// important: textarea id should be named ckeditor
-            		if(form.find('textarea.ckeditor').length)
+            		if(form.find('textarea.ckeditor').length){
 						CKEDITOR.replace('ckeditor');
+						// cleanup new ckeditor form
+						CKEDITOR.instances.work_editor.setData('');
+            		}
                 }
 			}
 		});
