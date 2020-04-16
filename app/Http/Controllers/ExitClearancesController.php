@@ -42,7 +42,13 @@ class ExitClearancesController extends Controller
 			'last_pay_dt.date_format' => "Wrong date format"
 		]);
 
-    	ExitClearance::create($validated);
+    	if(ExitClearance::create($validated)){
+            // change the status of the employee to inactive
+            $e = Employee::find($request->employee_id);
+            $e->status = 'inactive';
+            $e->save();
+        }
+
     	return redirect()->route('ext-clr.index');
     }
 
